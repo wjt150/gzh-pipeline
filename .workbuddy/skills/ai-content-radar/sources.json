@@ -1,0 +1,171 @@
+{
+  "_说明": "AI 选题雷达的源清单。采集脚本抓 channel=rss 与 channel=aihot 两类条目；channel=web 的条目仅作登记，需要走网页抓取通道，不要在脚本里启用；channel=manual 靠用户转发链接。加源改这里，不用改代码。2026-10-16 逐条实测，AIHOT 于 2026-10-19 接入。",
+  "feeds": [
+    {
+      "name": "量子位",
+      "url": "https://www.qbitai.com/feed",
+      "channel": "rss",
+      "tier": 1,
+      "bypass_proxy": true,
+      "note": "官方 RSS，约 10 条/次，覆盖近 1 天；pubDate 精确到分，desc 极短（仅标题级，深挖要点需另抓正文）。对完整浏览器 UA 返回 403，需用极简 UA（脚本已内置 UA 轮换）。2026-10-19 实测：走本机环境代理会返回 502 Tunnel connection failed，直连 200，故置 bypass_proxy=true。"
+    },
+    {
+      "name": "新智元",
+      "url": "https://aiera.com.cn/feed",
+      "channel": "rss",
+      "tier": 1,
+      "note": "官方 RSS，约 15 条/次；link 是 permalink 长地址（含中文百分号编码），desc 自带 80 字左右摘要，可直接用作要点素材。"
+    },
+    {
+      "name": "AI前线·InfoQ",
+      "url": "https://www.infoq.cn/feed",
+      "channel": "rss",
+      "tier": 1,
+      "tz_adjust_hours": -8,
+      "note": "官方 RSS，约 20 条/次，混有非 AI 内容（需在筛选步过滤）；description 只有图片/链接标记、没有正文摘要，要点需另抓正文。**该 feed 的 pubDate 把北京时间标成了 GMT**，比真实时间晚 8 小时（实测推算出真实发布时刻与官网页面一致时需减 8 小时），故 tz_adjust_hours=-8；不校正会出现「未来时间」的假条目。"
+    },
+    {
+      "name": "AIHOT·编辑精选",
+      "url": "https://aihot.news/api/v1/items",
+      "channel": "aihot",
+      "tier": 2,
+      "mode": "selected",
+      "limit": 30,
+      "note": "聚合源（二手精选），用于补一手 RSS 漏掉的事件，不替代任何一手源。匿名只读，无需 Key，同 IP 约 60 次/分；程序化取数 UA 必须是 aihot-api/2.0.0。原生窗口只有 24h/7d，脚本取 7d 后按 publishedAt 本地截断。**它自带的中文 summary 与 reason 是 AIHOT 的原创文字，只能当选题线索，不得搬进成稿**；引用一律回 links.original。旧域名 aihot.virxact.com 与 /api/public/* 于 2026-10-31 停用。"
+    },
+    {
+      "name": "EN·OpenAI News",
+      "url": "https://openai.com/news/rss.xml",
+      "channel": "rss",
+      "tier": 1,
+      "lang": "en",
+      "note": "官方博客，1299 条历史（2026-10-19 实测），更新间隔约 2-3 天。一手信息、可编译。desc 较短，要点需抓正文。"
+    },
+    {
+      "name": "EN·Google Research",
+      "url": "https://research.google/blog/rss/",
+      "channel": "rss",
+      "tier": 1,
+      "lang": "en",
+      "note": "100 条，偏论文与方法（实测最新约 63h 前）。质量高、技术性强，适合做「技术解读」类编译。"
+    },
+    {
+      "name": "EN·Hugging Face Blog",
+      "url": "https://huggingface.co/blog/feed.xml",
+      "channel": "rss",
+      "tier": 1,
+      "lang": "en",
+      "note": "881 条，开源模型/工程实践为主（实测最新约 80h 前）。适合定位「开源新模型」选题。"
+    },
+    {
+      "name": "EN·Import AI",
+      "url": "https://importai.substack.com/feed",
+      "channel": "rss",
+      "tier": 1,
+      "lang": "en",
+      "note": "Jack Clark 周更通讯（实测最新约 165h 前，一周一篇属正常）。观点密度高，自带判断，适合做「趋势评论」编译，但**必须标明是转述其观点**。"
+    },
+    {
+      "name": "EN·Latent Space",
+      "url": "https://www.latent.space/feed",
+      "channel": "rss",
+      "tier": 2,
+      "lang": "en",
+      "note": "AI 工程向播客/文章（实测最新约 50h 前）。偏实践与访谈，编译价值在于可复用的工程经验。"
+    },
+    {
+      "name": "EN·Simon Willison",
+      "url": "https://simonwillison.net/atom/everything/",
+      "channel": "rss",
+      "tier": 2,
+      "lang": "en",
+      "note": "个人技术博客（Atom），30 条、更新最快（实测 10h 内）。**非纯 AI 源**，需按关键词过滤；但他对新模型的实测记录往往比官方发布更有信息量。"
+    },
+    {
+      "name": "EN·MIT Tech Review AI",
+      "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
+      "channel": "rss",
+      "tier": 2,
+      "lang": "en",
+      "note": "科技媒体深度报道（实测最新约 63h 前）。**有付费墙**，正文可能抓不全，只能做摘要级编译并注明原刊。"
+    },
+    {
+      "name": "EN·Microsoft Research",
+      "url": "https://www.microsoft.com/en-us/research/feed/",
+      "channel": "rss",
+      "tier": 2,
+      "lang": "en",
+      "note": "研究院博客（实测最新约 90h 前）。偏基础研究，适合低频但高质量的选题。"
+    },
+    {
+      "name": "EN·TechCrunch AI",
+      "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+      "channel": "rss",
+      "tier": 2,
+      "lang": "en",
+      "note": "行业快讯（实测 20 条、最新约 13h 前）。**用于发现事件**（融资、发布、人事），本身偏短讯，编译时需补公司官方来源交叉验证。"
+    },
+    {
+      "name": "EN·The Verge AI",
+      "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+      "channel": "rss",
+      "tier": 3,
+      "lang": "en",
+      "note": "消费向科技媒体（实测 10 条、最新约 15h 前）。话题偏产品与舆论，可作为「读者关心什么」的参照，但技术深度有限。"
+    },
+    {
+      "name": "EN·Hacker News 热帖",
+      "url": "https://hn.algolia.com/api/v1/search",
+      "channel": "hn",
+      "tier": 2,
+      "lang": "en",
+      "query": "AI",
+      "min_points": 80,
+      "lookback_hours": 168,
+      "limit": 30,
+      "note": "**按社区投票而不是时间排序**，等于替我们做了一轮质量筛选（2026-10-19 实测：72h 内 points>80 的 AI 帖仅十几条）。link 是外部原文地址，可直接喂给 gzh_source 抓正文；没有外部链接的会回落到 HN 讨论页（这种不要选）。desc 前缀带「[HN N 分]」便于判断热度。"
+    },
+    {
+      "name": "量子位·官网列表",
+      "url": "https://www.qbitai.com/",
+      "channel": "web",
+      "tier": 1,
+      "note": "RSS 限流时的备选。列表页带相对时间（如「12分钟前」）和编辑摘要，比 RSS 更全。"
+    },
+    {
+      "name": "新智元·官网列表",
+      "url": "https://aiera.com.cn/",
+      "channel": "web",
+      "tier": 1,
+      "note": "RSS 不够用时的备选。首页带时间戳、原始出处（X/Bloomberg 等）和热度值，排序参考价值高。"
+    },
+    {
+      "name": "GitHub Trending",
+      "url": "https://github.com/trending?since=daily",
+      "channel": "web",
+      "tier": 2,
+      "note": "仅素材（原创聚合用，不直接转载）。脚本直连会被环境代理拦（502 Bad Gateway），必须走网页抓取通道。"
+    },
+    {
+      "name": "AI产品阿颖",
+      "url": "",
+      "channel": "manual",
+      "tier": 1,
+      "note": "公众号专属号，无官网无 RSS。已实测一篇为未声明原创。入口靠用户在微信里转发链接。"
+    },
+    {
+      "name": "AIGC开放社区",
+      "url": "",
+      "channel": "manual",
+      "tier": 1,
+      "note": "公众号为主，官网 news 子站证书异常。入口靠用户在微信里转发链接。"
+    },
+    {
+      "name": "机器之心",
+      "url": "https://www.jiqizhixin.com/articles",
+      "channel": "manual",
+      "tier": 1,
+      "note": "官网文章库需登录（jiqizhixin.com/rss 实测返回的是网页不是 feed）。入口靠用户在微信里转发链接。"
+    }
+  ]
+}

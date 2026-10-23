@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 选题雷达 · 2026-10-20 · 第 5 期</title>
+<style>
+  :root { --ink:#1a1a1a; --sub:#666; --line:#ececec; --accent:#07c160; --warn:#e6a23c; --hi:#f56c6c; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f5f6f7; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.7; }
+  .wrap { max-width:760px; margin:0 auto; padding:20px 14px 60px; }
+  header { background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); color:#fff; border-radius:14px; padding:22px 20px; }
+  header h1 { margin:0 0 6px; font-size:22px; }
+  header .meta { font-size:13px; opacity:.85; }
+  .legend { background:#fff; border-radius:12px; padding:14px 16px; margin:14px 0; font-size:13px; color:var(--sub); border:1px solid var(--line); }
+  .legend b { color:var(--ink); }
+  h2 { font-size:17px; margin:26px 0 12px; padding-left:10px; border-left:4px solid var(--accent); }
+  .card { background:#fff; border-radius:12px; padding:16px 16px 14px; margin:10px 0; border:1px solid var(--line); }
+  .card h3 { margin:0 0 6px; font-size:16px; line-height:1.5; }
+  .card h3 a { color:var(--ink); text-decoration:none; }
+  .card h3 a:hover { color:var(--accent); }
+  .num { display:inline-block; min-width:26px; font-weight:700; color:var(--accent); }
+  .src { font-size:12px; color:var(--sub); margin:2px 0 8px; word-break:break-all; }
+  .src a { color:#576b95; text-decoration:none; }
+  .pts { margin:0; padding-left:18px; font-size:14px; }
+  .pts li { margin:2px 0; }
+  .angle { margin-top:8px; font-size:13px; background:#f0f9f4; border-radius:8px; padding:8px 10px; color:#136c40; }
+  .meta2 { margin-top:9px; font-size:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .tag { display:inline-block; border-radius:6px; padding:1px 8px; font-size:12px; }
+  .t-ok { background:#e8f7ef; color:#0b7a46; }
+  .t-key { background:#fff4e5; color:#b25e09; }
+  .t-todo { background:#f2f3f5; color:#555; }
+  .t-mat { background:#eef3ff; color:#3a5bd0; }
+  .star { color:#e6a23c; letter-spacing:2px; }
+  .foot { margin-top:30px; background:#fff; border-radius:12px; padding:16px; font-size:13px; color:var(--sub); border:1px solid var(--line); }
+  .foot b { color:var(--ink); }
+  .one { font-size:14px; margin:6px 0; padding-left:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>AI 选题雷达 · 第 5 期</h1>
+  <div class="meta">2026-10-20 · 共 19 条 · 已按事件聚合 · 来源：新智元 / AI前线(InfoQ) / AIHOT ・ AIHOT 侧含 TechCrunch、The Verge、Ars Technica、Meta Engineering 等一手源 ・ HN 热帖</div>
+</header>
+
+<div class="legend">
+  <b>本期导读</b>：四条主线——<b>监管与安全收紧</b>（美国 DHS 清退 DeepSeek、FBI 起诉前 OpenAI 工程师、AI 智能体被用来入侵百站）、<b>算力钱的循环</b>（Anthropic 第二笔 450 亿美元订单、CoreWeave 债券入困境区、Tenstorrent 62 亿估值）、<b>Agent 工程化</b>（Google Harness²、Meta 瘦编排器、DoorDash 的 Playbook）、<b>模型层的小爆发</b>（Inception 扩散 LLM、蚂蚁开源 TTS、OpenAI 三个「极光」图像模型）。<br><br>
+  <b>转载可行性</b>（均为初判，未打开任何公众号文章页）：<br>
+  <span class="tag t-key">需授权</span> 专业媒体机构原创号，需原作者开白名单（预期）　
+  <span class="tag t-todo">待核验</span> 需打开对应公众号文章核验原创标　
+  <span class="tag t-mat">仅素材</span> 用于原创聚合，不直接转载<br>
+  <b>注意</b>：本期雷达仍未打开任何公众号文章页，因此本页不给出「原文可直接使用」这类结论——那必须在核验原创标之后。<br>
+  <b>优先级</b>：<span class="star">★★★</span> 强推 ・ <span class="star">★★</span> 值得写 ・ <span class="star">★</span> 备选<br>
+  <b>用法</b>：回复编号（如「1、4」）+ 轨道（改写 / 编译 / 转载），我出成稿。
+</div>
+
+<h2>🔥 今日焦点</h2>
+
+<div class="card">
+  <h3><span class="num">01</span><a href="https://madrobot.blog/2026/10/19/us-bans-deepseek-federal-agencies-dhs-order-remove-third-party/">美国土安全部下令：联邦文职机构清退 DeepSeek，连「基于它开发的第三方产品」一起移除</a></h3>
+  <div class="src">AIHOT·编辑精选（10-19，原始信源：Hacker News 热帖）<a href="https://madrobot.blog/2026/10/19/us-bans-deepseek-federal-agencies-dhs-order-remove-third-party/">原文</a></div>
+  <ul class="pts">
+    <li>依据 2018 年供应链法，美国国土安全部发布 <b>2026-01 号命令</b>；</li>
+    <li>要求所有联邦文职机构<b>立即停止采购</b> DeepSeek 及其关联公司产品，并从 IT 系统中移除；</li>
+    <li>范围不止模型本身——<b>用 DeepSeek 实现开发的第三方产品与服务</b>同样要清。</li>
+  </ul>
+  <div class="angle">建议角度：真正的杀伤力在最后一句。禁令一旦延伸到「魔改产品」，供应链溯源的责任就压到了集成商头上：你交付的系统里有没有一行来自被禁模型？从「合规部该怎么查模型成分」切入，比复述禁令有信息量。</div>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">02</span><a href="https://arstechnica.com/tech-policy/2026/10/accused-openai-spy-had-folder-called-saudi-gov-docs-fbi-says/">FBI：涉嫌在 OpenAI 会议室装窃听器的前工程师，手机里有「Saudi Gov Docs」文件夹</a></h3>
+  <div class="src">Ars Technica（10-20）<a href="https://arstechnica.com/tech-policy/2026/10/accused-openai-spy-had-folder-called-saudi-gov-docs-fbi-says/">原文</a></div>
+  <ul class="pts">
+    <li>美国法院批准羁押前工程师 <b>Abdulrahman Alfozan</b>，其被指控在 OpenAI 会议室安装窃听设备；</li>
+    <li>检方称其 iPhone 上存在名为 <b>Saudi Gov Docs</b> 的文件夹，并与沙特王室成员有 WhatsApp 往来；</li>
+    <li>细节里最刺眼的一条：他曾用 OpenAI 自家的<b>生产力 Agent</b> 检索「适合安放窃听器的会议室」；被捕前已订好沙特政府付费的单程机票，妻儿先行离境。</li>
+  </ul>
+  <div class="angle">建议角度：这不是标准的商业间谍故事，而是「企业内部 Agent 成了取证对象」的第一批样本——员工拿公司 AI 干私事，日志全留着。可以顺着写：企业级 Agent 的审计日志，正在变成司法机关的呈堂证供。</div>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">03</span><a href="https://aiera.com.cn/2026/10/20/other/admin/119550/%e5%88%9a%e5%88%9a%ef%bc%8copenai%e4%b8%89%e5%a4%a7%e6%96%b0%e6%a8%a1%e5%9e%8b%e6%b7%b1%e5%a4%9c%e7%9f%ad%e6%9a%82%e4%b8%8a%e7%ba%bf%ef%bc%81/">OpenAI 三个「极光」模型深夜上线又撤回，结果是在 Arena 里画猫</a></h3>
+  <div class="src">新智元（10-20）<a href="https://aiera.com.cn/2026/10/20/other/admin/119550/%e5%88%9a%e5%88%9a%ef%bc%8copenai%e4%b8%89%e5%a4%a7%e6%96%b0%e6%a8%a1%e5%9e%8b%e6%b7%b1%e5%a4%9c%e7%9f%ad%e6%9a%82%e4%b8%8a%e7%ba%bf%ef%bc%81/">原文</a> ・ 参考：<a href="https://www.testingcatalog.com/openai-possibly-testing-gpt-image-3/">TestingCatalog</a></div>
+  <ul class="pts">
+    <li>API 后台出现 <b>aurora-red-alpha / aurora-green-alpha / aurora-blue-alpha</b> 三个 Alpha 模型，数小时内被官方撤回；</li>
+    <li>API 关了，Arena 灰度池没关——网友实测发现它们不是代码模型，而是<b>图像生成模型</b>，出图质感被拿来与 Nano Banana 对比；</li>
+    <li>盲测里<b>绿版以明显优势压制红版</b>，被解读为 OpenAI 在挑下一代默认出图风格；蓝版细节更多。</li>
+  </ul>
+  <div class="angle">建议角度：别把它写成「OpenAI 又要发新模型」。可写的点有两个：一是「Aurora = 超快代码模型」这个社区共识被三只猫当场推翻，说明模型代号的可信度有多低；二是 Arena 灰度池已经成了事实上的泄漏通道，官方想藏也藏不住。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">04</span><a href="https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins">一名黑客用 AI 智能体入侵 100 多家网站，John Deere、SharkNinja 在列</a></h3>
+  <div class="src">The Verge（10-19）<a href="https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins">原文</a></div>
+  <ul class="pts">
+    <li>AI 安全公司 <b>Norforge</b> 发现，一名黑客用开源 AI 平台 <b>Cairn</b> 编排的智能体集群实施入侵；</li>
+    <li>受害站点超过 <b>100 家</b>，据 Reuters 报道包括 John Deere、SharkNinja 与 Cummins；</li>
+    <li>攻击面来自<b>暴露在公网的 Cairn 实例</b>被滥用——不是零日漏洞，是把现成 agent 平台当武器。</li>
+  </ul>
+  <div class="angle">建议角度：「AI 黑客」从概念变成可复制的工具链，成本几乎为零。企业该自查的不是模型安全，而是自家有没有对外暴露的 agent 编排实例——这条比任何「AI 安全白皮书」都好落地。</div>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">05</span><a href="https://techcrunch.com/2026/10/19/nscale-and-anthropic-are-reportedly-in-talks-for-yet-another-45-billion-compute-deal/">Nscale 与 Anthropic 据传在谈第二笔 450 亿美元算力单</a></h3>
+  <div class="src">TechCrunch（10-19）<a href="https://techcrunch.com/2026/10/19/nscale-and-anthropic-are-reportedly-in-talks-for-yet-another-45-billion-compute-deal/">原文</a></div>
+  <ul class="pts">
+    <li>今年 8 月，两家公司已宣布一笔 <b>450 亿美元</b>的算力协议；</li>
+    <li>现在据传正在洽谈<b>规模相当的第二笔</b>；</li>
+    <li>同一家模型公司、同一家算力商，一年内两笔同量级长约。</li>
+  </ul>
+  <div class="angle">建议角度：配合本页第 6 条一起读。算力订单正在从「采购」变成「结构性融资」——模型公司用长约给算力商背书，算力商拿长约去发债。这条链子上任何一环松动，都会同时打到两头。这是当下 AI 资本结构最值得画一张图的部分。</div>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★★</span></div>
+</div>
+
+<h2>📊 行业与资本</h2>
+
+<div class="card">
+  <h3><span class="num">06</span><a href="https://www.theverge.com/ai-artificial-intelligence/1014045/coreweave-stock-debt-sector-ai">CoreWeave 的债，正在变成整个 AI 行业的问题</a></h3>
+  <div class="src">The Verge（10-20）<a href="https://www.theverge.com/ai-artificial-intelligence/1014045/coreweave-stock-debt-sector-ai">原文</a></div>
+  <ul class="pts">
+    <li>上周 CoreWeave 的债券收益率相对同期限美国国债的溢价达到 <b>1000 个基点</b>，按常用口径已滑入「困境（distressed）」区间；</li>
+    <li>文章的判断是：这不只是一家公司的事——算力租赁商的负债表，与模型公司的租约绑在一起，风险会外溢到整条 AI 供应链。</li>
+  </ul>
+  <div class="angle">建议角度：「AI 泡沫」这个话题已经写烂了，但很少有人从<b>债权人的视角</b>写。可用的框架：算力是重资产、模型公司是轻资产，两者用长约互相担保——这种结构在利率下行时是加速器，上行时是绞索。</div>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">07</span><a href="https://techcrunch.com/2026/10/19/tenstorrent-hits-6-2b-valuation-to-scale-open-weight-ai-chips/">Tenstorrent 融 15 亿美元、估值 62 亿，选择「不卖」继续挑战 Nvidia</a></h3>
+  <div class="src">TechCrunch（10-19）<a href="https://techcrunch.com/2026/10/19/tenstorrent-hits-6-2b-valuation-to-scale-open-weight-ai-chips/">原文</a></div>
+  <ul class="pts">
+    <li>这家 Nvidia 挑战者完成 <b>15 亿美元</b>融资，估值 <b>62 亿美元</b>；</li>
+    <li>今年早些时候它曾收到收购意向，本轮融资的目的就是<b>保持独立</b>；</li>
+    <li>定位是「开放权重（open-weight）AI 芯片」——芯片与开源模型生态绑定，而非只卖硬件。</li>
+  </ul>
+  <div class="angle">建议角度：芯片创业公司的三条路——被收购、做专用加速卡、做开放生态。Tenstorrent 押第三条，本质是在赌「模型开源 → 硬件也必须开放」。这个赌注是否成立，看明年开源模型的部署量就知道。</div>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">08</span><a href="https://engineering.fb.com/2026/10/19/data-center-engineering/inside-prometheus-meta-gigawatt-scale-supercluster/">Meta 拆解 Prometheus 吉瓦级超集群：一期已建成，目标约 100 万张 GPU</a></h3>
+  <div class="src">Meta Engineering Blog（10-19）<a href="https://engineering.fb.com/2026/10/19/data-center-engineering/inside-prometheus-meta-gigawatt-scale-supercluster/">原文</a></div>
+  <ul class="pts">
+    <li>集群位于俄亥俄州 <b>New Albany</b>，一期已建成，并已用于训练 <b>Muse 系列</b>基础模型；</li>
+    <li>官方给出的扩张目标是约 <b>100 万张 GPU</b>；</li>
+    <li>这篇是工程复盘，重点在网络、散热与可靠性——不是采购清单。</li>
+  </ul>
+  <div class="angle">建议角度：吉瓦级集群的真正难点不是电费，是「故障成为常态」之后怎么调度。可写「当 100 万张卡里随时有几千张在坏，训练任务怎么不中断」——这是国内做万卡集群的团队最想看的细节。</div>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">09</span><a href="https://techcrunch.com/2026/10/19/microsoft-says-ai-agents-are-like-insider-threats-as-frontier-models-cant-be-trusted/">微软：AI 代理就像「内部威胁」，前沿模型还不能被信任</a></h3>
+  <div class="src">TechCrunch（10-20）<a href="https://techcrunch.com/2026/10/19/microsoft-says-ai-agents-are-like-insider-threats-as-frontier-models-cant-be-trusted/">原文</a></div>
+  <ul class="pts">
+    <li>微软建议企业重点盯住员工使用的、跑在<b>非自家可控系统</b>上的 agent（即由 OpenAI、Anthropic 等外部实验室运营的模型）；</li>
+    <li>其表述的底层判断是：<b>前沿模型目前还达不到可完全信任的程度</b>。</li>
+  </ul>
+  <div class="angle">建议角度：一家既卖模型又卖安全产品的公司说「模型不可信」，这话该怎么读？可以拆成两半：一半是对的（agent 权限确实该收紧），一半是生意（信任缺口就是安全产品的市场）。</div>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">10</span><a href="https://aiera.com.cn/2026/10/19/other/admin/119490/01-%e6%b3%9b%e7%bc%96%e7%a8%8b%e4%bb%8d%e6%98%af%e7%ac%ac%e4%b8%80%e5%a4%a7%e7%94%a8%e9%80%94-%e8%ae%be%e8%ae%a1%e4%b8%8e%e5%86%85%e5%ae%b9%e5%88%9b%e4%bd%9c%e6%ad%a3%e5%9c%a8%e5%8d%87%e6%b8%a9/">网易 LobsterAI 报告：智谱 GLM 的 Token 份额环比 +166.7%，居头部厂商之首</a></h3>
+  <div class="src">新智元（10-19）<a href="https://aiera.com.cn/2026/10/19/other/admin/119490/01-%e6%b3%9b%e7%bc%96%e7%a8%8b%e4%bb%8d%e6%98%af%e7%ac%ac%e4%b8%80%e5%a4%a7%e7%94%a8%e9%80%94-%e8%ae%be%e8%ae%a1%e4%b8%8e%e5%86%85%e5%ae%b9%e5%88%9b%e4%bd%9c%e6%ad%a3%e5%9c%a8%e5%8d%87%e6%b8%a9/">原文</a></div>
+  <ul class="pts">
+    <li>报告为《中国办公 Agent 用户行为报告》<b>9 月版</b>，由网易 LobsterAI 发布；</li>
+    <li>智谱 GLM 的 Token 份额<b>环比激增 166.7%</b>，在头部厂商中排第一；</li>
+    <li>用途结构上，<b>泛编程仍是第一大用途</b>，设计与内容创作正在升温。</li>
+  </ul>
+  <div class="angle">建议角度：第三方份额报告的第一件事是问口径——按调用量还是按金额、按 token 还是按会话？同一份数据换个分母结论可能反过来。这条适合做「国产模型份额到底怎么算」的科普，而不是当新闻转。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span></div>
+</div>
+
+<h2>🛠 技术与开源</h2>
+
+<div class="card">
+  <h3><span class="num">11</span><a href="https://www.inceptionlabs.ai/blog/introducing-mercury-3">Inception 发布扩散式 LLM Mercury 3：1068 tokens/秒，已上 OpenRouter</a></h3>
+  <div class="src">Inception Labs Blog（10-19）<a href="https://www.inceptionlabs.ai/blog/introducing-mercury-3/">原文</a> ・ 同题：<a href="https://x.com/OpenRouter/status/2112225779782398131">OpenRouter（10-20）</a></div>
+  <ul class="pts">
+    <li>扩散架构语言模型，生成速度 <b>1068 tokens/秒</b>，参数量较 Mercury 1 扩大 <b>40 倍以上</b>；</li>
+    <li>上线 OpenRouter，支持 <b>1M 上下文</b>，速度是 Mercury 2.5 的 <b>4 倍</b>；</li>
+    <li>官方称在 IFBench、GPQA Diamond、SWE-Bench Atlas 上超过 GPT-6 Luna 与 Claude Haiku 5.5；上线期五折，<b>$0.10/M 输入、$0.35/M 输出</b>。</li>
+  </ul>
+  <div class="angle">建议角度：扩散模型第一次在「速度 × 价格」两个维度同时压过自回归模型，这比跑分榜更值得写。切入点：当推理速度过千 tok/s、价格降到一毛钱一兆，实时语音、实时字幕、实时批注这类应用的账本要重算。</div>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">12</span><a href="https://github.com/inclusionAI/Ming-3.0-tts">蚂蚁 inclusionAI 开源 Ming-3.0-tts：两个版本，MIT 协议</a></h3>
+  <div class="src">GitHub · inclusionAI（10-19）<a href="https://github.com/inclusionAI/Ming-3.0-tts">仓库</a></div>
+  <ul class="pts">
+    <li>一次放出两个语音生成模型：<b>0.5B dense</b>，以及基于 Ling V3 的 tiny（<b>7.9B 总参数、1.3B 激活</b>）；</li>
+    <li><b>MIT 协议</b>开源，权重可在 Hugging Face 与 ModelScope 下载；</li>
+    <li>两个尺寸对应两种部署场景：端侧/私有化与高质量合成。</li>
+  </ul>
+  <div class="angle">建议角度：TTS 的竞争点已经从「像不像人」转到「能不能控」——多语言、情绪、副语言（停顿、语气词）。国产开源 TTS 加上 MIT 协议，最直接的影响是私有化部署的门槛，这个角度对做企业服务的读者最有用。</div>
+  <div class="meta2"><span class="tag t-mat">仅素材</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">13</span><a href="https://pytorch.org/blog/introducing-torchneuron-native-pytorch-backend-for-aws-trainium/">AWS 发布 TorchNeuron：Trainium 的原生 PyTorch 后端，今天正式开放</a></h3>
+  <div class="src">PyTorch Blog（10-19）<a href="https://pytorch.org/blog/introducing-torchneuron-native-pytorch-backend-for-aws-trainium/">原文</a> ・ 同题：<a href="https://techcrunch.com/2026/10/19/amazon-is-taking-its-biggest-shot-at-nvidia-yet-with-new-torchneuron-dev-tool/">TechCrunch</a></div>
+  <ul class="pts">
+    <li>面向 AWS Trainium 的<b>原生 PyTorch 后端</b>，开源；</li>
+    <li>于 10 月 20 日在 PyTorch Conference North America 上以 <b>Apache 2.0</b> 协议开放；</li>
+    <li>TechCrunch 的定性是：这是亚马逊对 Nvidia 迄今最大的一次进攻——目标是把 PyTorch 这个「建 AI 应用的默认工具箱」从 Nvidia 生态里松开。</li>
+  </ul>
+  <div class="angle">建议角度：芯片战已经打到框架层。谁掌握 PyTorch 后端，谁就掌握迁移成本——这比算力单价更能决定客户走不走。可以做成「换芯片到底要改多少行代码」的实测向选题。</div>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">14</span><a href="https://www.infoq.cn/article/AD1M3mJ2SH1dJrTA1r5q">Google Research 开源 Harness²：不动模型权重，只改「外壳」就能涨点</a></h3>
+  <div class="src">AI前线·InfoQ（10-19）<a href="https://www.infoq.cn/article/AD1M3mJ2SH1dJrTA1r5q">原文</a> ・ 仓库：<a href="https://github.com/google-research/harness2">google-research/harness2</a></div>
+  <ul class="pts">
+    <li>Apache 2.0 开源，支持 OpenCode 与 Codex（默认 OpenCode），官方强调<b>属研究项目、非官方支持产品</b>；</li>
+    <li>把可修改的 Harness 拆成 <b>8 类组件</b>：系统提示词、护栏、记忆、工具指导、子智能体、Skills、脚本、插件；两层递归——任务内「提出—探测—组合」，任务间保留经验；</li>
+    <li>权重不变，一步优化后 WorkBuddy-Bench 最高 <b>+11.5 分</b>、JobBench <b>+4.5 分</b>、LAB 通过率 <b>+11.8 个百分点</b>；代价是用更多测试时算力换成功率；</li>
+    <li>两个坑：executor 默认<b>不限网络</b>，Codex executor 会<b>关闭 sandbox</b>，正式评测须自行限制。</li>
+  </ul>
+  <div class="angle">建议角度：「不训模型也能涨点」这件事终于有了可复现的开源实现，Harness 工程从手艺变成方法。但第四点更该写——一个默认关掉 sandbox、放开网络的 agent 框架，拿去跑公开榜单，等于把答案放在它手边。这既是安全提醒，也是评测方法学问题。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">15</span><a href="https://engineering.fb.com/2026/10/19/ml-applications/thin-orchestrator-ai-agent-architecture/">Meta「瘦编排器」：1300 行只做路由，20 多个工作流交给 14 个子智能体</a></h3>
+  <div class="src">Meta Engineering Blog（10-19）<a href="https://engineering.fb.com/2026/10/19/ml-applications/thin-orchestrator-ai-agent-architecture/">原文</a></div>
+  <ul class="pts">
+    <li>数据管道智能体采用「thin orchestrator」模式：编排器约 <b>1300 行</b>，只负责路由与可靠性检查，<b>不做任何领域推理</b>；</li>
+    <li>20 多个工作流分派给 <b>14 个上下文隔离</b>的专项子智能体执行；</li>
+    <li>目的是用固定路由协议 + 隔离上下文，压低生产环境的幻觉与串台风险。</li>
+  </ul>
+  <div class="angle">建议角度：这是「给 agent 更多自主权」的反面——把复杂度关进隔离舱，让中枢变笨。可以和第 14 条对照着写：Google 想让 Harness 自己进化，Meta 想让编排器尽量少做事。两条路线的取舍，正好是一篇有观点的稿子。</div>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">16</span><a href="https://aiera.com.cn/2026/10/19/other/admin/119473/%e5%85%ad%e9%a1%b9%e8%af%84%e6%b5%8b%e8%b6%85%e8%b6%8agpt-6-astra%ef%bc%81%e5%a4%a7%e6%99%93ace-brain-0-6%e4%bb%a5%e6%95%b0%e6%8d%aescaling%e6%8e%a8%e5%8a%a8%e5%85%b7%e8%ba%ab%e7%a9%ba%e9%97%b4/">大晓 ACE-Brain-0.6：八项 Grounding 评测六项超过 GPT-6 Astra</a></h3>
+  <div class="src">新智元（10-19）<a href="https://aiera.com.cn/2026/10/19/other/admin/119473/%e5%85%ad%e9%a1%b9%e8%af%84%e6%b5%8b%e8%b6%85%e8%b6%8agpt-6-astra%ef%bc%81%e5%a4%a7%e6%99%93ace-brain-0-6%e4%bb%a5%e6%95%b0%e6%8d%aescaling%e6%8e%a8%e5%8a%a8%e5%85%b7%e8%ba%ab%e7%a9%ba%e9%97%b4/">原文</a></div>
+  <ul class="pts">
+    <li>训练用约 <b>一百万条</b>可验证的空间锚定样本，主攻视觉空间锚定（Grounding）而非高层推理；</li>
+    <li>七项公开基准平均 <b>74.53 分</b>（GPT-6 Astra 73.68）；自建 RobotGrounding 真实场景评测 <b>94.13 分</b>（Astra 91.10）；</li>
+    <li>八项评测中六项超过 Astra，并与 Gemini 4 Argon、Claude Opus 5.5 等横向对比领先。</li>
+  </ul>
+  <div class="angle">建议角度：这条真正的信息量是那个判断——具身智能的瓶颈在「空间锚定」而不是「会推理」，Astra 变强的关键也不是推理涨了。但必须同时交代两点：RobotGrounding 是大晓自建基准，样本与权重也未开源，结论要打折看。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span></div>
+</div>
+
+<h2>🧪 待观察</h2>
+
+<div class="one"><b>17</b>　<a href="https://techcrunch.com/2026/10/19/people-are-using-ai-to-make-their-smart-tvs-dumb-again/">用 AI 把自家智能电视改「笨」：Claude Code 走 ADB 关广告，X 上 200 多万浏览</a>（The Verge / 新智元，10-20；同题：<a href="https://aiera.com.cn/2026/10/20/other/admin/119637/claude-code%e4%b8%80%e6%ae%b5%e8%af%9d%e7%88%86%e6%94%b9%e7%94%b5%e8%a7%86%ef%bc%9a%e6%9e%81%e7%ae%80%e9%9b%b6%e5%b9%bf%e5%91%8a%ef%bc%8c%e5%ae%89%e5%8d%93%e5%8f%98%e3%80%8c%e8%8b%b9%e6%9e%9c%e3%80%8d/">新智元</a>）—— 实质是开发者模式 + ADB + <code>pm disable-user</code>，不 root 不刷机，这套办法在 XDA 上躺了近十年；<b>新意在「谁来执行」</b>，8 月底已有工程师贴出完整提示词。<span class="tag t-todo">待核验</span></div>
+
+<div class="one"><b>18</b>　<a href="https://news.ycombinator.com/item?id=50151036">Ask HN：怎么面对「看不懂却要上线」的 AI 代码</a>（HN <b>256 分</b>）—— 帖子里引了一位 Meta 工程师「从没这么不安过」的自述；同日 Simon Willison 转的<a href="https://simonwillison.net/2026/Oct/19/my-obituary-for-programming/">《编程的讣告》</a>写的是同一件事的另一面：coding agent 抹掉的是「解谜的快感」。两条可以并成一篇「AI 编程时代的理解力」。<span class="tag t-todo">待核验</span></div>
+
+<div class="one"><b>19</b>　<a href="https://www.infoq.cn/article/K5J7yb60djWKM6vUZqwq">OpenCode 被围攻 48 小时，官方把事故归因「大规模模型蒸馏攻击」遭质疑</a>（AI前线·InfoQ，10-19）—— <b>上期已报</b>泄露事件，本期进展：攻击仍在持续、连联创个人账号也被打；更尴尬的是团队用来分析攻击的前沿模型干到一半因安全策略<b>拒绝配合</b>。官方用「蒸馏攻击」解释安全事故，被研究者质疑答非所问。<span class="tag t-key">需授权</span></div>
+
+<div class="foot">
+  <b>本期说明</b><br>
+  ① <b>采集情况</b>：15 个源里 12 个 OK，共产出 64 条候选（24 小时窗）。<b>三个英文源失败</b>——Google Research / Hugging Face Blog / Import AI 均为连接超时（WinError 10060），非内容问题，本期未采到。<b>量子位 RSS 抓到 10 条但窗内 0 条</b>：属已知的约 1 天滞后，不是抓取失败。<br>
+  ② <b>聚簇结果</b>：脚本合并 0 条（64 候选 → 64 事件，无 review 簇）。本期所有合并都是人工认的——Mercury 3 的官方发布 + OpenRouter 上线、TorchNeuron 的 PyTorch 博客 + TechCrunch、电视改造的 The Verge + 新智元，各并成一张卡。<br>
+  ③ <b>跨期去重</b>：与第 3、4 期重复而剔除的有——Anthropic 5% 公益基金、Disney 接手 Character.AI、Claude Code 九成代码自产、MIT 把 Claude 放荒岛、Cloudflare cf CLI、Gemini 4、DeepSeek V4.1 Flash 三榜成绩、OpenCode 泄露本身（本期只留后续进展）。<br>
+  ④ <b>未采用的候选</b>：InfoQ 的 Karmada 毕业、OpenTelemetry K8s Processor、Lyft Flink 迁移因「拿掉 AI 仍成立」剔除；QCon 上海、阿里云样板间属会议/品牌内容；The Verge 的美国民主党 AI 议题、纽约市长表态属美国内政，不进雷达。<br><br>
+  <b>本期待办（需要你）</b><br>
+  · 挑 1–2 条定轨道（改写 / 编译），我出成稿；<br>
+  · 第 19 条要不要重新开一张卡：上期那条已报过泄露，这期只能算后续，值不值得单独成文你定；<br>
+  · 英文源连续两期有 3 个抓不到（超时），要不要把它们降级成「按需手动」。
+</div>
+
+</div>
+</body>
+</html>

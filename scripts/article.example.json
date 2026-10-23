@@ -1,0 +1,9 @@
+{
+  "_说明": "复制本文件改名后填写，然后执行：python scripts/gzh_draft.py --manifest 你的文件.json",
+  "title": "标题（≤64 字，必填）",
+  "summary": "摘要（≤120 字；不填则微信自动抓取正文开头）",
+  "author": "作者（选填）",
+  "source_url": "原文链接（选填；注意：该字段目前脚本填不进去，需在草稿里手动勾选「原文链接」后粘贴）",
+  "body_html_path": "body.html",
+  "cover_path": "cover.jpg"
+}

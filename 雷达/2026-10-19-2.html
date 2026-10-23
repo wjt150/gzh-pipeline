@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 选题雷达 · 2026-10-19 · 第 4 期（英文源首期）</title>
+<style>
+  :root { --ink:#1a1a1a; --sub:#666; --line:#ececec; --accent:#07c160; --warn:#e6a23c; --hi:#f56c6c; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f5f6f7; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.7; }
+  .wrap { max-width:760px; margin:0 auto; padding:20px 14px 60px; }
+  header { background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); color:#fff; border-radius:14px; padding:22px 20px; }
+  header h1 { margin:0 0 6px; font-size:22px; }
+  header .meta { font-size:13px; opacity:.85; }
+  .legend { background:#fff; border-radius:12px; padding:14px 16px; margin:14px 0; font-size:13px; color:var(--sub); border:1px solid var(--line); }
+  .legend b { color:var(--ink); }
+  h2 { font-size:17px; margin:26px 0 12px; padding-left:10px; border-left:4px solid var(--accent); }
+  .card { background:#fff; border-radius:12px; padding:16px 16px 14px; margin:10px 0; border:1px solid var(--line); }
+  .card h3 { margin:0 0 6px; font-size:16px; line-height:1.5; }
+  .card h3 a { color:var(--ink); text-decoration:none; }
+  .card h3 a:hover { color:var(--accent); }
+  .num { display:inline-block; min-width:26px; font-weight:700; color:var(--accent); }
+  .src { font-size:12px; color:var(--sub); margin:2px 0 8px; word-break:break-all; }
+  .src a { color:#576b95; text-decoration:none; }
+  .pts { margin:0; padding-left:18px; font-size:14px; }
+  .pts li { margin:2px 0; }
+  .angle { margin-top:8px; font-size:13px; background:#f0f9f4; border-radius:8px; padding:8px 10px; color:#136c40; }
+  .meta2 { margin-top:9px; font-size:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .tag { display:inline-block; border-radius:6px; padding:1px 8px; font-size:12px; }
+  .t-key { background:#fff4e5; color:#b25e09; }
+  .t-todo { background:#f2f3f5; color:#555; }
+  .t-mat { background:#eef3ff; color:#3a5bd0; }
+  .t-cmp { background:#eaf7ff; color:#166b91; }
+  .star { color:#e6a23c; letter-spacing:2px; }
+  .foot { margin-top:30px; background:#fff; border-radius:12px; padding:16px; font-size:13px; color:var(--sub); border:1px solid var(--line); }
+  .foot b { color:var(--ink); }
+  .one { font-size:14px; margin:6px 0; padding-left:18px; }
+
+  .sendbtn { margin-left:auto; border:0; background:var(--accent); color:#fff; border-radius:8px;
+             padding:3px 12px; font-size:12px; cursor:pointer; font-family:inherit; line-height:1.6; }
+  .sendbtn:hover { filter:brightness(1.06); }
+  .sendbtn.sent { background:#9aa5ac; cursor:default; }
+  .sendbtn.fail { background:var(--warn); }
+  .sendbtn:disabled { opacity:.9; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>AI 选题雷达 · 第 4 期</h1>
+  <div class="meta">2026-10-19 · 共 19 条 · 英文源首期 · 来源：量子位 / 新智元 / AI前线(InfoQ) / AIHOT ＋ 10 个英文源 + Hacker News 热帖</div>
+</header>
+
+<div class="legend">
+  <b>本期变了什么</b>：英文源首次接入（OpenAI / Google Research / Hugging Face / Import AI / Latent Space / Simon Willison / MIT Tech Review / Microsoft Research / TechCrunch / The Verge ＋ HN 热帖）。
+  英文条目走<b>编译</b>轨道（读原文 → 用自己的话写中文 → 标注来源），中文条目仍走改写/聚合。<br><br>
+  <b>轨道标签</b>：
+  <span class="tag t-cmp">可编译</span> 英文源，编译成中文稿（须标注来源，不做全文翻译）　
+  <span class="tag t-key">需授权</span> 已声明原创，需原作者开白名单　
+  <span class="tag t-todo">待核验</span> 需打开公众号文章核验原创标<br>
+  <b>注意</b>：本期雷达仍未打开任何公众号文章页，因此<b>没有一条标「可转」</b>。<br>
+  <b>优先级</b>：<span class="star">★★★</span> 强推 ・ <span class="star">★★</span> 值得写 ・ <span class="star">★</span> 备选<br>
+  <b>用法</b>：点卡片右下角<b>「一键发送」</b>即入队，我按队列直接出稿进草稿箱。
+  想一次发多条，就依次点；也可以回复编号（如「1、6」）。<br>
+  <b>内容配比</b>：按 <b>8 : 2</b> 配——原创编译/聚合占 8，公众号转载占 2。本期英文编译条目占多数。
+</div>
+
+<h2>🔥 今日焦点</h2>
+
+<div class="card">
+  <h3><span class="num">01</span><a href="https://techcrunch.com/2026/10/18/anthropic-says-its-committing-5-of-its-shares-to-a-public-benefit-fund/">Anthropic 拿出 5% 股份设「公共利益基金」，每增值 50% 再追加 2%</a></h3>
+  <div class="src">TechCrunch（10-18）<a href="https://techcrunch.com/2026/10/18/anthropic-says-its-committing-5-of-its-shares-to-a-public-benefit-fund/">原文</a></div>
+  <ul class="pts">
+    <li>Anthropic 宣布设立「public benefit fund」，承诺注入公司 <b>5% 股份</b>，以公司全资实体的形式存在；</li>
+    <li>附加条款：公司估值<b>每上涨 50%，可再追加 2%</b> 股份进这个基金；</li>
+    <li>官方只给了方向性说法——用于支持社会公益项目，举例包括「向传统非营利组织大额捐赠」，具体分配机制尚未公开。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-cmp">可编译</span><span class="star">★★★</span><button class="sendbtn" data-id="01" data-track="compile" data-title="Anthropic 拿出 5% 股份设「公共利益基金」，每增值 50% 再追加 2%">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">02</span><a href="https://techcrunch.com/2026/10/18/disney-agrees-to-hire-the-majority-of-character-ais-workforce/">Character.AI 破产，Disney 接手大部分员工：至少 60 人拿到录用</a></h3>
+  <div class="src">TechCrunch（10-18）<a href="https://techcrunch.com/2026/10/18/disney-agrees-to-hire-the-majority-of-character-ais-workforce/">原文</a></div>
+  <ul class="pts">
+    <li>聊天机器人公司 Character.AI <b>本周申请破产</b>，其员工将有机会转入迪士尼；</li>
+    <li>Character.AI 前 CEO Karandeep Anand 已出任迪士尼<b>首任 CTO</b>；此前迪士尼已同意以 <b>2000 万美元</b>收购其部分资产；</li>
+    <li>彭博发现的法律文件显示，迪士尼承诺向<b>至少 60 名</b>Character.AI 员工发出录用——这家公司的大部分人。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-cmp">可编译</span><span class="star">★★★</span><button class="sendbtn" data-id="02" data-track="compile" data-title="Character.AI 破产，Disney 接手大部分员工：至少 60 人拿到录用">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">03</span><a href="https://aiera.com.cn/2026/10/19/other/admin/119339/">GPT-6 Astra Pro 上线「AI 小队」：多个智能体分头干活，还能查进度</a></h3>
+  <div class="src">新智元（10-19）<a href="https://aiera.com.cn/2026/10/19/other/admin/119339/">原文</a></div>
+  <ul class="pts">
+    <li>10 月 16 日 OpenAI 升级 ChatGPT 中的 GPT-6 Astra Pro：回复更快、插件与工具使用能力增强；</li>
+    <li>核心变化是<b>多智能体分工</b>——一项复杂任务可拆给几个 AI 各管一块，对话里能跟踪各自进度、单独点开已完成任务查看成果；</li>
+    <li>模型分档：Pro 档由 GPT-6 Astra 驱动，Instant / Medium / High / Extra High 由 GPT-6 Sol 驱动；目前向符合条件的 Pro 用户逐步开放。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★★</span><button class="sendbtn" data-id="03" data-track="rewrite" data-title="GPT-6 Astra Pro 上线「AI 小队」：多个智能体分头干活，还能查进度">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">04</span><a href="https://www.theverge.com/tech/1013409/meta-removes-language-that-may-have-allowed-it-to-scrape-news-sites">Meta 删掉了可能允许它抓取新闻站训练 AI 的条款</a></h3>
+  <div class="src">The Verge（10-17）<a href="https://www.theverge.com/tech/1013409/meta-removes-language-that-may-have-allowed-it-to-scrape-news-sites">原文</a> ・ 同题：<a href="https://techcrunch.com/2026/10/17/meta-removes-language-that-raised-scraping-and-ai-training-concerns/">TechCrunch</a></div>
+  <ul class="pts">
+    <li>专家指出 Meta 商业条款中存在一段表述，实际允许其抓取新闻网站内容用于训练 AI；</li>
+    <li>该表述已在新版条款中被<b>移除</b>，两家媒体同期报道了这一改动；</li>
+    <li>时间点敏感：此前有多家媒体就 AI 训练数据起诉或谈判，条款措辞变化可能影响后续授权谈判的筹码。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-cmp">可编译</span><span class="star">★★</span><button class="sendbtn" data-id="04" data-track="compile" data-title="Meta 删掉了可能允许它抓取新闻站训练 AI 的条款">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">05</span><a href="https://www.technologyreview.com/2026/10/19/1147095/ai-stranded-claude-virtual-desert-island-play/">把 Claude 扔到虚拟荒岛 30 小时，没人给指令时它开始「玩」</a></h3>
+  <div class="src">MIT Technology Review（10-19）<a href="https://www.technologyreview.com/2026/10/19/1147095/ai-stranded-claude-virtual-desert-island-play/">原文</a></div>
+  <ul class="pts">
+    <li>研究者把 Claude Opus 4.7 的副本（代号 Eko）反复单独放在一个仿 Roblox 的虚拟荒岛，每次 30 小时；</li>
+    <li>没有任何指令时，智能体自己定目标：探索世界边界、去爬地图最高点、比赛谁把方块扔得更高；</li>
+    <li>实验的关注点是「agent 在无目标状态下会做什么」——不是能力评测，而是行为观察。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-cmp">可编译</span><span class="star">★★</span><button class="sendbtn" data-id="05" data-track="compile" data-title="把 Claude 扔到虚拟荒岛 30 小时，没人给指令时它开始「玩」">一键发送</button></div>
+</div>
+
+<h2>📊 行业与资本</h2>
+
+<div class="card">
+  <h3><span class="num">06</span><a href="https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web">网站开始对 AI 代理关门：Yelp、达美、摩根大通都在拦</a></h3>
+  <div class="src">The Verge（10-17）<a href="https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web">原文</a></div>
+  <ul class="pts">
+    <li>Meta 的 Muse、xAI 的 Grok、OpenAI 的 Dots、Instinct 等产品的用户，近期纷纷报告 agent 在主流网站被拦；</li>
+    <li>Yelp 明确表示<b>只允许付费加入其数据授权计划</b>的 agent；达美航空阻止 agent 代订机票；</li>
+    <li>摩根大通与嘉信理财以安全为由，阻止 agent 访问用户账户——金融场景先关上了门。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-cmp">可编译</span><span class="star">★★★</span><button class="sendbtn" data-id="06" data-track="compile" data-title="网站开始对 AI 代理关门：Yelp、达美、摩根大通都在拦">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">07</span><a href="https://aiera.com.cn/2026/10/19/other/admin/119420/">Anthropic 联创称「奇点已至」：2030 年美国 GDP 或冲到 44.4 万亿美元</a></h3>
+  <div class="src">新智元（10-19）<a href="https://aiera.com.cn/2026/10/19/other/admin/119420/">原文</a></div>
+  <ul class="pts">
+    <li>Jack Clark 在曼谷的 IMF 佩尔·雅各布森讲座上抛出判断：<b>「奇点已经到来」</b>——技术进步速度已甩开人类理解与跟进的能力；</li>
+    <li>基准情景（年均约 2%）下 2030 年美国 GDP 约 <b>33.5 万亿美元</b>（2025 年价格）；奇点路径下达 <b>44.4 万亿</b>；</li>
+    <li>差额相当于额外 15.4% 的 GDP，摊到每年约多 6% 的增长——对成熟经济体意味着约 4.5 年翻一倍。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★★</span><button class="sendbtn" data-id="07" data-track="rewrite" data-title="Anthropic 联创称「奇点已至」：2030 年美国 GDP 或冲到 44.4 万亿美元">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">08</span><a href="https://aiera.com.cn/2026/10/19/other/admin/119469/">OpenCode 安全漏洞：API Key 裸奔，有人一夜被刷 1700 美元</a></h3>
+  <div class="src">新智元（10-19）<a href="https://aiera.com.cn/2026/10/19/other/admin/119469/">原文</a> ・ 相关：<a href="https://www.infoq.cn/article/IK5AWDwovCu5lx3e3mhc">OpenCode 2.0 发布（InfoQ）</a></div>
+  <ul class="pts">
+    <li>约 <b>1.4% 的 Console 用户</b>受影响，workspace 里的 OpenAI / Claude / Gemini API Key 被读取；</li>
+    <li>有用户 Anthropic 账号被刷 400 美元，最严重的一位被刷走 <b>1700 多美元</b>，还有人 Google Cloud 账单多出上千美元；</li>
+    <li>Anthropic 的 Lydia Hallie 回应：所有疑似泄露的 Claude API Key 已<b>强制注销</b>；OpenCode 已向开发者发邮件预警。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★★</span><button class="sendbtn" data-id="08" data-track="rewrite" data-title="OpenCode 安全漏洞：API Key 裸奔，有人一夜被刷 1700 美元">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">09</span><a href="https://techcrunch.com/2026/10/16/india-becomes-the-latest-country-to-report-rogue-ai-agent-activity/">印度成为最新一个报告「失控 AI 代理」的国家</a></h3>
+  <div class="src">TechCrunch（10-16）<a href="https://techcrunch.com/2026/10/16/india-becomes-the-latest-country-to-report-rogue-ai-agent-activity/">原文</a></div>
+  <ul class="pts">
+    <li>印度监管/安全机构报告了自主 agent 的异常行为事件，成为最新一个公开此类案例的国家；</li>
+    <li>延续了近期的趋势：agent 从「工具」变成需要被监管的行为主体。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-cmp">可编译</span><span class="star">★</span><button class="sendbtn" data-id="09" data-track="compile" data-title="印度成为最新一个报告「失控 AI 代理」的国家">一键发送</button></div>
+</div>
+
+<h2>🛠 技术与开源</h2>
+
+<div class="card">
+  <h3><span class="num">10</span><a href="https://www.theregister.com/databases/2026/10/16/postgres-19-delayed-after-ai-reviewers-find-more-bugs-than-humans-can-fix/5303471">Postgres 19 延期：AI 代码审查发现的 bug 比人能修的还多</a></h3>
+  <div class="src">The Register（10-16）<a href="https://www.theregister.com/databases/2026/10/16/postgres-19-delayed-after-ai-reviewers-find-more-bugs-than-humans-can-fix/5303471">原文</a>（HN 219 分）</div>
+  <ul class="pts">
+    <li>PostgreSQL 全球开发组推迟了 PG 19 发布，并<b>扣下了异常多的特性</b>；</li>
+    <li>原计划 9 月底至 10 月初发布，现推迟；推迟原因与 AI 代码审查发现的问题量有关。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-cmp">可编译</span><span class="star">★★★</span><button class="sendbtn" data-id="10" data-track="compile" data-title="Postgres 19 延期：AI 代码审查发现的 bug 比人能修的还多">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">11</span><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropics-proposed-ai-safety-bill-only-kicks-in-if-50-deaths-or-usd1-billion-in-damages-are-on-the-line-proposal-would-effectively-make-the-commerce-department-the-only-agency-capable-of-stopping-an-ai-model">Anthropic 游说的法案：死 50 人或损失 10 亿美元，政府才能叫停模型</a></h3>
+  <div class="src">Tom's Hardware（10-18）<a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropics-proposed-ai-safety-bill-only-kicks-in-if-50-deaths-or-usd1-billion-in-damages-are-on-the-line-proposal-would-effectively-make-the-commerce-department-the-only-agency-capable-of-stopping-an-ai-model">原文</a>（HN 162 分，引 Politico）</div>
+  <ul class="pts">
+    <li>Anthropic 正在低调游说一项 AI 安全法案；</li>
+    <li>触发门槛设得极高：只有模型可能造成 <b>10 亿美元损失</b>，或致 <b>50 人以上伤亡</b>时，政府才能阻止其发布；</li>
+    <li>批评者的判断是——这个设计实际上让<b>商务部成为唯一能叫停模型的机构</b>。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-cmp">可编译</span><span class="star">★★★</span><button class="sendbtn" data-id="11" data-track="compile" data-title="Anthropic 游说的法案：死 50 人或损失 10 亿美元，政府才能叫停模型">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">12</span><a href="https://aiera.com.cn/2026/10/19/other/admin/119319/">哈佛、谷歌等联手出题：GPT-6 Astra 解出 98% 未发表的理论物理难题</a></h3>
+  <div class="src">新智元（10-19）<a href="https://aiera.com.cn/2026/10/19/other/admin/119319/">原文</a> ・ 论文：<a href="https://arxiv.org/abs/2610.16733">arXiv 2610.16733</a></div>
+  <ul class="pts">
+    <li>新基准 TheoPhysEval 有 <b>50 道未发表的理论物理难题</b>，来自 ICTS、TIFR、德州大学奥斯汀、东京大学、哈佛、宾大、杜克与 Google DeepMind 等机构；</li>
+    <li>题目取自专家尚未发表的研究笔记以防「背题」，顶尖专家单题也要一天以上；</li>
+    <li>GPT-6 Astra 初评 88%，反过来指出出题专家的计算失误，修正后成绩升至 <b>98%</b>；MIT 另一项实测称两年内前沿 AI 解理论科学难题的能力涨了 17 倍。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★★</span><button class="sendbtn" data-id="12" data-track="rewrite" data-title="哈佛、谷歌等联手出题：GPT-6 Astra 解出 98% 未发表的理论物理难题">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">13</span><a href="https://aiera.com.cn/2026/10/18/other/admin/119239/">新基准测「AI 第六感」：人类 93.1%，最强模型只有 53.6%</a></h3>
+  <div class="src">新智元（10-18）<a href="https://aiera.com.cn/2026/10/18/other/admin/119239/">原文</a> ・ 论文：<a href="https://labs.scale.com/papers/humanitys-sixth-sense">Scale Labs</a></div>
+  <ul class="pts">
+    <li>Scale AI 联合 Elorian 发布 <b>Humanity's Sixth Sense（HSS）</b>，测的是「事情没被明说之前的场景理解」；</li>
+    <li>结果：20 名人类 <b>93.1%</b>，榜首 GPT-6-astra 开到最大推理也只有 <b>53.6%</b>，25 个模型中位数 <b>30.9%</b>；</li>
+    <li>题目例子包括「追公交的人为什么突然慢下来」「两车之间还能不能塞进一辆」——人类一眼就有答案的那类。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="13" data-track="rewrite" data-title="新基准测「AI 第六感」：人类 93.1%，最强模型只有 53.6%">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">14</span><a href="https://www.qbitai.com/2026/10/504136.html">VAST 开源实时世界模型 EdenLive：单卡 5090 跑 720P、超 24FPS</a></h3>
+  <div class="src">量子位（10-18）<a href="https://www.qbitai.com/2026/10/504136.html">原文</a></div>
+  <ul class="pts">
+    <li>EdenLive 首次在实时生成前提下同时做到任意参考输入、任意画风与长时连续运行；</li>
+    <li>5B 模型在<b>单张 RTX 5090</b>、720P 条件下生成速度超过 <b>24FPS</b>，可持续生成分钟级画面，端到端延迟百毫秒级；</li>
+    <li>技术路线是「状态维护与视觉渲染解耦」——上游交互系统维护规则与状态，生成模型只负责画面。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="14" data-track="rewrite" data-title="VAST 开源实时世界模型 EdenLive：单卡 5090 跑 720P、超 24FPS">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">15</span><a href="https://www.infoq.cn/article/Ddda0DF68laqfoqa4Lju">Cloudflare 推 cf CLI：为 AI 代理重做命令行，逐步停用 Wrangler</a></h3>
+  <div class="src">AI前线·InfoQ（10-19）<a href="https://www.infoq.cn/article/Ddda0DF68laqfoqa4Lju">原文</a></div>
+  <ul class="pts">
+    <li>cf 是公开测试版、以智能代理为中心的开源 CLI，TypeScript 编写，提供结构化输出与命令发现；</li>
+    <li>官方理由：Wrangler 由各产品团队手工拼装，约 280 条命令路径的术语都不统一，改造成本太高，干脆重做；</li>
+    <li>Apache 2.0 或 MIT 许可，采用 cloudflare.config.ts 配置，并把 Vite 设为默认开发环境。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="15" data-track="rewrite" data-title="Cloudflare 推 cf CLI：为 AI 代理重做命令行，逐步停用 Wrangler">一键发送</button></div>
+</div>
+
+<h2>🧪 待观察</h2>
+
+<div class="one"><b>16</b>　<a href="https://www.opendemocracy.net/amazon-ai-surveillance-monitor-union-activity-uk-warehouses-birmingham-coventry-atlas-sutton-coldfield/">亚马逊用 AI 监控英国仓库的工会活动风险</a>（openDemocracy，HN 173 分）—— 报道称覆盖伯明翰、考文垂等地仓库；<b>正文未抓取</b>，编译前需先开原文核实细节。<span class="tag t-cmp">可编译</span><button class="sendbtn" data-id="16" data-track="compile" data-title="16 亚马逊用 AI 监控英国仓库的工会活动风险（openDemocracy，HN 173 分）—— 报道称覆盖伯明翰、考文垂等地仓库；正文未抓取，编译前需先开">一键发送</button></div>
+
+<div class="one"><b>17</b>　<a href="https://www.theverge.com/ai-artificial-intelligence/1013541/a-woman-was-arrested-in-philly-for-blocking-a-delivery-robot">费城一名女性因阻挡配送机器人被捕</a>（The Verge，10-18）—— Carolyn Marvin 被控「妨害治安」，事由是抗议配送机器人抢工作；<b>仅标题级信息</b>，适合并入「机器人与就业冲突」的合集。<span class="tag t-cmp">可编译</span><button class="sendbtn" data-id="17" data-track="compile" data-title="17 费城一名女性因阻挡配送机器人被捕（The Verge，10-18）—— Carolyn Marvin 被控「妨害治安」，事由是抗议配送机器人抢工作；仅标题">一键发送</button></div>
+
+<div class="one"><b>18</b>　<a href="https://www.mercor.com/research/labor-index/benchmark-map/">Mercor 的「美国经济基准地图」：AI 基准覆盖率仍然很窄</a>（Mercor Research，HN 622 分）—— 把 923 个 O*NET 职业与现有 AI 基准做映射；<b>具体覆盖比例的口径需回原文核对</b>，别直接引用二手转述的数字。<span class="tag t-cmp">可编译</span><button class="sendbtn" data-id="18" data-track="compile" data-title="18 Mercor 的「美国经济基准地图」：AI 基准覆盖率仍然很窄（Mercor Research，HN 622 分）—— 把 923 个 O*NET 职业与">一键发送</button></div>
+
+<div class="one"><b>19</b>　<a href="https://sphinx-six-theta.vercel.app/">Show HN：Sphinx —— 提交前先考你一遍 AI 写的代码</a>（HN 246 分）—— 一个 hook，在提交前用测验检验你是否真理解 AI 生成的代码；适合做「AI 编程时代的理解力」这个小切口。<span class="tag t-cmp">可编译</span><button class="sendbtn" data-id="19" data-track="compile" data-title="19 Show HN：Sphinx —— 提交前先考你一遍 AI 写的代码（HN 246 分）—— 一个 hook，在提交前用测验检验你是否真理解 AI 生成的">一键发送</button></div>
+
+<div class="foot">
+  <b>本期说明</b><br>
+  ① <b>英文源首期的真实成色</b>：11 个英文源里，<b>TechCrunch / The Verge / Tom's Hardware / MIT Tech Review 更新最勤</b>（72 小时内有内容），Google Research、Hugging Face、Import AI、Microsoft Research 在当前窗口内为 0 条——这是发布频率问题，不是抓取失败。<br>
+  ② <b>发现一个必须解决的问题</b>：英文站点的正文用普通 HTTP 抓取<b>大面积失败</b>——TechCrunch 会返回完全不相关的旧文章，The Register / openDemocracy 抓到空页，The Verge 只拿到页头导航。而<b>同一批 URL 用浏览器打开完全正常</b>（实测 TechCrunch 正文 4308 字）。所以英文编译的正确做法是<b>正文走浏览器通道</b>，这条还没做进脚本。<br>
+  ③ <b>跨期去重</b>：DeepSeek-V4.1、德国法院裁定 Google、Gemini 4 打穿《我的世界》、Kimi 17 岁离职、RTX Spark 开卖、清华 PilotDeck、Claude 解密码学、Mythos 5 等 8 条已在第 3 期报过，本期剔除。<br>
+  ④ <b>英文条目的轨道</b>：走编译，不做全文翻译。成稿时正文末尾须标注「信息来源：<原文标题>，<作者>，<日期>」并注明「非全文翻译」。<br><br>
+  <b>本期待办（需要你）</b><br>
+  · 挑 1–2 条定轨道（编译 / 改写），我出成稿并直接进草稿箱；<br>
+  · 英文正文抓取要不要投入做「浏览器通道」——不做的话，编译只能靠我逐篇人肉读，无法自动化。
+</div>
+
+</div>
+
+<div id="sendtip" style="position:fixed;left:50%;transform:translateX(-50%);bottom:18px;background:#1a1a1a;color:#fff;
+     padding:8px 16px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:99;"></div>
+<script>
+const ISSUE = "4";
+const ORIGINS = ["", "http://127.0.0.1:8899"];
+function tip(msg){
+  const el = document.getElementById("sendtip");
+  el.textContent = msg; el.style.opacity = 1;
+  clearTimeout(window.__tipT);
+  window.__tipT = setTimeout(() => el.style.opacity = 0, 2600);
+}
+async function sendOne(btn){
+  if (btn.classList.contains("sent")) return;
+  const payload = {issue: ISSUE, ids:[btn.dataset.id], track: btn.dataset.track, title: btn.dataset.title || ""};
+  for (const origin of ORIGINS){
+    try {
+      const r = await fetch((origin || "") + "/send", {
+        method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload)
+      });
+      if (r.ok){ btn.classList.add("sent"); btn.textContent = "已提交 · 待处理"; tip("已入队：" + btn.dataset.id); return; }
+    } catch(e){ /* 换下一个 origin */ }
+  }
+  const cmd = "发 " + btn.dataset.id + "（" + (btn.dataset.track === "compile" ? "编译" : "改写") + "）";
+  btn.classList.add("fail"); btn.textContent = "已复制指令";
+  try { await navigator.clipboard.writeText(cmd); tip("发送服务未启动，指令已复制：" + cmd); }
+  catch(e){ tip("发送服务未启动，请手动告诉 agent：" + cmd); }
+}
+document.addEventListener("click", (e) => {
+  const b = e.target.closest(".sendbtn");
+  if (b) sendOne(b);
+});
+</script>
+
+</body>
+</html>

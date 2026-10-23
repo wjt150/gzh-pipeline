@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 选题雷达 · {{DATE}} · 第 {{ISSUE}} 期</title>
+<!--
+  本文件是「AI 选题雷达」的骨架。用法：
+  1. 复制本文件内容，替换所有 {{占位符}}；
+  2. CSS 原样保留，不要改（这套样式是与用户确认过的成品样式，改了版面就不一致）；
+  3. 卡片 HTML 照下面「卡片范例」写，class 名不要改、不要新增。
+
+  ==== 卡片范例（复制这段改内容） ====
+  <div class="card">
+    <h3><span class="num">01</span><a href="真实链接">标题原文</a></h3>
+    <div class="src">来源名（时间）真实链接 ・ <a href="第二来源链接">同题另一家</a></div>
+    <ul class="pts">
+      <li>要点一，来自抓到的原文或摘要；</li>
+      <li>要点二，数字带单位；</li>
+      <li>要点三，最后一条用句号。</li>
+    </ul>
+    <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★★</span></div>
+  </div>
+  ==== 范例结束 ====
+
+  ⚠ 不要写「建议角度」：稿子由 agent 写，那是内部思路，不该出现在交付物上。
+  ⚠ 生成完 HTML 后必须跑一次加工器，给每条加「一键发送」按钮：
+       python scripts/radar_enrich.py 雷达/<本期文件名>.html
+     它会删掉残留的 .angle、注入按钮与提交脚本（依赖 scripts/radar_server.py 在 8899 端口）。
+
+  编号规则：全期连续，两位数补零（01、02 … 20），跨栏目不重新计数。
+  标签规则见 references/选题判断标准.md 第六节：本阶段只能用 t-todo / t-key / t-mat，禁止用 t-ok；
+  英文源条目用 t-cmp（可编译）。
+-->
+<style>
+  :root { --ink:#1a1a1a; --sub:#666; --line:#ececec; --accent:#07c160; --warn:#e6a23c; --hi:#f56c6c; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f5f6f7; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.7; }
+  .wrap { max-width:760px; margin:0 auto; padding:20px 14px 60px; }
+  header { background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); color:#fff; border-radius:14px; padding:22px 20px; }
+  header h1 { margin:0 0 6px; font-size:22px; }
+  header .meta { font-size:13px; opacity:.85; }
+  .legend { background:#fff; border-radius:12px; padding:14px 16px; margin:14px 0; font-size:13px; color:var(--sub); border:1px solid var(--line); }
+  .legend b { color:var(--ink); }
+  h2 { font-size:17px; margin:26px 0 12px; padding-left:10px; border-left:4px solid var(--accent); }
+  .card { background:#fff; border-radius:12px; padding:16px 16px 14px; margin:10px 0; border:1px solid var(--line); }
+  .card h3 { margin:0 0 6px; font-size:16px; line-height:1.5; }
+  .card h3 a { color:var(--ink); text-decoration:none; }
+  .card h3 a:hover { color:var(--accent); }
+  .num { display:inline-block; min-width:26px; font-weight:700; color:var(--accent); }
+  .src { font-size:12px; color:var(--sub); margin:2px 0 8px; word-break:break-all; }
+  .src a { color:#576b95; text-decoration:none; }
+  .pts { margin:0; padding-left:18px; font-size:14px; }
+  .pts li { margin:2px 0; }
+  .angle { margin-top:8px; font-size:13px; background:#f0f9f4; border-radius:8px; padding:8px 10px; color:#136c40; }
+  .meta2 { margin-top:9px; font-size:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .tag { display:inline-block; border-radius:6px; padding:1px 8px; font-size:12px; }
+  .t-ok { background:#e8f7ef; color:#0b7a46; }
+  .t-key { background:#fff4e5; color:#b25e09; }
+  .t-todo { background:#f2f3f5; color:#555; }
+  .t-mat { background:#eef3ff; color:#3a5bd0; }
+  .star { color:#e6a23c; letter-spacing:2px; }
+  .foot { margin-top:30px; background:#fff; border-radius:12px; padding:16px; font-size:13px; color:var(--sub); border:1px solid var(--line); }
+  .foot b { color:var(--ink); }
+  .one { font-size:14px; margin:6px 0; padding-left:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>AI 选题雷达 · 第 {{ISSUE}} 期</h1>
+  <div class="meta">{{DATE}} · 共 {{COUNT}} 条 · 已按事件聚合 · 来源：{{SOURCES}}</div>
+</header>
+
+<div class="legend">
+  <b>转载可行性</b>（决定这条走哪条轨，<b>以下均为初判</b>）：<br>
+  <span class="tag t-ok">可转·注明来源</span> 未声明原创，原文可整篇进你的公众号　
+  <span class="tag t-key">需授权</span> 已声明原创，需原作者开白名单　
+  <span class="tag t-todo">待核验</span> 需打开对应公众号文章核验原创标　
+  <span class="tag t-mat">仅素材</span> 用于原创聚合，不直接转载<br>
+  <b>注意</b>：本期雷达未打开公众号文章页，因此本页不会出现「可转·注明来源」——
+  该结论必须在核验原创标后才能下，属成稿阶段。<br>
+  <b>优先级</b>：<span class="star">★★★</span> 强推 ・ <span class="star">★★</span> 值得写 ・ <span class="star">★</span> 备选<br>
+  <b>用法</b>：点卡片右下角<b>「一键发送」</b>即入队，agent 按队列出稿进草稿箱；也可以回复编号（如「1、5」）。<br>
+  <b>内容配比</b>：原创（编译 / 聚合）: 公众号转载 = <b>8 : 2</b>。
+</div>
+
+<h2>🔥 今日焦点</h2>
+{{FOCUS_CARDS}}
+
+<h2>📊 行业与资本</h2>
+{{INDUSTRY_CARDS}}
+
+<h2>🛠 技术与开源</h2>
+{{TECH_CARDS}}
+
+<h2>🧪 待观察</h2>
+<div class="card">
+{{WATCH_ITEMS}}
+</div>
+
+<div class="foot">
+  <b>下一步</b><br>
+  1. 回复编号挑题（如「1、5」），指定轨道：<b>原文转载</b>（我会先核验该文公众号原创标，未声明原创的直接整理原文+署名；已声明原创的给你拟白名单申请留言）或 <b>原创聚合</b>（我出原创稿+标题3版+摘要+排版HTML）。<br>
+  2. {{PENDING_ITEMS}}
+  3. 来源清单与写作规则见工作区根目录 <b>来源清单.md</b> / <b>写作规则.md</b>。
+</div>
+
+</div>
+</body>
+</html>

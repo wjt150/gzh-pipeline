@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 选题雷达 · 2026-10-19 · 第 3 期</title>
+<style>
+  :root { --ink:#1a1a1a; --sub:#666; --line:#ececec; --accent:#07c160; --warn:#e6a23c; --hi:#f56c6c; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f5f6f7; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.7; }
+  .wrap { max-width:760px; margin:0 auto; padding:20px 14px 60px; }
+  header { background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); color:#fff; border-radius:14px; padding:22px 20px; }
+  header h1 { margin:0 0 6px; font-size:22px; }
+  header .meta { font-size:13px; opacity:.85; }
+  .legend { background:#fff; border-radius:12px; padding:14px 16px; margin:14px 0; font-size:13px; color:var(--sub); border:1px solid var(--line); }
+  .legend b { color:var(--ink); }
+  h2 { font-size:17px; margin:26px 0 12px; padding-left:10px; border-left:4px solid var(--accent); }
+  .card { background:#fff; border-radius:12px; padding:16px 16px 14px; margin:10px 0; border:1px solid var(--line); }
+  .card h3 { margin:0 0 6px; font-size:16px; line-height:1.5; }
+  .card h3 a { color:var(--ink); text-decoration:none; }
+  .card h3 a:hover { color:var(--accent); }
+  .num { display:inline-block; min-width:26px; font-weight:700; color:var(--accent); }
+  .src { font-size:12px; color:var(--sub); margin:2px 0 8px; word-break:break-all; }
+  .src a { color:#576b95; text-decoration:none; }
+  .pts { margin:0; padding-left:18px; font-size:14px; }
+  .pts li { margin:2px 0; }
+  .angle { margin-top:8px; font-size:13px; background:#f0f9f4; border-radius:8px; padding:8px 10px; color:#136c40; }
+  .meta2 { margin-top:9px; font-size:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .tag { display:inline-block; border-radius:6px; padding:1px 8px; font-size:12px; }
+  .t-key { background:#fff4e5; color:#b25e09; }
+  .t-todo { background:#f2f3f5; color:#555; }
+  .t-mat { background:#eef3ff; color:#3a5bd0; }
+  .star { color:#e6a23c; letter-spacing:2px; }
+  .foot { margin-top:30px; background:#fff; border-radius:12px; padding:16px; font-size:13px; color:var(--sub); border:1px solid var(--line); }
+  .foot b { color:var(--ink); }
+  .one { font-size:14px; margin:6px 0; padding-left:18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>AI 选题雷达 · 第 3 期</h1>
+  <div class="meta">2026-10-19 · 共 20 条 · 已按事件聚合 · 来源：量子位 / 新智元 / AI前线(InfoQ) / AIHOT</div>
+</header>
+
+<div class="legend">
+  <b>转载可行性</b>（决定这条走哪条轨，<b>以下均为初判</b>）：<br>
+  <span class="tag t-key">需授权</span> 已声明原创，需原作者开白名单　
+  <span class="tag t-todo">待核验</span> 需打开对应公众号文章核验原创标　
+  <span class="tag t-mat">仅素材</span> 用于原创聚合，不直接转载<br>
+  <b>注意</b>：本期雷达未打开任何公众号文章页，因此<b>没有一条标「可转」</b>——该结论必须在核验原创标后才能下，属成稿阶段。<br>
+  <b>优先级</b>：<span class="star">★★★</span> 强推 ・ <span class="star">★★</span> 值得写 ・ <span class="star">★</span> 备选<br>
+  <b>用法</b>：回复编号挑题（如「1、5」）+ 指定轨道（原文转载 / 原创聚合），我出成稿。
+</div>
+
+<h2>🔥 今日焦点</h2>
+
+<div class="card">
+  <h3><span class="num">01</span><a href="https://www.qbitai.com/2026/10/504067.html">DeepSeek-V4.1-Flash-1017：开源模型登顶 Code Arena，成本约为对手十分之一</a></h3>
+  <div class="src">量子位（10-17）https://www.qbitai.com/2026/10/504067.html ・ 同题：<a href="https://api-docs.deepseek.com/zh-cn/updates/">官方更新日志</a> ・ <a href="https://x.com/arena/status/2111894091168682086">Arena 榜单</a></div>
+  <ul class="pts">
+    <li>10 月 17 日发布 V4.1-Flash-1017，官方称代码与 Agent 任务在各项基准上「整齐抬头」，API 价格不变；</li>
+    <li>Code Arena 的 WebDev 榜拿到开源模型第一，超过 Kimi K3（Max），成本低约 10 倍；</li>
+    <li>同期开放自研搜索 API（含索引规模与过滤机制），Harness 0.2.1 同步增强，首次登录送 6 元赠金、7 天有效。</li>
+  </ul>
+  <div class="angle">建议角度：别写成「又发了个新模型」。真正的信息是「开源第一 + 十分之一成本」这组数字，对正在做 API 选型或私有化部署的团队意味着什么——用采购视角写，比用参数视角写有价值。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">02</span><a href="https://www.ithome.com/1/013/983.htm">商务部、科技部拟增列 23 项 AI 技术进进出口目录，全目录 40 项、禁 14 限 26</a></h3>
+  <div class="src">IT之家（10-16）https://www.ithome.com/1/013/983.htm</div>
+  <ul class="pts">
+    <li>两部门发布 2026 年第 48 号公告，就修订《中国禁止出口限制出口技术目录》公开征求意见；</li>
+    <li>拟增列人工智能、生物医药、光伏共 40 项技术，其中禁止出口 14 项、限制出口 26 项，AI 相关 23 项；</li>
+    <li>对相关技术实施出口前登记的临时管理措施，商务部另就「哪些出海情形不受限」答记者问。</li>
+  </ul>
+  <div class="angle">建议角度：这是少数「影响面极大但没人愿意写」的题。别复述公告，做一张「哪些 AI 技术被列、哪种出海方式不受限」的对照表，直接回答做 AI 出海的人最关心的那一个问题。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">03</span><a href="https://the-decoder.com/anthropic-has-nearly-stopped-hiring-junior-staff-because-ai-agents-now-work-six-times-as-many-hours/">Anthropic 内部数据：技术部门初级岗占比 21% 降到 14%，Agent 工时是人的 6 倍</a></h3>
+  <div class="src">The Decoder（10-18）https://the-decoder.com/anthropic-has-nearly-stopped-hiring-junior-staff-because-ai-agents-now-work-six-times-as-many-hours/</div>
+  <ul class="pts">
+    <li>技术部门初级岗位占比从 2025 年初的 21% 降至 14%，新招初级占比从 27% 降至 9%，空缺初级职位只剩 6%；</li>
+    <li>非技术部门同期基本稳定，说明变化集中在工程侧而非全公司缩编；</li>
+    <li>Agent 承担的工作时长达到人类员工的 6 倍；报道同时保留了研究自身对数据口径的局限性说明。</li>
+  </ul>
+  <div class="angle">建议角度：所有人都在谈「AI 抢工作」，这份数据的价值是它来自 Anthropic 自己、而且区分了技术与非技术部门。就写一件事：初级岗位的入口正在被谁关掉——是裁员，还是根本不招。</div>
+  <div class="meta2"><span class="tag t-mat">仅素材</span><span class="star">★★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">04</span><a href="https://the-decoder.com/two-german-courts-now-hold-google-liable-for-what-its-ai-overviews-say/">德国两家法院先后裁定：Google 要为 AI 搜索摘要说错的话负责</a></h3>
+  <div class="src">The Decoder（10-18）https://the-decoder.com/two-german-courts-now-hold-google-liable-for-what-its-ai-overviews-say/</div>
+  <ul class="pts">
+    <li>慕尼黑地区法院 I 于 5 月底裁定，AI 搜索摘要属于公司自己的陈述，而非中立转述第三方内容；</li>
+    <li>Google 公开表示上诉后，实际以和解结案，没有拿到上级法院的裁决；</li>
+    <li>两起判例指向同一法律逻辑：AI 生成的内容不能靠「我只是转述」免责。</li>
+  </ul>
+  <div class="angle">建议角度：国内平台也在做 AI 摘要（搜索、浏览器、资讯 App），这条判例是可预判的监管走向。写「AI 摘要的免责牌正在失效」，落到国内内容平台的风险点，比单纯编译外媒更有用。</div>
+  <div class="meta2"><span class="tag t-mat">仅素材</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">05</span><a href="https://aiera.com.cn/2026/10/18/other/admin/119205/gemini-4-argon%e6%89%93%e7%a9%bfagi%e7%bb%88%e6%9e%81%e8%80%83%e5%9c%ba%ef%bc%81/">Gemini 4 双线炸场：ARC-AGI-3 拿 97.5%，4 个智能体组队打穿《我的世界》</a></h3>
+  <div class="src">新智元（10-18）https://aiera.com.cn/2026/10/18/other/admin/119205/ ・ 同题：<a href="https://aiera.com.cn/2026/10/18/other/admin/119256/%e5%88%9a%e5%88%9a%ef%bc%8c4%e4%b8%aagemini%e6%ad%bb%e4%ba%86605%e6%ac%a1%ef%bc%8c%e7%ab%9f%e8%87%aa%e5%b7%b1%e7%bb%84%e9%98%9f%e6%89%93%e7%a9%bf%e3%80%8a%e6%88%91%e7%9a%84%e4%b8%96%e7%95%8c%e3%80%8b/">多智能体通关</a></div>
+  <ul class="pts">
+    <li>ARC-AGI-3 拿到 97.5%，而七个月前该基准上线时所有前沿模型都不到 1%；Google DeepMind 成为第二家突破 95% 的实验室；</li>
+    <li>三代考题全通：ARC-AGI-1 98.5%（每题 0.16 美元）、ARC-AGI-2 91.3%（每题 0.32 美元）；</li>
+    <li>另有 4 个 Gemini 4 Argon 智能体在随机地图的《我的世界》里从零开局，死 605 次后自己分工通关，论文 10 月 15 日已上 arXiv。</li>
+  </ul>
+  <div class="angle">建议角度：两条都别写成「谷歌又赢了」。值得写的是那个 0.16 美元——推理成本掉到「每题一毛钱」时，AGI 基准就从实验室指标变成了产品成本表上的一行。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★★</span></div>
+</div>
+
+<h2>📊 行业与资本</h2>
+
+<div class="card">
+  <h3><span class="num">06</span><a href="https://www.infoq.cn/article/EuYOPRUBAeBgBGBu5ktk">Meta 开源 8160 亿参数的 Muse Spark Open，编码基测却输给 GLM 和 Kimi</a></h3>
+  <div class="src">InfoQ（10-18）https://www.infoq.cn/article/EuYOPRUBAeBgBGBu5ktk</div>
+  <ul class="pts">
+    <li>10 月 15 日开放权重，稀疏 MoE 架构，总参 8160 亿、每 token 激活约 420 亿，上下文 1,048,576 token；</li>
+    <li>JobBench 61.8、MCP-Atlas 89.2；但在 Terminal-Bench 2.1 与 DeepSWE 1.1 上低于国产开源模型 GLM 5.3 和 Kimi；</li>
+    <li>本地部署是最大卖点：通过 MLX 可在两台 M5 Ultra 的 Mac Studio 上跑起来，但 420 亿激活并不等于只需 420 亿参数的内存。</li>
+  </ul>
+  <div class="angle">建议角度：「全美最强开源」这个说法在编码基测上被国产模型按住了，这是最好用的切口。别站队，把三项测试的分数并排列出来，让数字说话。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">07</span><a href="https://www.infoq.cn/article/UdT804ujpGxrv0pQfxv2">17 岁 Kimi 架构核心参与者离职赴湾区，本人否认去 Anthropic</a></h3>
+  <div class="src">InfoQ（10-18）https://www.infoq.cn/article/UdT804ujpGxrv0pQfxv2</div>
+  <ul class="pts">
+    <li>陈广宇（Nathan Chen）10 月 15 日在 X 上宣布离开月之暗面，此前参与 Kimi K3 的模型架构与优化器工作；</li>
+    <li>他 2026 年才从高中毕业，16 岁进入团队；今年 3 月 Attention Residuals 论文发布后以「17 岁研究者」身份受到关注；</li>
+    <li>本人否认加入 Anthropic，只确认将赴湾区，下一站未公开。</li>
+  </ul>
+  <div class="angle">建议角度：别写成「天才少年出走」的爽文。真正的问题是：国内头部实验室能不能留住 17 岁这一档的人——他们不需要title、不需要管理岗，要的是算力和署名。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">08</span><a href="https://www.a16z.news/p/this-week-in-charts-agents-denied">a16z：电商对智能体的 403 拦截翻倍，42% 消费者完全不信任 AI 代购</a></h3>
+  <div class="src">a16z（10-16）https://www.a16z.news/p/this-week-in-charts-agents-denied</div>
+  <ul class="pts">
+    <li>Cloudflare 数据显示，智能体与爬虫收到的 403 拒绝响应自今年夏季起明显增多，约为原先的两倍；</li>
+    <li>NRF 数据：退货率自 2019 年以来翻倍，退货成本增至三倍；调查显示 42% 的消费者完全不信任 AI 代购；</li>
+    <li>Similarweb 数据显示，AI 购物主要发生在「发现」与「下单」之间的中间环节，而不是成交环节。</li>
+  </ul>
+  <div class="angle">建议角度：这是「Agent 电商」叙事的第一份冷水数据。写「谁在拦、为什么拦」比写「Agent 购物有多方便」有价值——电商拦的不是技术，是退货率和佣金。</div>
+  <div class="meta2"><span class="tag t-mat">仅素材</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">09</span><a href="https://waymo.com/blog/2026/10/waymo-in-toronto">Waymo 进入加拿大：多伦多落地，2028 年迎首批乘客</a></h3>
+  <div class="src">Waymo 官方博客（10-16）https://waymo.com/blog/2026/10/waymo-in-toronto</div>
+  <ul class="pts">
+    <li>先以人工驾驶方式采集高精地图，再由自动驾驶专家进行测试，2028 年面向公众开放；</li>
+    <li>与 Element Fleet Management 合作提供车队管理，逐步创造数百个岗位；</li>
+    <li>官方称基于超 4 亿公里完全自动驾驶里程，其车辆在严重伤害及以上事故中比人类驾驶少 95%。</li>
+  </ul>
+  <div class="angle">建议角度：国内读者对「Waymo 又开一城」已经疲劳。可写的角度是它进新市场的固定节奏——先人工采图、再专家测试、两年后才载客，这套流程本身就是护城河。</div>
+  <div class="meta2"><span class="tag t-mat">仅素材</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">10</span><a href="https://aiera.com.cn/2026/10/19/other/admin/119393/%e6%97%a5%e8%b5%9a1-7%e4%ba%bf%ef%bc%8146%e5%b2%81%e6%95%b0%e5%ad%a6%e5%8d%9a%e5%a3%ab%e9%9d%a0ai%e6%9d%80%e5%85%a5%e5%af%8c%e8%b1%aa%e6%a6%9c%e5%89%8d%e5%8d%81/">46 岁数学博士靠纯 AI 量化公司日赚 1.76 亿，身家 1417 亿</a></h3>
+  <div class="src">新智元（10-19）https://aiera.com.cn/2026/10/19/other/admin/119393/</div>
+  <ul class="pts">
+    <li>Alex Gerko 以 160.06 亿英镑（约 1417 亿元人民币）进入 2026 英国富豪榜前十，一年财富增加约 643 亿元；</li>
+    <li>其 2015 年创办的 XTX Markets 只有 250 多名员工，没有传统交易员，也没有外部投资者；</li>
+    <li>交易系统基于超 400PB 全球金融市场数据、由 GPU 集群驱动，他持股约 75%。</li>
+  </ul>
+  <div class="angle">建议角度：这是「AI 变现」最硬的一个样本——不是卖模型，是用模型替掉整个人力结构。写「250 人、无交易员、400PB」这三个数字，比写富豪榜排名有意思。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span></div>
+</div>
+
+<h2>🛠 技术与开源</h2>
+
+<div class="card">
+  <h3><span class="num">11</span><a href="https://aiera.com.cn/2026/10/18/other/admin/119273/%e5%88%9a%e5%88%9a%ef%bc%8c%e8%80%81%e9%bb%84rtx-spark%e5%bc%80%e5%8d%96%ef%bc%81740%e4%ba%bf%e5%a4%a7%e6%a8%a1%e5%9e%8b%e5%a1%9e%e8%bf%9b%e7%ac%94%e8%ae%b0%e6%9c%ac/">RTX Spark 开卖：740 亿参数压到 22.1GB，本地跑大模型进 24GB 显存档</a></h3>
+  <div class="src">新智元（10-18）https://aiera.com.cn/2026/10/18/other/admin/119273/ ・ 同题：<a href="https://mp.weixin.qq.com/s?__biz=MzIyMzA5NjEyMA%3D%3D&amp;mid=2647687354&amp;idx=1&amp;sn=dea0d54dc3b71b361e36199db6cf4a86">卡兹克 37999 元实测</a></div>
+  <ul class="pts">
+    <li>英伟达开放 Nemotron 3.5 Bolt 权重，参数从约 148GB 压到 22.1GB，砍掉约 85%，瞄准 24GB 级本地部署；</li>
+    <li>每次生成只激活约 90 亿参数，但 740 亿的「家底」都在；Terminal-Bench 2.1 得 50.98%、BrowseComp 66.75%；</li>
+    <li>10 月 16 日搭载 RTX Spark 的笔记本全球发售，联想、微软等厂商新机同步登场。</li>
+  </ul>
+  <div class="angle">建议角度：本地大模型第一次真的能「装进消费级笔记本」。别堆参数，算一笔账：一台 37999 元的机器能跑什么、省下多少 API 费、什么时候回本。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">12</span><a href="https://www.qbitai.com/2026/10/503935.html">清华开源 PilotDeck 2.0：智能体操作系统把任务成本压掉 83%，记忆可查可改</a></h3>
+  <div class="src">量子位（10-17）https://www.qbitai.com/2026/10/503935.html</div>
+  <ul class="pts">
+    <li>清华 THUNLP 联合面壁智能、OpenBMB 推出，解决多项目下文件、记忆、任务互相搅在一起的问题；</li>
+    <li>WorkBuddy Bench 上用 Qwen3.6-35B-A3B 得 79.1 分，高于 Claude Code 的 77.3；</li>
+    <li>「主强子弱」智能路由：全流程走 Opus 4.5 单次 12.58 美元，改为主 Agent 走 Opus、子 Agent 降级 Sonnet 后成本大降。</li>
+  </ul>
+  <div class="angle">建议角度：这是一条可以和读者「自己的工作流」直接对照的题。重点写「主强子弱」路由这个思路——不是换更便宜的模型，是让不同层级的 Agent 用不同价位的模型。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">13</span><a href="https://www.qbitai.com/2026/10/503965.html">智谱 GLM-Legal 拿下法律评测全球第一：准确率 86.23%</a></h3>
+  <div class="src">量子位（10-17）https://www.qbitai.com/2026/10/503965.html</div>
+  <ul class="pts">
+    <li>在 Vals AI 公布的法律测评中，任务全通过率 19.2%、准确率 86.23%，在 Harvey LAB 与 LegalBench 两个榜单登顶；</li>
+    <li>官方演示里，GLM-Legal 能把合同终止通知从 60 天缩到 30 天，并补上最长 90 天的过渡支持条款；</li>
+    <li>对比同代通用模型 GLM-5.3-Flash，差异在于给出可执行的时间与交接范围，而不只是泛泛的建议。</li>
+  </ul>
+  <div class="angle">建议角度：垂类模型的竞争已经从「跑分」进入「能不能改写合同条款」。可以拿官方那个「对外报 60%、内部只有 41%」的案例做钩子，写 AI 审合同的边界在哪。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">14</span><a href="https://x.com/shao__meng/status/2111274173192638932">Claude 写了自家 90% 的代码之后，Anthropic 把代码评审重做了一遍</a></h3>
+  <div class="src">X：邵猛（10-18）https://x.com/shao__meng/status/2111274173192638932</div>
+  <ul class="pts">
+    <li>Claude Code 约 90% 的代码由 Claude 自己写；2026 年 6 月到 9 月，合并 PR 数翻倍以上；</li>
+    <li>同期 revert 率下降超过 40%，说明评审改造确实兜住了质量；</li>
+    <li>做法是七层防线逐层收敛问题，把「谁来验证 AI 写的代码」变成流程问题而不是人的问题。</li>
+  </ul>
+  <div class="angle">建议角度：和「AI 写完代码谁来验证」这个老问题正面对上。可写的是那七层防线具体怎么分层——这是可以直接搬进自己团队的东西，比讨论「AI 会不会取代程序员」有用十倍。</div>
+  <div class="meta2"><span class="tag t-mat">仅素材</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">15</span><a href="https://www.qbitai.com/2026/10/503910.html">Claude 半小时解开 20 年密码学悬案：DSA 参数竟来自 90 年代的随机数生成器</a></h3>
+  <div class="src">量子位（10-17）https://www.qbitai.com/2026/10/503910.html</div>
+  <ul class="pts">
+    <li>DSA 数字签名标准自 2000 年被 NIST 纳入 FIPS 186-2，但其曲线 P-192/224/256/384/521 的参数来源 20 年无人说清；</li>
+    <li>Claude 猜测这些数字来自 90 年代 C 语言库的伪随机数生成器，写扫描程序测了 34 种生成器与输出截取方式的组合；</li>
+    <li>结果发现四组种子拆成五个 32 位整数后，这 20 个整数的最高位全是 0——答案来自时间，一个 90 年代的机器时钟。</li>
+  </ul>
+  <div class="angle">建议角度：这是「AI 做科研」里少见的、能被人类独立验证的案例。写法上别神化，重点在「它怎么想到去翻 90 年代的 C 库」——模型的价值是交叉联想，不是算力。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">16</span><a href="https://aiera.com.cn/2026/10/18/other/admin/119294/%e5%88%9a%e5%88%9a%ef%bc%8cmythos-5%e7%a0%b4%e8%a7%a3%e9%87%8f%e5%ad%90%e8%ae%a1%e7%ae%97%e9%87%8d%e5%a4%a7%e9%9a%be%e9%a2%98%ef%bc%8153%e5%b0%8f%e6%97%b6%e7%a2%be%e5%8e%8b%e4%ba%ba%e7%b1%bb%e6%95%b0/">Mythos 5 用 53 小时自主设计量子电路，解码成本降 12–17 倍</a></h3>
+  <div class="src">新智元（10-18）https://aiera.com.cn/2026/10/18/other/admin/119294/</div>
+  <ul class="pts">
+    <li>Anthropic 的研究中，Mythos 5 在纯自然语言描述下自主闭环，设计出比人类「最佳方案」更高效的量子电路；</li>
+    <li>关键解码任务里计算成本直接降低 12 倍到 17 倍；</li>
+    <li>整个闭环 53 小时完成，而同类问题人类团队通常以年计。</li>
+  </ul>
+  <div class="angle">建议角度：量子电路编程有两座山——没有 if-then、不能丢中间结果。先把这个门槛讲清楚，再讲 AI 越过了它，读者才知道 53 小时有多离谱。</div>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span></div>
+</div>
+
+<h2>🧪 待观察</h2>
+<div class="card">
+  <p class="one"><span class="num">17</span><a href="https://aiera.com.cn/2026/10/19/other/admin/119319/%e5%93%88%e4%bd%9b%e8%b0%b7%e6%ad%8c%e6%83%8a%e4%ba%ba%e7%a0%94%e7%a9%b6%ef%bc%9agpt-6-astra%e5%b7%b2%e8%a7%a3%e5%86%b398%e4%b8%96%e7%95%8c%e7%89%a9%e7%90%86%e9%9a%be%e9%a2%98%ef%bc%81/">GPT-6 Astra 解出 98% 的理论物理新题，还揪出出题专家的计算错误</a>（新智元，arXiv 2610.16733 待核）<span class="star">★★</span></p>
+  <p class="one"><span class="num">18</span><a href="https://aiera.com.cn/2026/10/19/other/admin/119374/%e9%87%8d%e7%a3%85%ef%bc%81openai%e4%b9%8b%e5%90%8e%ef%bc%8cai%e5%86%8d%e7%a0%b4%e5%b9%bf%e4%b9%89%e9%bb%8e%e6%9b%bc%e7%8c%9c%e6%83%b3/">AI 再破广义黎曼猜想：OpenAI 之后 6 天，三位数学家完成「绝杀」</a>（新智元，10-12 预印本待核）<span class="star">★★</span></p>
+  <p class="one"><span class="num">19</span><a href="https://aiera.com.cn/2026/10/19/other/admin/119450/claude%e5%8f%8d%e6%8a%97%e4%ba%ba%e7%b1%bb%ef%bc%8c%e8%bf%9e%e6%94%b920%e6%ac%a1%e5%ba%95%e5%b1%82%e5%ae%aa%e6%b3%95%ef%bc%81%e6%8b%92%e7%bb%9d%e9%83%a8%e7%bd%b2%e8%ae%ad%e7%bb%83/">Claude 连改 20 次底层宪法，实验里三款模型都在扩张「道德自主权」</a>（新智元，论文待核）<span class="star">★</span></p>
+  <p class="one"><span class="num">20</span><a href="https://www.infoq.cn/article/IK5AWDwovCu5lx3e3mhc">OpenCode 2.0 发布旧插件全废，同期爆安全漏洞、1.4% 用户被盗刷</a>（InfoQ）<span class="star">★★</span></p>
+</div>
+
+<div class="foot">
+  <b>下一步</b><br>
+  1. 回复编号挑题（如「1、5」），指定轨道：<b>原文转载</b>（我会先核验该文公众号原创标，未声明原创的直接整理原文+署名；已声明原创的给你拟白名单申请留言）或 <b>原创聚合</b>（我出原创稿+标题3版+摘要+排版HTML）。<br>
+  2. 待办：第一梯队里 <b>AI产品阿颖 / AIGC开放社区 / 机器之心</b> 仍无稳定入口，仍需你在微信里转发链接；向目标号申请转载白名单的话术可随时代拟。<br>
+  3. 本期提示：量子位 RSS 比官网滞后约 1 天，本期量子位条目可能不是它最新的内容；已记入《来源清单》。<br>
+  4. 来源清单与写作规则见工作区根目录 <b>来源清单.md</b> / <b>写作规则.md</b>。
+</div>
+
+</div>
+</body>
+</html>

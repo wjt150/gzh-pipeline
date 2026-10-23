@@ -1,0 +1,25 @@
+# 登录态与运行缓存（含 cookie、二维码截图，绝不能传）
+.cache/
+
+# 构建产物（可随时重建）
+dist/
+__pycache__/
+*.pyc
+*.pyo
+
+# 内部工作日志（运营细节，不适合公开）
+.workbuddy/memory/
+
+# 稿件里的第三方原文全文（版权不是我们的）
+稿件/*/[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]*.md
+稿件/*/[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]*.manifest.json
+
+# 本地环境
+.env
+*.local
+Thumbs.db
+.DS_Store
+
+# 备份
+*.bak-*
+*.zip

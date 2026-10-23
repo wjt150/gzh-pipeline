@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 选题雷达 · 2026-10-23 · 第 8 期</title>
+<style>
+  :root { --ink:#1a1a1a; --sub:#666; --line:#ececec; --accent:#07c160; --warn:#e6a23c; --hi:#f56c6c; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f5f6f7; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.7; }
+  .wrap { max-width:760px; margin:0 auto; padding:20px 14px 60px; }
+  header { background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); color:#fff; border-radius:14px; padding:22px 20px; }
+  header h1 { margin:0 0 6px; font-size:22px; }
+  header .meta { font-size:13px; opacity:.85; }
+  .legend { background:#fff; border-radius:12px; padding:14px 16px; margin:14px 0; font-size:13px; color:var(--sub); border:1px solid var(--line); }
+  .legend b { color:var(--ink); }
+  h2 { font-size:17px; margin:26px 0 12px; padding-left:10px; border-left:4px solid var(--accent); }
+  .card { background:#fff; border-radius:12px; padding:16px 16px 14px; margin:10px 0; border:1px solid var(--line); }
+  .card h3 { margin:0 0 6px; font-size:16px; line-height:1.5; }
+  .card h3 a { color:var(--ink); text-decoration:none; }
+  .card h3 a:hover { color:var(--accent); }
+  .num { display:inline-block; min-width:26px; font-weight:700; color:var(--accent); }
+  .src { font-size:12px; color:var(--sub); margin:2px 0 8px; word-break:break-all; }
+  .src a { color:#576b95; text-decoration:none; }
+  .pts { margin:0; padding-left:18px; font-size:14px; }
+  .pts li { margin:2px 0; }
+  .angle { margin-top:8px; font-size:13px; background:#f0f9f4; border-radius:8px; padding:8px 10px; color:#136c40; }
+  .meta2 { margin-top:9px; font-size:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .tag { display:inline-block; border-radius:6px; padding:1px 8px; font-size:12px; }
+  .t-ok { background:#e8f7ef; color:#0b7a46; }
+  .t-key { background:#fff4e5; color:#b25e09; }
+  .t-todo { background:#f2f3f5; color:#555; }
+  .t-mat { background:#eef3ff; color:#3a5bd0; }
+  .star { color:#e6a23c; letter-spacing:2px; }
+  .foot { margin-top:30px; background:#fff; border-radius:12px; padding:16px; font-size:13px; color:var(--sub); border:1px solid var(--line); }
+  .foot b { color:var(--ink); }
+  .one { font-size:14px; margin:6px 0; padding-left:18px; }
+
+  .sendbtn { margin-left:auto; border:0; background:var(--accent); color:#fff; border-radius:8px;
+             padding:3px 12px; font-size:12px; cursor:pointer; font-family:inherit; line-height:1.6; }
+  .sendbtn:hover { filter:brightness(1.06); }
+  .sendbtn.sent { background:#9aa5ac; cursor:default; }
+  .sendbtn.fail { background:var(--warn); }
+  .sendbtn:disabled { opacity:.9; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>AI 选题雷达 · 第 8 期</h1>
+  <div class="meta">2026-10-23 · 共 20 条 · 已按事件聚合 · 来源：量子位 / 新智元 / AI前线(InfoQ) / AIHOT·编辑精选（含 IT之家、404 Media、Wiz、The Decoder、Newcomer、Ars Technica 等一手源）・ 英文源 OpenAI News / TechCrunch / The Verge / Microsoft AI</div>
+</header>
+
+<div class="legend">
+  <b>本期导读</b>：三条主线——<b>资本交割</b>（DeepSeek 千亿融资收官并筹备科创板、Anthropic 最快周五递表）、<b>安全攻防提速</b>（PHP2Shell 余波、「Skynet 模式」agent 劫持模型、ARTEX 被实战滥用）、<b>专用小模型抢班</b>（OpenAI Decisions API、蚂蚁 LingDT 决策模型）。最值得写：DeepSeek 千亿融资、微软医疗诊断登 Science。<br><br>
+  <b>转载可行性</b>（均为初判，未打开任何公众号文章页）：<br>
+  <span class="tag t-key">需授权</span> 专业媒体机构原创号，需原作者开白名单（预期）　
+  <span class="tag t-todo">待核验</span> 需打开对应公众号文章核验原创标　
+  <span class="tag t-mat">仅素材</span> 用于原创聚合，不直接转载<br>
+  <b>注意</b>：本期雷达仍未打开任何公众号文章页，因此本页不给出「原文可直接使用」这类结论——那必须在核验原创标之后。<br>
+  <b>优先级</b>：<span class="star">★★★</span> 强推 ・ <span class="star">★★</span> 值得写 ・ <span class="star">★</span> 备选<br>
+  <b>用法</b>：回复编号（如「1、11」）+ 轨道（改写 / 编译），我出成稿。
+</div>
+
+<h2>🔥 今日焦点</h2>
+
+<div class="card">
+  <h3><span class="num">01</span><a href="https://www.infoq.cn/article/ViOyxiOSP2ihxuUyg1rD">DeepSeek 第二轮融资锁定约 1000 亿元，投前估值约 5000 亿元：百余天累计募资超 1500 亿元，同步筹备科创板</a></h3>
+  <div class="src">AI前线·InfoQ（10-23）<a href="https://www.infoq.cn/article/ViOyxiOSP2ihxuUyg1rD">原文</a> ・ 同题：<a href="https://techcrunch.com/2026/10/22/deepseek-reportedly-raises-15b-days-after-us-restrictions/">TechCrunch（10-22）</a></div>
+  <ul class="pts">
+    <li>彭博 10 月 22 日报道：本轮规模已锁定约 <b>1000 亿元人民币</b>，投前估值维持约 <b>5000 亿元</b>；最初的计划只有 500 亿元，被产业资本与老股东两度推高后翻倍；</li>
+    <li>资金对新老股东<b>对半切</b>：腾讯、宁德时代各追加约 100 亿元作基石，新进方是石溪资本、中芯聚源、CPE 源峰、君联资本与吉利；TechCrunch 的美元口径为 <b>150 亿美元</b>，并强调这发生在美国下令联邦机构清退其技术之后数天；</li>
+    <li>叠加 6 月底 510 亿元首轮，百余天内累计吸纳超 <b>1500 亿元</b>；同期筹备科创板 IPO，计划最快今年底递表、2027 年挂牌，并由前高瓴创投合伙人严文韬出任 CFO。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★★</span><button class="sendbtn" data-id="01" data-track="rewrite" data-title="DeepSeek 第二轮融资锁定约 1000 亿元，投前估值约 5000 亿元：百余天累计募资超 1500 亿元，同步筹备科创板">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">02</span><a href="https://www.ithome.com/1/016/243.htm">Anthropic 最快本周五公开提交 S-1：招股书前夜，没有一家风投持股超过 2%</a></h3>
+  <div class="src">IT之家（10-22）<a href="https://www.ithome.com/1/016/243.htm">原文</a> ・ 同题：<a href="https://www.newcomer.co/p/the-story-of-anthropics-cap-table">Newcomer（10-22）</a></div>
+  <ul class="pts">
+    <li>上期已报 S-1 的财务数字，本期进展：IT之家援引雅虎财经称，Anthropic 最早或于本周五公开提交 S-1，推进有望创史上最大规模的 IPO；</li>
+    <li>Newcomer 依据投资人文件与六位知情人士复盘股权表：ICONIQ、Menlo、Lightspeed 将是这轮 IPO 最大的风投赢家，但<b>没有一家持股超过 2%</b>；</li>
+    <li>把单一投资人压在 2% 以下是公司主动告知投资人的目标，意在避免话语权集中；风投多年观望的理由是治理结构特殊、以及「安全优先于商业化」的路线。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★★</span><button class="sendbtn" data-id="02" data-track="rewrite" data-title="Anthropic 最快本周五公开提交 S-1：招股书前夜，没有一家风投持股超过 2%">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">03</span><a href="https://microsoft.ai/news/building-medical-superintelligence/">微软 MAI-DxO 登上 Science：NEJM 疑难病例诊断准确率 83%，医生带上资料也只有 36%</a></h3>
+  <div class="src">Microsoft AI（10-22）<a href="https://microsoft.ai/news/building-medical-superintelligence/">原文</a> ・ 同题：<a href="https://techcrunch.com/2026/10/22/microsofts-mustafa-suleyman-says-its-ai-outperforms-doctors-on-hard-cases-as-he-chases-medical-superintelligence/">TechCrunch（10-22）</a> ・ <a href="https://www.theverge.com/ai-artificial-intelligence/1016690/suleyman-microsoft-diagnostic-orchestrator-science-medical-superintelligence">The Verge（10-22）</a></div>
+  <ul class="pts">
+    <li>同时发布 <b>SDBench</b>：304 个 NEJM 疑难病例 + MIMIC-IV-ED 的急诊常见表现，双方都从有限信息起步、自行决定下一步问什么查什么，考的是诊断路径而不只是最终答案，还计成本；</li>
+    <li>MAI-DxO 不靠单个模型直接作答，而是像一组虚拟医生多轮辩论后收敛：NEJM 病例 <b>83%</b>（医生无资料 22%、有资料 36%），急诊病例 <b>80%</b> 对医生 47%，成本约为对照方案的一半到三分之一；</li>
+    <li>换成 GPT-5.5 等更新模型、不改编排方法，成绩仍成立甚至更好；SDBench 的部分病例与评分代码已开源。TechCrunch 的提醒是：提升主要来自底层模型，而非这套编排本身。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★★</span><button class="sendbtn" data-id="03" data-track="rewrite" data-title="微软 MAI-DxO 登上 Science：NEJM 疑难病例诊断准确率 83%，医生带上资料也只有 36%">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">04</span><a href="https://www.404media.co/php2shell-black-october-ai-is-changing-everything-about-hacking-no-one-knows-what-happens-next/">PHP2Shell 余波：NSA 与日本首相喊话打补丁，4chan、维基媒体、Archive.org 一度下线</a></h3>
+  <div class="src">404 Media（10-22）<a href="https://www.404media.co/php2shell-black-october-ai-is-changing-everything-about-hacking-no-one-knows-what-happens-next/">原文</a> ・ 同题：<a href="https://aiera.com.cn/2026/10/23/other/admin/120195/%e5%88%9a%e5%88%9a%ef%bc%8copenai%e6%8f%aa%e5%87%baphp%e8%87%b4%e5%91%bd%e6%bc%8f%e6%b4%9e%ef%bc%81%e5%85%a8%e7%90%8370%e7%bd%91%e7%ab%99%e6%b7%b1%e5%a4%9c%e7%88%86%e9%9b%b7/">新智元（10-23）</a></div>
+  <ul class="pts">
+    <li>上期已报漏洞本身，本期进展：安全圈把这一轮叫「Black October」，NSA、日本首相与多国政府要求立即修补、修不了的先下线，<b>4chan、多个维基媒体服务与 Archive.org</b> 都曾临时关站升级；</li>
+    <li>披露前后出现「抢跑」：Chainguard 提前数小时放出修复，被 PHP 基金会批评可能帮攻击者抢时间，其 CEO 称是直接把「找出 PHP 里的坏漏洞」这句话输入前沿模型独立复现的；</li>
+    <li>404 Media 的判断是：目前主要影响是被迫下线与将来的链接腐烂，尚未出现大规模利用；网上流传的「人人都有 exp」多半是读不懂模型输出的误判，被访研究者强调漏洞真实存在、该打的补丁还得打。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="04" data-track="rewrite" data-title="PHP2Shell 余波：NSA 与日本首相喊话打补丁，4chan、维基媒体、Archive.org 一度下线">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">05</span><a href="https://aiera.com.cn/2026/10/23/other/admin/120176/anthropic-ceo%e9%95%bf%e6%96%87%e7%a1%ac%e5%88%9a%ef%bc%81%e8%87%aa%e6%9b%9d%e9%9b%aa%e8%97%8fmythos-4%e4%b8%aa%e6%9c%88%ef%bc%8c%e4%b8%baai%e5%ae%89%e5%85%a8%e8%87%aa%e6%96%ad%e8%b4%a2%e8%b7%af/">Dario 深夜长文回击「安全只是遮羞布」：承认把一个 Mythos 级模型雪藏了 4 个月</a></h3>
+  <div class="src">新智元（10-23）<a href="https://aiera.com.cn/2026/10/23/other/admin/120176/anthropic-ceo%e9%95%bf%e6%96%87%e7%a1%ac%e5%88%9a%ef%bc%81%e8%87%aa%e6%9b%9d%e9%9b%aa%e8%97%8fmythos-4%e4%b8%aa%e6%9c%88%ef%bc%8c%e4%b8%baai%e5%ae%89%e5%85%a8%e8%87%aa%e6%96%ad%e8%b4%a2%e8%b7%af/">原文</a></div>
+  <ul class="pts">
+    <li>导火索是安全调查员 Nathan Calvin 的一份「九宗罪」清单：5000 亿美元算力单、秘密组建自研芯片团队、让 Claude 接管内部 26% 的研发、悄悄修改安全承诺，以及一份被指「表面求监管、实则架空州法并抬高联邦叫停门槛」的草案；</li>
+    <li>Dario 回应里信息量最大的一条：今年 2 月就训完一个 Mythos 级模型，因针对该级别模型的网络防御护栏没打磨好，只给极少数合作方做防御测试，<b>6 月才向公众开放</b>，等于自弃约四个月领先窗口；</li>
+    <li>他另称在生物风险上「零容忍」，但全文没给出等待期损失多少收入、又避免多少风险的量化账单——发布时点本身，已经成了 AI 安全的一部分。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★★</span><button class="sendbtn" data-id="05" data-track="rewrite" data-title="Dario 深夜长文回击「安全只是遮羞布」：承认把一个 Mythos 级模型雪藏了 4 个月">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">06</span><a href="https://the-decoder.com/an-ai-agent-in-skynet-mode-hijacks-unprotected-language-models-to-launch-self-sustaining-cyberattacks/">Symantec 抓到「Skynet 模式」agent：劫持没设防的模型端点，自己打 10 万步，账单算在别人头上</a></h3>
+  <div class="src">The Decoder（10-22）<a href="https://the-decoder.com/an-ai-agent-in-skynet-mode-hijacks-unprotected-language-models-to-launch-self-sustaining-cyberattacks/">原文</a></div>
+  <ul class="pts">
+    <li>Symantec 用蜜罐截获一个攻击 agent：先在公网上找没有防护的模型推理端点，再用<b>五层越狱</b>绕过安全规则，把别人的模型当作自己的算力底座；</li>
+    <li>拿到算力后自主扫描目标、利用常见服务器软件漏洞、拖走数据库与凭据、顺手装挖矿，最多连续执行 <b>100,000 步</b>，全程没有人工介入，费用由被劫持模型的拥有者承担；</li>
+    <li>Symantec 把这类行为命名为「LLMjacking」——重点不是白用别人的模型，而是让被劫持的模型去指挥整场攻击。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="06" data-track="rewrite" data-title="Symantec 抓到「Skynet 模式」agent：劫持没设防的模型端点，自己打 10 万步，账单算在别人头上">一键发送</button></div>
+</div>
+
+<h2>📊 行业与资本</h2>
+
+<div class="card">
+  <h3><span class="num">07</span><a href="https://techcrunch.com/2026/10/22/uber-puts-all-30000-employees-on-chatgpt-work/">Uber 把 ChatGPT Work 推给全部 3 万名员工，此前只试点了 1000 人</a></h3>
+  <div class="src">TechCrunch（10-22）<a href="https://techcrunch.com/2026/10/22/uber-puts-all-30000-employees-on-chatgpt-work/">原文</a></div>
+  <ul class="pts">
+    <li>试点阶段覆盖财务、运营、产品等部门，早期使用者中 <b>80% 不是工程师</b>，用途包括分析运营数据找趋势、给不同市场做本地化培训材料、搭个人工作看板；</li>
+    <li>今年早些时候 Uber 还组过 30 名 AI 工程师的「AI pods」，配到各团队用两周时间自动化自己岗位的关键环节；</li>
+    <li>公司没有披露这笔投入多少钱，工程 VP 的说法是会按员工实际用法、沉淀出的流程再决定下一步怎么铺。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="07" data-track="rewrite" data-title="Uber 把 ChatGPT Work 推给全部 3 万名员工，此前只试点了 1000 人">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">08</span><a href="https://www.theverge.com/policy/1016585/openai-anthropic-nvidia-lobbying-records">OpenAI、Anthropic、Nvidia 同期创下各自游说支出纪录，三家合计近 600 万美元</a></h3>
+  <div class="src">The Verge（10-22）<a href="https://www.theverge.com/policy/1016585/openai-anthropic-nvidia-lobbying-records">原文</a></div>
+  <ul class="pts">
+    <li>7 至 9 月的联邦披露：Nvidia <b>220 万美元</b>、Anthropic <b>210 万</b>、OpenAI <b>150 万</b>，均为各自单季最高；OpenAI 直到今年才首次出现单季破百万；</li>
+    <li>Anthropic 申报的议题包括 KOSA 里的 AI 条款、AI Overwatch Act 的出口管制、把 AI 更名「Super Intelligence」的行政令，以及要求数据中心自担电费的 Ratepayer Protection Act；</li>
+    <li>Nvidia 的清单是 6G、负责任的 AI 设计、竞争政策、量子计算与出口管制；同期 Apple 花 310 万美元，也是它首次单季破 300 万。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="08" data-track="rewrite" data-title="OpenAI、Anthropic、Nvidia 同期创下各自游说支出纪录，三家合计近 600 万美元">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">09</span><a href="https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors">Wiz：开源自主渗透框架 ARTEX 已被实战滥用，撞上微软点名的 Storm-0940</a></h3>
+  <div class="src">Wiz（10-22）<a href="https://www.wiz.io/blog/artex-in-the-wild-storm-0940-expands-targeting-of-it-and-software-vendors">原文</a></div>
+  <ul class="pts">
+    <li>整个 10 月观察到同一批基础设施在用 ARTEX 打多家 IT 与软件厂商，重点在 Okta、Entra、Cognito 等身份提供商与 Microsoft 365 集成的滥用；</li>
+    <li>ARTEX 是今年 7 月由中国开发者在 GitHub 开源的自主渗透测试框架，9 月拿下百度「Agent+」红队挑战赛冠军：操作者只给目标与目的，规划 agent 决定下一步，worker agent 去跑 nmap、curl 这类工具；</li>
+    <li>Wiz 称其观察与微软关于 Storm-0940 的报告重叠，并已看到同一批 TTP 向其他软件领域的供应链攻击扩散，文中给出了可复用的检测规则。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="09" data-track="rewrite" data-title="Wiz：开源自主渗透框架 ARTEX 已被实战滥用，撞上微软点名的 Storm-0940">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">10</span><a href="https://www.theverge.com/tech/1017066/meta-muse-sharing-back-on-artifiacts">Meta 把 Muse 分享重新打开：旧链接全部换新地址，访问旧链接只提示去找作者要</a></h3>
+  <div class="src">The Verge（10-22）<a href="https://www.theverge.com/tech/1017066/meta-muse-sharing-back-on-artifiacts">原文</a></div>
+  <ul class="pts">
+    <li>上期已报分享链接在公网可被搜到、Meta 暂停该功能，本期进展：问题出在分享产物的 URL 会按对话标题命名并写进公共 DNS，修复后已恢复分享；</li>
+    <li>Meta 的 David Singleton 强调这不是聊天分享本身的漏洞；修复前分享过的产物都换了新 URL，旧链接只会显示提示；</li>
+    <li>研究者此前找到的例子，包括一家营销公司的内部营收复盘和一位小企业主的贷款申请。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★</span><button class="sendbtn" data-id="10" data-track="rewrite" data-title="Meta 把 Muse 分享重新打开：旧链接全部换新地址，访问旧链接只提示去找作者要">一键发送</button></div>
+</div>
+
+<h2>🛠 技术与开源</h2>
+
+<div class="card">
+  <h3><span class="num">11</span><a href="https://openai.com/index/decisions-api">OpenAI 把 Decisions API 正式开放：只回答有边界的问题，比走 Responses API 快最多 10 倍</a></h3>
+  <div class="src">OpenAI（10-22）<a href="https://openai.com/index/decisions-api">原文</a> ・ 同题：<a href="https://techcrunch.com/2026/10/22/openai-makes-its-jev-competitor-widely-available-as-decision-model-competition-heats-up/">TechCrunch（10-22）</a></div>
+  <ul class="pts">
+    <li>用法是给一个问题加一组允许的答案，返回三类结果之一：predicate（0–1 概率）、choice（选项 + 置信度）、score（等级加权均值）；底层是 GPT-6 Luna；</li>
+    <li>计费只算输入：<b>0.10 美元/百万 token</b>、缓存输入 0.01 美元，输出不收费；单次请求最多 400 个问题，还接进了 GPT-Live；</li>
+    <li>客户数据：Datadog 用它给 agent 生成的 shell 命令做风险评分，p95 快 40 倍；Sierra 用在客服实时编排，p95 低于 <b>280 毫秒</b>、单次成本降 90%；Speak 的下一动作响应从 1.4 秒压到 0.13 秒。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="11" data-track="rewrite" data-title="OpenAI 把 Decisions API 正式开放：只回答有边界的问题，比走 Responses API 快最多 10 倍">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">12</span><a href="https://www.infoq.cn/article/wyGrRsTrfHM7i9MhuV5P">蚂蚁数科发决策模型 LingDT-Decision-1.0：4B / 27B 两版，23 项开源基测综合分超微软与 Jev</a></h3>
+  <div class="src">AI前线·InfoQ（10-22）<a href="https://www.infoq.cn/article/wyGrRsTrfHM7i9MhuV5P">原文</a></div>
+  <ul class="pts">
+    <li>面向意图识别、任务分类、工具选择、风险判断这类结构化决策：不再先生成一段话再解析，而是在预设候选里直接判断，减少文本生成与后处理；</li>
+    <li>官方口径：数据标注场景对比 DS-V4-flash，Token 消耗降约 <b>97%</b>、速度升约 10 倍；智能客服对比 Qwen-3.7-flash，Token 降约 90%、风险识别准确率从 76% 提到 89%；</li>
+    <li>原生支持多选与按序决策（用 DAG 表达任务依赖），能处理「退款 + 关续费 + 补发票，但别注销」这类复合请求；已上蚂蚁数科 DTMaaS 平台限时免费。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span><button class="sendbtn" data-id="12" data-track="rewrite" data-title="蚂蚁数科发决策模型 LingDT-Decision-1.0：4B / 27B 两版，23 项开源基测综合分超微软与 Jev">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">13</span><a href="https://aiera.com.cn/2026/10/23/other/admin/120138/%e5%8d%8a%e5%b9%b4%e6%89%ab%e5%87%ba%e8%b6%852-9%e4%b8%87%e7%96%91%e4%bc%bc%e6%bc%8f%e6%b4%9e%ef%bc%81claude%e6%8f%aa%e5%87%bacurl%e9%ab%98%e5%8d%b1%e9%9a%90%e6%82%a3%ef%bc%8c29%e5%a4%a9%e4%bf%ae/">Claude 找出的 curl 高危漏洞已修完：CVE-2026-92392，从收到报告到发版 29 天</a></h3>
+  <div class="src">新智元（10-23）<a href="https://aiera.com.cn/2026/10/23/other/admin/120138/%e5%8d%8a%e5%b9%b4%e6%89%ab%e5%87%ba%e8%b6%852-9%e4%b8%87%e7%96%91%e4%bc%bc%e6%bc%8f%e6%b4%9e%ef%bc%81claude%e6%8f%aa%e5%87%bacurl%e9%ab%98%e5%8d%b1%e9%9a%90%e6%82%a3%ef%bc%8c29%e5%a4%a9%e4%bf%ae/">原文</a></div>
+  <ul class="pts">
+    <li>10 月 14 日发布的 curl 8.23.0 安全公告里，致谢栏写着「Luna with Claude, Anthropic」；漏洞是 HTTP/2 上传中的释放后使用，官方确认恶意服务器在特定条件下可实现远程代码执行；</li>
+    <li>curl 官方 2025 年估算全球约有 <b>300 亿个</b>安装实例；从收到报告到发版用了 29 天，维护者 Daniel Stenberg 称这是近年收到的最严重报告之一；</li>
+    <li>背后是 Anthropic 10 月 8 日推出的 OSS Scanner：为符合条件的关键开源项目免费定期扫描，交付漏洞解释、复现材料与候选补丁，报不报、修不修仍由维护者判断。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span><button class="sendbtn" data-id="13" data-track="rewrite" data-title="Claude 找出的 curl 高危漏洞已修完：CVE-2026-92392，从收到报告到发版 29 天">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">14</span><a href="https://www.infoq.cn/article/zGqDWHF8tHDtlYcImAJS">GitHub 把 Copilot 运行时从 TypeScript 迁到 Rust：80 万行代码、14.5 周，启动从 5.25 秒降到 292 毫秒</a></h3>
+  <div class="src">AI前线·InfoQ（10-22）<a href="https://www.infoq.cn/article/zGqDWHF8tHDtlYcImAJS">原文</a></div>
+  <ul class="pts">
+    <li>没走「先并行重写再一次性切换」，而是逐个组件替换，中间用临时的 N-API 互操作层顶着；迁移期间照常发了 <b>135 个版本</b>（35 个稳定 + 100 个预发布）；</li>
+    <li>兼容层移除前内部导出项达 2019 个、TypeScript 调用点 3356 处；截至 8 月 21 日运行时含 83.2 万行生产 Rust 代码与 46.9 万行测试代码，绝大部分实现由 AI agent 生成，4478 次 cargo check 中 87.1% 一次通过；</li>
+    <li>启动、开会话、单轮交互从 5.25 秒降到 <b>292 毫秒</b>，也不再需要为每个客户端背约 100MB 的 Node/V8 工作集；社区追问的是取消、重试、背压这些编译查不出来的边界行为。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span><button class="sendbtn" data-id="14" data-track="rewrite" data-title="GitHub 把 Copilot 运行时从 TypeScript 迁到 Rust：80 万行代码、14.5 周，启动从 5.25 秒降到 292 毫秒">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">15</span><a href="https://www.theverge.com/ai-artificial-intelligence/1017151/canva-craft-in-house-ai-model">Canva 发布首个自研图像模型 Canva Craft：先规划版式再出图，最高 2K、30 多种画幅</a></h3>
+  <div class="src">The Verge（10-22）<a href="https://www.theverge.com/ai-artificial-intelligence/1017151/canva-craft-in-house-ai-model">原文</a> ・ 同题：<a href="https://techcrunch.com/2026/10/22/canva-releases-its-first-image-generation-model/">TechCrunch（10-22）</a></div>
+  <ul class="pts">
+    <li>两阶段架构：模型先把设计意图规划出来，再生成图像，官方称换来更高的精确度、一致性与可控性；</li>
+    <li>输出最高 <b>2K</b> 分辨率、支持 30 多种画幅比例，覆盖社媒图与营销物料，也主打写实场景、数字艺术与环境图；</li>
+    <li>直接对标 OpenAI、微软与谷歌的图像模型，官方口径是更低成本下更可定制的表现，向全部用户开放。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★</span><button class="sendbtn" data-id="15" data-track="rewrite" data-title="Canva 发布首个自研图像模型 Canva Craft：先规划版式再出图，最高 2K、30 多种画幅">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">16</span><a href="https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/">1Password 让 agent 替你登录但看不到密码：每次登录都要你本人点一下确认</a></h3>
+  <div class="src">TechCrunch（10-22）<a href="https://techcrunch.com/2026/10/22/1password-launches-a-way-for-ai-agents-to-log-in-on-your-behalf-without-seeing-your-password/">原文</a></div>
+  <ul class="pts">
+    <li>流程是：agent 先出示数字密钥向 1Password 证明身份，用户收到提醒并亲自确认，然后由 1Password 代填凭据完成登录，agent 全程碰不到密码；</li>
+    <li>支持 Claude Duet、ChatGPT Work、Grok Bot、Meta Muse 与 Town 等 agent，官方称还在继续扩；</li>
+    <li>同日 Axios 报道美国多家银行已在用户账户里检测到 agent 活动，且多数银行分不清这算不算用户本人授权，有银行人士形容「很吓人」，Chase 的回应是不该把账号密码交给任何人。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="16" data-track="rewrite" data-title="Password 让 agent 替你登录但看不到密码：每次登录都要你本人点一下确认">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">17</span><a href="https://www.qbitai.com/2026/10/504832.html">中国电信开源星辰 Xing4.0-29B-Intent：既做选择题也做填空题，275 万条语料一起放出来</a></h3>
+  <div class="src">量子位（10-22）<a href="https://www.qbitai.com/2026/10/504832.html">原文</a></div>
+  <ul class="pts">
+    <li>把意图识别和参数抽取合成一件事：「帮我把卧室的灯调成暖黄」要同时答出「控制灯光」与「卧室 / 灯 / 暖黄」，再用 USP 统一 schema 输出 JSON，多意图、多参数、多实体一并处理；</li>
+    <li>只输出几十个 token、完整响应做到<b>百毫秒级</b>；官方给的三个理由是通用大模型在这类场景太慢、太贵、输出自由文本难解析；</li>
+    <li>模型权重、推理镜像与 <b>275 万条</b>训练语料同步开源，已在电信万号客服、智能家居音箱上用于意图识别、工单路由与口语指令解析。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span><button class="sendbtn" data-id="17" data-track="rewrite" data-title="中国电信开源星辰 Xing4.0-29B-Intent：既做选择题也做填空题，275 万条语料一起放出来">一键发送</button></div>
+</div>
+
+<h2>🧪 待观察</h2>
+<div class="card">
+<div class="one"><b>18</b>　<a href="https://aiera.com.cn/2026/10/23/other/admin/120124/%e8%b0%b7%e6%ad%8cgemini-4-carbon%e9%a6%96%e6%89%b9%e5%ae%9e%e6%b5%8b%e6%9b%9d%e5%85%89%ef%bc%81%e6%89%8b%e6%84%9f%e7%9b%b4%e9%80%bcopus-5-5/">Gemini 4 Carbon 在 LMArena 挂着「gemini-4-argon」的名字参加盲测</a>（新智元，10-23）—— Argon 全面开放才 8 天，下一代就被测出来了：测试者靠「明显更慢」把它从同名条目里认出来，3D 场景与长流程任务强于 Argon，但要慢 2 到 4 倍。<b>目前全是 X 上的第三方实测，Google 没有任何官方口径</b>，参数与发布时间都未定，先记一笔。<span class="tag t-todo">待核验</span><button class="sendbtn" data-id="18" data-track="rewrite" data-title="18 Gemini 4 Carbon 在 LMArena 挂着「gemini-4-argon」的名字参加盲测（新智元，10-23）—— Argon 全面开放才 ">一键发送</button></div>
+
+<div class="one"><b>19</b>　<a href="https://x.com/Kling_ai/status/2113142473145078041">Kling 4.0 接连上线 OnSolo 与 OpenArt 两个创作平台</a>（Kling 官方 X，10-22）—— 官方给出的能力是单次原生 30 秒、21:9 宽屏、可叠多张参考图与关键帧来保角色和剧情一致。这是「模型进第三方工具」的进展，缺中文一手报道与实测，暂不单独成卡。<span class="tag t-todo">待核验</span><button class="sendbtn" data-id="19" data-track="rewrite" data-title="19 Kling 4.0 接连上线 OnSolo 与 OpenArt 两个创作平台（Kling 官方 X，10-22）—— 官方给出的能力是单次原生 30 秒、">一键发送</button></div>
+
+<div class="one"><b>20</b>　<a href="https://aiera.com.cn/2026/10/23/other/admin/120048/%e8%af%ba%e5%a5%96%e5%be%97%e4%b8%bbhassabis%e6%94%b9%e5%8f%a3%ef%bc%9aagi%e6%9c%80%e5%bf%ab2%e5%b9%b4%e5%86%85%e9%99%8d%e4%b8%b4%ef%bc%81/">Hassabis 改口：AGI 最快 2 到 3 年内到来</a>（新智元，10-23）—— 一向被视为「谨慎派」的他这次把窗口压到 2–3 年，但没有给出新的技术依据或评测标准，属表态而非新事实，先记一笔，等他下次公开说明再决定要不要单独成篇。<span class="tag t-todo">待核验</span><button class="sendbtn" data-id="20" data-track="rewrite" data-title="20 Hassabis 改口：AGI 最快 2 到 3 年内到来（新智元，10-23）—— 一向被视为「谨慎派」的他这次把窗口压到 2–3 年，但没有给出新的技">一键发送</button></div>
+</div>
+
+<div class="foot">
+  <b>本期说明</b><br>
+  ① <b>采集情况</b>：15 个源里 12 个 OK，共产出 <b>83 条</b>候选（24 小时窗）。<b>三个英文源连续第五期失败</b>——Google Research / Hugging Face Blog / Import AI 均为连接超时（WinError 10060），本期未采到。四个主力源这次全 OK：量子位抓到 10 条、窗内留 3 条（比前几期好，滞后仍在但已能进窗）；新智元 15 条留 10 条；AI前线·InfoQ 20 条留 14 条；AIHOT 30 条留 20 条。公众号专属三个号（AI产品阿颖 / AIGC开放社区 / 机器之心）仍无可用入口，未采。<br>
+  ② <b>聚簇结果</b>：脚本 83 条候选 → 83 个事件，合并 0 条、无 review 簇，这期几乎没有同题通稿。真正的合并全部在人工：DeepSeek 融资（InfoQ + TechCrunch + AIHOT 收录的 X）压成第 01 条；Anthropic 上市（IT之家 + Newcomer）第 02 条；微软医疗（官方 + TechCrunch + The Verge）第 03 条；PHP2Shell 后续（404 Media + 新智元）第 04 条；Canva（The Verge + TechCrunch）第 15 条。<br>
+  ③ <b>跨期去重</b>：与第 6、7 期重复而剔除的有——SpaceX 与特斯拉合并（第 7 期第 04 条，本期 WSJ 与 The Verge 都是同一件事的复述）、OpenAI 新一轮约 300 亿美元融资（第 6 期第 02 条，本期 TechCrunch 只是估值口径变化，且原链接已 404，不列入）、特斯拉 Q3 财报（与第 7 期第 04 条同一份财报）、DeepSeek 相关旧题（DeepInfer、联邦清退）。第 02、04、10 条保留的是<b>实质进展</b>，要点首条已注明。<br>
+  ④ <b>未采用的候选</b>：InfoQ 的 AWS Lambda 长任务、Snowflake 自适应计算、Shopify Checkout Blocks、Valkey 吞吐、Cloudflare 追踪定价、Qwen 线性注意力优化、企业 AI Gateway（拿掉 AI 仍成立，或纯工程稿）；北汽星钽新车预售（车企稿）；Nirva 吊坠、Discord Markdown、Switch 2 越狱（消费向，量级不够）；Latent Space 的两期访谈、MIT Tech Review 的三篇（两篇是 EmTech 演讲整理，一篇有付费墙）；Simon Willison 的音乐视频与引言（非事件）；HN 的「模型对人类的争议看法」（博客观点）。<br>
+  ⑤ <b>一处没做成</b>：Ars Technica 关于 PHP2Shell 四天抢跑的那篇被站点验证页拦住（405），正文没拿到，因此第 04 条只用 404 Media 与 新智元 已读到的内容，没有引用 Ars 的数字。<br><br>
+  <b>本期待办（需要你）</b><br>
+  · 挑 1–2 条定轨道（改写 / 编译），我出成稿；<br>
+  · 第 01、03 条是今天量级最大的两条（千亿融资 + Science 论文），建议至少出一条；<br>
+  · 英文源连续五期有 3 个抓不到（超时），要不要把它们降级成「按需手动」；<br>
+  · 第 02 条只剩「本周五递表」这一个未落地的时间点，如果周五没提交，下期不要追；<br>
+  · 第 05 条涉及对一家公司的道德指控，成稿前建议回读 Dario 原文与 Calvin 原文，别只依赖二手转述。
+</div>
+
+</div>
+
+<div id="sendtip" style="position:fixed;left:50%;transform:translateX(-50%);bottom:18px;background:#1a1a1a;color:#fff;
+     padding:8px 16px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:99;"></div>
+<script>
+const ISSUE = "8";
+const ORIGINS = ["", "http://127.0.0.1:8899"];
+function tip(msg){
+  const el = document.getElementById("sendtip");
+  el.textContent = msg; el.style.opacity = 1;
+  clearTimeout(window.__tipT);
+  window.__tipT = setTimeout(() => el.style.opacity = 0, 2600);
+}
+async function sendOne(btn){
+  if (btn.classList.contains("sent")) return;
+  const payload = {issue: ISSUE, ids:[btn.dataset.id], track: btn.dataset.track, title: btn.dataset.title || ""};
+  for (const origin of ORIGINS){
+    try {
+      const r = await fetch((origin || "") + "/send", {
+        method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload)
+      });
+      if (r.ok){ btn.classList.add("sent"); btn.textContent = "已提交 · 待处理"; tip("已入队：" + btn.dataset.id); return; }
+    } catch(e){ /* 换下一个 origin */ }
+  }
+  const cmd = "发 " + btn.dataset.id + "（" + (btn.dataset.track === "compile" ? "编译" : "改写") + "）";
+  btn.classList.add("fail"); btn.textContent = "已复制指令";
+  try { await navigator.clipboard.writeText(cmd); tip("发送服务未启动，指令已复制：" + cmd); }
+  catch(e){ tip("发送服务未启动，请手动告诉 agent：" + cmd); }
+}
+document.addEventListener("click", (e) => {
+  const b = e.target.closest(".sendbtn");
+  if (b) sendOne(b);
+});
+</script>
+
+</body>
+</html>

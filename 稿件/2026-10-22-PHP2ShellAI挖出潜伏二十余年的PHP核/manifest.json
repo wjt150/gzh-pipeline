@@ -1,0 +1,7 @@
+{
+  "title": "AI 挖出潜伏十几年的 PHP 漏洞，70% 网站都在用",
+  "summary": "PHP 核心两个内存漏洞，CVSS 最高 9.2，免认证就能远程执行代码，影响全球约七成网站，补丁 10 月 21 日已发。真正的新变量是：证明它可利用，过去卡在人力成本上。",
+  "author": "",
+  "body_html_path": "body.html",
+  "cover_path": "cover.jpg"
+}
