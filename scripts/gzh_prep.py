@@ -239,11 +239,11 @@ def _run(args) -> int:
         if fit_info.get("ok"):
             cover = target
     if (not cover or not cover.exists()) and not args.no_fit:
-        from gzh_covercard import render
+        from gzh_covercard import load_brand, render
 
         title = job.get("title_hint") or "AI 观察"
-        # 标题太长就切一半做副标题，封面卡自己会处理字号
-        card = render(title, None, "到了早上. · AI 工程实践", "到了早上.", out_dir / "cover.jpg")
+        brand = load_brand()
+        card = render(title, None, brand["kick"], brand["foot"], out_dir / "cover.jpg")
         if card.get("ok"):
             cover = Path(card["cover"])
             fit_info = {"ok": True, "mode": "covercard", "size": card.get("size"), "lines": card.get("lines")}

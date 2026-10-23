@@ -109,6 +109,34 @@ def build() -> Path:
     return OUT
 
 
+def sync_into_skill() -> list[str]:
+    """把打好的内容同步回 .workbuddy/skills/gzh-publisher。
+
+    为什么必须做：之前只往 dist/ 打 zip，技能目录里只有 SKILL.md + 2 个说明，
+    **脚本一个都没有**——别人从技能目录安装会拿到一个跑不起来的空壳。
+
+    只覆盖打包管的那几类（SKILL.md / references / assets / scripts），
+    不动用户自己放进去的东西。
+    """
+    changed: list[str] = []
+    for sub in ("references", "assets", "scripts"):
+        src_dir = STAGE / sub
+        dst_dir = SKILL / sub
+        if not src_dir.exists():
+            continue
+        # 覆盖式复制，不删目录：rmtree 一次删几十个文件会被安全策略拦下，
+        # 而且万一 STAGE 内容不全就是自毁。残留的旧文件无害，命名带日期的那种会被覆盖。
+        shutil.copytree(src_dir, dst_dir, dirs_exist_ok=True)
+        changed.append(sub)
+
+    for name in ("SKILL.md", "安装说明.md"):
+        src = STAGE / name
+        if src.exists():
+            shutil.copy2(src, SKILL / name)
+            changed.append(name)
+    return changed
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="打包 gzh-publisher 技能（可移植）")
     ap.add_argument("--check", action="store_true", help="只校验不打包")
@@ -127,8 +155,8 @@ def main(argv: list[str] | None = None) -> int:
     out = build()
     names = zipfile.ZipFile(out).namelist()
     print(f"✅ 打包完成：{out.relative_to(ROOT)}  {out.stat().st_size // 1024} KB  {len(names)} 个文件")
-    for n in names:
-        print("   ", n)
+    synced = sync_into_skill()
+    print(f"✅ 已同步到技能目录：{SKILL.relative_to(ROOT)}（{', '.join(synced)}）")
     print("\n拷到别的电脑后：解压 → 放进 <项目>/.workbuddy/skills/ → python scripts/gzh_doctor.py")
     return 0
 

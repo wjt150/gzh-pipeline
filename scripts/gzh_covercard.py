@@ -24,6 +24,23 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 from gzh_cover import image_dims  # noqa: E402
+from gzh_draft import workroot  # noqa: E402
+
+
+def load_brand() -> dict:
+    """品牌文案（封面卡左上/左下的小字）从工作区的 品牌.json 读。
+
+    为什么不在代码里写死：这是作者自己的号名，别人用不该看到「到了早上.」。
+    没有这个文件就留空，封面卡少两行小字，不影响出图。
+    """
+    try:
+        f = workroot() / "品牌.json"
+        if f.exists():
+            data = json.loads(f.read_text(encoding="utf-8"))
+            return {"kick": data.get("kick") or "", "foot": data.get("foot") or ""}
+    except Exception:
+        pass
+    return {"kick": "", "foot": ""}
 
 TEMPLATE = """<!DOCTYPE html><html><head><meta charset="utf-8"><style>
 *{{margin:0;padding:0;box-sizing:border-box}}
@@ -168,12 +185,19 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="渲染中文封面卡（900×383）")
     ap.add_argument("--title", required=True, help="主标题；较长会自动折成两行")
     ap.add_argument("--sub", default=None, help="第二行（深蓝色）")
-    ap.add_argument("--kick", default="到了早上. · AI 工程实践", help="左上角小字")
-    ap.add_argument("--foot", default="到了早上.", help="左下角署名")
+    ap.add_argument("--kick", default=None, help="左上角小字（默认读 品牌.json）")
+    ap.add_argument("--foot", default=None, help="左下角署名（默认读 品牌.json）")
     ap.add_argument("--out", default=".cache/covers/card.jpg")
     args = ap.parse_args(argv)
 
-    res = render(args.title, args.sub, args.kick, args.foot, Path(args.out).resolve())
+    brand = load_brand()
+    res = render(
+        args.title,
+        args.sub,
+        args.kick if args.kick is not None else brand["kick"],
+        args.foot if args.foot is not None else brand["foot"],
+        Path(args.out).resolve(),
+    )
     print(json.dumps(res, ensure_ascii=False, indent=2))
     return 0 if res.get("ok") else 1
 

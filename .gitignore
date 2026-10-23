@@ -23,3 +23,6 @@ Thumbs.db
 # 备份
 *.bak-*
 *.zip
+
+# 自己的号名（用 品牌示例.json 复制一份改名）
+品牌.json
