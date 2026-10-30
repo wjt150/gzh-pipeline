@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 选题雷达 · 2026-10-30 · 第 9 期</title>
+<style>
+  :root { --ink:#1a1a1a; --sub:#666; --line:#ececec; --accent:#07c160; --warn:#e6a23c; --hi:#f56c6c; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f5f6f7; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.7; }
+  .wrap { max-width:760px; margin:0 auto; padding:20px 14px 60px; }
+  header { background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); color:#fff; border-radius:14px; padding:22px 20px; }
+  header h1 { margin:0 0 6px; font-size:22px; }
+  header .meta { font-size:13px; opacity:.85; }
+  .legend { background:#fff; border-radius:12px; padding:14px 16px; margin:14px 0; font-size:13px; color:var(--sub); border:1px solid var(--line); }
+  .legend b { color:var(--ink); }
+  h2 { font-size:17px; margin:26px 0 12px; padding-left:10px; border-left:4px solid var(--accent); }
+  .card { background:#fff; border-radius:12px; padding:16px 16px 14px; margin:10px 0; border:1px solid var(--line); }
+  .card h3 { margin:0 0 6px; font-size:16px; line-height:1.5; }
+  .card h3 a { color:var(--ink); text-decoration:none; }
+  .card h3 a:hover { color:var(--accent); }
+  .num { display:inline-block; min-width:26px; font-weight:700; color:var(--accent); }
+  .src { font-size:12px; color:var(--sub); margin:2px 0 8px; word-break:break-all; }
+  .src a { color:#576b95; text-decoration:none; }
+  .pts { margin:0; padding-left:18px; font-size:14px; }
+  .pts li { margin:2px 0; }
+  .angle { margin-top:8px; font-size:13px; background:#f0f9f4; border-radius:8px; padding:8px 10px; color:#136c40; }
+  .meta2 { margin-top:9px; font-size:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .tag { display:inline-block; border-radius:6px; padding:1px 8px; font-size:12px; }
+  .t-ok { background:#e8f7ef; color:#0b7a46; }
+  .t-key { background:#fff4e5; color:#b25e09; }
+  .t-todo { background:#f2f3f5; color:#555; }
+  .t-mat { background:#eef3ff; color:#3a5bd0; }
+  .star { color:#e6a23c; letter-spacing:2px; }
+  .foot { margin-top:30px; background:#fff; border-radius:12px; padding:16px; font-size:13px; color:var(--sub); border:1px solid var(--line); }
+  .foot b { color:var(--ink); }
+  .one { font-size:14px; margin:6px 0; padding-left:18px; }
+
+  .sendbtn { margin-left:auto; border:0; background:var(--accent); color:#fff; border-radius:8px;
+             padding:3px 12px; font-size:12px; cursor:pointer; font-family:inherit; line-height:1.6; }
+  .sendbtn:hover { filter:brightness(1.06); }
+  .sendbtn.sent { background:#9aa5ac; cursor:default; }
+  .sendbtn.fail { background:var(--warn); }
+  .sendbtn:disabled { opacity:.9; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>AI 选题雷达 · 第 9 期</h1>
+  <div class="meta">2026-10-30 · 共 20 条 · 已按事件聚合 · 来源：量子位 / 新智元 / AI前线·InfoQ / AIHOT / TechCrunch / The Verge / BBC / 404 Media / MIT Technology Review / OpenAI / Cursor / Hugging Face / Hacker News</div>
+</header>
+
+<div class="legend">
+  <b>转载可行性</b>（决定这条走哪条轨，<b>以下均为初判</b>）：<br>
+  <span class="tag t-key">需授权</span> 已声明原创，需原作者开白名单　
+  <span class="tag t-todo">待核验</span> 需打开对应公众号文章核验原创标　
+  <span class="tag t-mat">仅素材</span> 用于原创聚合，不直接转载<br>
+  <b>注意</b>：本期雷达未打开公众号文章页，因此本页不会出现「可转·注明来源」——
+  该结论必须在核验原创标后才能下，属成稿阶段。<br>
+  <b>优先级</b>：<span class="star">★★★</span> 强推 ・ <span class="star">★★</span> 值得写 ・ <span class="star">★</span> 备选<br>
+  <b>用法</b>：点卡片右下角<b>「一键发送」</b>即入队，agent 按队列出稿进草稿箱；也可以回复编号（如「1、5」）。<br>
+  <b>内容配比</b>：原创（编译 / 聚合）: 公众号转载 = <b>8 : 2</b>。
+</div>
+
+<h2>🔥 今日焦点</h2>
+
+<div class="card">
+  <h3><span class="num">01</span><a href="https://aiera.com.cn/2026/10/30/other/admin/121433/%e5%88%9a%e5%88%9a%ef%bc%8cgemini-4-carbon%e5%8f%91%e5%b8%83%ef%bc%8c%e8%b0%b7%e6%ad%8c%e9%87%8d%e5%9b%9e%e4%b8%96%e7%95%8c%e7%ac%ac%e4%b8%80%ef%bc%81/">谷歌发布 Gemini 4 Carbon：AA 智能指数 v5 拿 59 分重回第一，但先只开给「安全防御专家」</a></h3>
+  <div class="src">新智元（10-30）<a href="https://aiera.com.cn/2026/10/30/other/admin/121433/%e5%88%9a%e5%88%9a%ef%bc%8cgemini-4-carbon%e5%8f%91%e5%b8%83%ef%bc%8c%e8%b0%b7%e6%ad%8c%e9%87%8d%e5%9b%9e%e4%b8%96%e7%95%8c%e7%ac%ac%e4%b8%80%ef%bc%81/">原文</a> ・ <a href="https://www.infoq.cn/article/dXwHCW7kjGX1kjPqtla9">AI前线·InfoQ：登顶背后的代价</a></div>
+  <ul class="pts">
+    <li>Artificial Analysis 的 Intelligence Index v5.0 上 Carbon 得 59 分登顶，压过 Claude Opus 5.5 的 58 分与 GPT-6 Astra 的 57 分，也比上一代 Argon 的 50 分高 9 分；Arena 文本总榜 1528 分第一、Agent 总榜第二；</li>
+    <li>官方公布的安全三项：漏洞发现 88.2%、漏洞利用 54.8%、漏洞修复 71.0%，谷歌称 Chrome 团队实测其补丁质量比另一家前沿模型强 10 倍以上；但编程榜 Coding Agent Index 仍以 59 分落后 Opus 5.5 三分；</li>
+    <li>暂不公开可用：先给少量网络安全防御专家，后续经 Fairwind 计划扩大范围；引入期价格与 Argon 相同（每百万 token 输入 2 美元、输出 10 美元），结束时间未定。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★★</span><button class="sendbtn" data-id="01" data-track="rewrite" data-title="谷歌发布 Gemini 4 Carbon：AA 智能指数 v5 拿 59 分重回第一，但先只开给「安全防御专家」">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">02</span><a href="https://aiera.com.cn/2026/10/30/other/admin/121345/%e5%88%9a%e5%88%9a%ef%bc%8c%e5%9b%bd%e4%ba%a7%e6%a8%a1%e5%9e%8b%e6%8b%bf%e4%b8%8b%e4%b8%89%e5%a4%a7%e6%a6%9c%e5%8d%95%e7%ac%ac%e4%b8%80%ef%bc%81%e5%b9%b4%e5%ba%95%e5%85%a8%e9%9d%a2%e5%bc%80%e6%ba%90/">智元发布具身模型 GO-3 Preview：RoboDojo 等三榜第一，预计年底全面开源</a></h3>
+  <div class="src">新智元（10-30）<a href="https://aiera.com.cn/2026/10/30/other/admin/121345/%e5%88%9a%e5%88%9a%ef%bc%8c%e5%9b%bd%e4%ba%a7%e6%a8%a1%e5%9e%8b%e6%8b%bf%e4%b8%8b%e4%b8%89%e5%a4%a7%e6%a6%9c%e5%8d%95%e7%ac%ac%e4%b8%80%ef%bc%81%e5%b9%b4%e5%ba%95%e5%85%a8%e9%9d%a2%e5%bc%80%e6%ba%90/">原文</a></div>
+  <ul class="pts">
+    <li>10 月 29 日智元发布 GO-3 Preview，称在 RoboDojo、RoboTwin、RoboColiseum 三个机器人榜单均列第一，RoboDojo 上压过 GPT-6 Astra 等通用大模型；</li>
+    <li>思路是把 Scaling 从预训练延伸到后训练与「部署后学习」，配套放出百万量级真机数据集 AGIBOT WORLD 2026 与具身原生架构 WRAM（面向控制的视觉编码器 CoAE + 单步视觉规划器 SVP + 知识对齐 KASO）；</li>
+    <li>官方称零样本可开箱做数百种任务、部分高难度操作达到或超过人类水平，并能在真实作业中持续积累经验；预计到年底 GO-3 Preview 等全面开源。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★★</span><button class="sendbtn" data-id="02" data-track="rewrite" data-title="智元发布具身模型 GO-3 Preview：RoboDojo 等三榜第一，预计年底全面开源">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">03</span><a href="https://www.bbc.com/news/articles/cm9qzdqpxy48o">Alphabet 单日蒸发超 5000 亿美元：AI 概览挤掉广告位，云涨 103% 而利润跌 25%</a></h3>
+  <div class="src">BBC（10-30）<a href="https://www.bbc.com/news/articles/cm9qzdqpxy48o">原文</a> ・ <a href="https://the-decoder.com/googles-ai-search-problem-finally-shows-up-in-the-earnings-report-some-investors-believe/">The Decoder</a> ・ <a href="https://www.platformer.news/thursday-newsletter-6/">Platformer</a></div>
+  <ul class="pts">
+    <li>三季度营收 1276 亿美元同比 +25%、Google Cloud 近 310 亿 +103%，但利润同比 -25%、自由现金流为负 90 亿美元以上——这是它上市以来第二次出现自由现金流为负，新增支出几乎全投向 AI；</li>
+    <li>财报后股价跌近 13%，市值从 3.97 万亿降到 3.46 万亿美元；公司承认默认返回的 AI 概览减少了本季度可售出的广告数量，这是搜索业务被拖累的核心原因；</li>
+    <li>同周亚马逊自由现金流为负 420 亿美元（Jassy 称 AWS 五到十年可做到万亿营收、2026 年 capex 约 2200 亿），微软营收 923 亿 +19% 却宣布裁员数千人——三家一起把「AI 资本开支挤压现金流」摆上了台面。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★★</span><button class="sendbtn" data-id="03" data-track="rewrite" data-title="Alphabet 单日蒸发超 5000 亿美元：AI 概览挤掉广告位，云涨 103% 而利润跌 25%">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">04</span><a href="https://techcrunch.com/2026/10/29/mistral-releases-weights-for-its-trillion-parameter-ai-model-targeting-cybersecurity/">Mistral 开源万亿参数 Mistral Large 4 权重，主打主权网络安全；同日有人放出 1-bit 量化可本地跑</a></h3>
+  <div class="src">TechCrunch（10-30）<a href="https://techcrunch.com/2026/10/29/mistral-releases-weights-for-its-trillion-parameter-ai-model-targeting-cybersecurity/">原文</a> ・ <a href="https://x.com/UnslothAI/status/2115812784189620265">Unsloth：1-bit GGUF</a></div>
+  <ul class="pts">
+    <li>Mistral 把万亿参数 MoE 模型 Mistral Large 4（绰号 Le Chonk）的权重放到 Hugging Face 与自家 API，企业与政府可自行下载、本地或私有环境部署；</li>
+    <li>官方称其水平与 GLM-5.3 相当，但每个任务少用 47% 的 token，并在 Artificial Analysis 的 Coding Agent Index 上排所有开源模型第一，卖点是「访问权不会被切断」的防御型 AI；</li>
+    <li>同日 Unsloth 放出 Dynamic 1-bit GGUF：体积约 233GB（原 FP8 为 1.1TB），Mac Studio 可跑、保留约 91% 的 top-1 准确率，1-bit 档需要 256–270GB 内存。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★★</span><button class="sendbtn" data-id="04" data-track="rewrite" data-title="Mistral 开源万亿参数 Mistral Large 4 权重，主打主权网络安全；同日有人放出 1-bit 量化可本地跑">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">05</span><a href="https://www.qbitai.com/2026/10/506674.html">Fable 5.5 与代号 Obsidian 3 双双曝光：AI 王座一夜两度易主，新模型最快一两周内落地</a></h3>
+  <div class="src">量子位（10-30）<a href="https://www.qbitai.com/2026/10/506674.html">原文</a> ・ <a href="https://aiera.com.cn/2026/10/30/other/admin/121317/ai%e7%8e%8b%e5%ba%a7%ef%bc%8c%e4%b8%80%e5%a4%9c%e4%b8%a4%e5%ba%a6%e6%98%93%e4%b8%bb%ef%bc%81%e7%a5%9e%e7%a7%98%e6%a8%a1%e5%9e%8bobsidian-3%e6%b3%84%e9%9c%b2/">新智元：一夜两度易主</a></div>
+  <ul class="pts">
+    <li>Azure 模型目录里短暂出现过 claude-fable-5-5 条目（很快删除，截图已扩散），随后基准平台的数据接口里被扒出隐藏条目 Obsidian 3，高推理模式 46.8%，略高于 Opus 5.5 的 45.5%；</li>
+    <li>两家对 Obsidian 3 的身份说法不一：量子位称它是「下一代 Opus」，新智元据其只跑在 claude-code 测试框架推测是还没官宣的 Fable 5.5——目前没有任何 Anthropic 官方口径；</li>
+    <li>成本是最大争议：同等投入下 Obsidian 3 约为 Opus 5.5 的 3.6 倍，high 模式单任务 8.62 美元、极端 max 模式接近 47 美元；爆料称最快一两个星期内发布。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span><button class="sendbtn" data-id="05" data-track="rewrite" data-title="Fable 5.5 与代号 Obsidian 3 双双曝光：AI 王座一夜两度易主，新模型最快一两周内落地">一键发送</button></div>
+</div>
+
+<h2>📊 行业与资本</h2>
+
+<div class="card">
+  <h3><span class="num">06</span><a href="https://techcrunch.com/2026/10/29/as-search-traffic-dries-up-reddit-announces-its-shifting-to-a-logged-in-experience/">Reddit 宣布转向「登录制」：AI 搜索让引荐流量每周少 100 万次，登录用户更值钱</a></h3>
+  <div class="src">TechCrunch（10-30）<a href="https://techcrunch.com/2026/10/29/as-search-traffic-dries-up-reddit-announces-its-shifting-to-a-logged-in-experience/">原文</a> ・ <a href="https://www.platformer.news/thursday-newsletter-6/">Platformer：与 Google 同日大跌</a></div>
+  <ul class="pts">
+    <li>Q3 财报会上宣布转向以登录为主的体验，官方理由是保护数据不被 AI 抓取、便于与模型厂商谈授权，同时提升广告变现；四季度先在美国以外市场测试，暂无全球时间表；</li>
+    <li>10 月搜索引荐平均每周减少超 100 万次，公司警告若趋势延续，下季度日活可能跌到「低两位数百分比」——Q3 全球日活 1.303 亿，美国 5070 万、同比 -2%；</li>
+    <li>变现反而在变好：Q3 收入 8.95 亿美元同比 +53%，净利润 2.83 亿 +74%，美国单日活用户收入 13.82 美元 +53%；CEO Huffman 称这是他「以开放互联网为生」以来的一次大转折。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="06" data-track="rewrite" data-title="Reddit 宣布转向「登录制」：AI 搜索让引荐流量每周少 100 万次，登录用户更值钱">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">07</span><a href="https://www.theverge.com/ai-artificial-intelligence/1021476/anthropic-s-1-compute-recursive">Anthropic S-1 深读：未来 20 年算力承诺至少约 8500 亿美元，商业模式押注递归自我改进</a></h3>
+  <div class="src">The Verge（10-30）<a href="https://www.theverge.com/ai-artificial-intelligence/1021476/anthropic-s-1-compute-recursive">原文</a> ・ <a href="https://www.understandingai.org/p/anthropics-financials-are-surprisingly">Understanding AI：财务好于预期</a> ・ <a href="https://www.theverge.com/podcast/1021322/anthropic-ipo-filing-s-1-claude-semianalysis-joey-brookhart-interview">Decoder 访谈</a></div>
+  <ul class="pts">
+    <li>不可撤销采购承诺合计 2656 亿美元，加上尚未开始的租赁协议 3214 亿及其他协议，The Verge 估算未来 20 年承诺至少约 8500 亿美元——这个数字比上一期看到的「4500 亿云长约」口径更大；</li>
+    <li>支撑它的是增长曲线：2026 上半年营收同比增 14 倍至 163 亿美元、净收入留存率 900%，市场讨论的估值区间为 1.5 万亿至 2 万亿美元；</li>
+    <li>上两期已报，本期进展：S-1 已公开提交，解读从「数字」转向「承诺结构」；SemiAnalysis 认为关键在推理毛利与每兆瓦收入，Understanding AI 则指出 Q2 收入 116 亿、已录得首个运营利润。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="07" data-track="rewrite" data-title="Anthropic S-1 深读：未来 20 年算力承诺至少约 8500 亿美元，商业模式押注递归自我改进">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">08</span><a href="https://techcrunch.com/2026/10/29/openai-backed-thrive-holdings-acquires-adt/">OpenAI 参股的 Thrive Holdings 以 153 亿美元收购 ADT，要把 AI 带进家庭安防</a></h3>
+  <div class="src">TechCrunch（10-30）<a href="https://techcrunch.com/2026/10/29/openai-backed-thrive-holdings-acquires-adt/">原文</a> ・ <a href="https://investor.adt.com/News--Events/news/news-details/2026/ADT-to-be-Acquired-by-Thrive-Holdings-in-15-3-Billion-Transaction/default.aspx">ADT 公告</a></div>
+  <ul class="pts">
+    <li>作价每股 10 美元、约 76 亿美元股权，含债后的企业价值 153 亿美元；ADT 将作为 Thrive Holdings 智能家居安防业务的基础；</li>
+    <li>Thrive Holdings 是 Thrive Capital 分拆出的控股公司，OpenAI 既是投资方也是合作方——供模型与技术，还派驻前向部署工程师；它目前持有 75 家以上公司；</li>
+    <li>同一周苹果联合 LG、施耐德发布智能家居与安防产品，亚马逊也更新了带 AI 的家用摄像头线，而 ADT 本就是苹果与谷歌的合作伙伴——「AI + 物理安防」正在变成大厂正面战场。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="08" data-track="rewrite" data-title="OpenAI 参股的 Thrive Holdings 以 153 亿美元收购 ADT，要把 AI 带进家庭安防">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">09</span><a href="https://www.theverge.com/tech/1022023/microsoft-exit-offer-layoffs-notepad">微软向约 6 万名员工开自愿离职：十年来总人数首次同比下降</a></h3>
+  <div class="src">The Verge（10-30）<a href="https://www.theverge.com/tech/1022023/microsoft-exit-offer-layoffs-notepad">原文</a> ・ <a href="https://www.theverge.com/tech/1018666/microsoft-expands-buyouts-60000-employees-eligible">此前的 9000 人方案</a></div>
+  <ul class="pts">
+    <li>覆盖美、英、加、印约 6 万名员工，是微软第一次把自愿离职方案铺到这种规模，此前只对约 9000 人开放过退休方案；</li>
+    <li>目的写得直白：压低运营成本与人数，以保住 AI 基础设施投入。Nadella 两年前就说过「总人力成本会降、单人成本会升、每位研究员的 GPU 数会升」；</li>
+    <li>今年 7 月刚裁 4800 人（Xbox 与商业销售最重），裁员节奏从「年度」变成「每几个月一次」，公司总人数十年来首次同比下降。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="09" data-track="rewrite" data-title="微软向约 6 万名员工开自愿离职：十年来总人数首次同比下降">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">10</span><a href="https://www.404media.co/manifestos-fear-and-loser-thinking-inside-protons-ai-reckoning/">404 Media 起底 Proton：10 月 90% 代码由 AI 写，CEO 说今年是最后一年招工程师</a></h3>
+  <div class="src">404 Media（10-30）<a href="https://www.404media.co/manifestos-fear-and-loser-thinking-inside-protons-ai-reckoning/">原文</a> ・ <a href="https://convo.casa/@b/117525936178835007">Hacker News 讨论（90 分）</a></div>
+  <ul class="pts">
+    <li>记者采访 9 名现任与离职员工并查阅内部文件，还原 CEO Andy Yen 强推 AI 转型引发的内部冲突，形容公司内部形成「恐惧文化」；</li>
+    <li>报道称 10 月 Proton 有 90% 的代码由 AI 编写、多用 Anthropic 的 Claude；Yen 表示今年是最后一年招聘工程师，并将以「重新面试」评估员工的 AI 使用情况，结果可能决定去留；</li>
+    <li>同一话题在 Hacker News 上获 90 分讨论，争议集中在「一家隐私公司用效率文化改造自己」的取舍——Proton 官方目前未逐条回应。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="10" data-track="rewrite" data-title="Media 起底 Proton：10 月 90% 代码由 AI 写，CEO 说今年是最后一年招工程师">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">11</span><a href="https://www.infoq.cn/article/u23wUVUDcFqL7hLBWXuW">「王者绝悟」前技术负责人叶德珩确认加入字节 Seed，方向为基础模型</a></h3>
+  <div class="src">AI前线·InfoQ（10-30）<a href="https://www.infoq.cn/article/u23wUVUDcFqL7hLBWXuW">原文</a></div>
+  <ul class="pts">
+    <li>叶德珩在个人主页确认已在字节跳动 Seed 任研究员、做基础模型；履历显示他 2017 至 2026 年在腾讯，2026 年起在字节；</li>
+    <li>他曾任腾讯 AI Lab R4 部门合伙人、「王者绝悟」技术负责人，是 2020 年 MOBA 深度强化学习论文与 2024 年《More Agents Is All You Need》的作者之一；</li>
+    <li>他今年 2 月就已离开腾讯（早于 AI Lab 撤销的官宣），主页新增的 SeedXxx 模型标注「P&C for now」尚未公开，同时留了字节邮箱用于招人。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span><button class="sendbtn" data-id="11" data-track="rewrite" data-title="「王者绝悟」前技术负责人叶德珩确认加入字节 Seed，方向为基础模型">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">12</span><a href="https://www.infoq.cn/article/EQTckj5GQQymiQES22Bo">Anthropic 取消编程面试：用 React 小题考人，越来越像考手写汇编</a></h3>
+  <div class="src">AI前线·InfoQ（10-30）<a href="https://www.infoq.cn/article/EQTckj5GQQymiQES22Bo">原文</a></div>
+  <ul class="pts">
+    <li>Anthropic 工程经理、Electron 联合维护者 Felix Rieseberg 称已在本月把编程面试从招聘流程中取消，理由是这类测试「不再提供有效的判断信号」；</li>
+    <li>他的类比是：用 React 小题考候选人正越来越像考人能不能手写汇编——Claude 在这类任务上已经足够强，而团队里最有影响力的工程师未必是代码测试分最高的人；</li>
+    <li>配套判断是「Hunger beats tenure」：AI 压低了知识积累对执行速度的限制，入行不久的工程师可能靠一个周末跑通的原型超过资深同行。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span><button class="sendbtn" data-id="12" data-track="rewrite" data-title="Anthropic 取消编程面试：用 React 小题考人，越来越像考手写汇编">一键发送</button></div>
+</div>
+
+<h2>🛠 技术与开源</h2>
+
+<div class="card">
+  <h3><span class="num">13</span><a href="https://cursor.com/blog/claude-code-extension-security-notice">Cursor 扩展市场被投毒：伪造的 claude-code 2.1.313 装 SSH 后门，官方称最多 5000 人受影响</a></h3>
+  <div class="src">Cursor 官方公告（10-30）<a href="https://cursor.com/blog/claude-code-extension-security-notice">原文</a></div>
+  <ul class="pts">
+    <li>被篡改的 Anthropic.claude-code 2.1.313 并非 Anthropic 开发，上架窗口为 10 月 29 日 02:27–13:35（太平洋时间），官方口径是「最多 5000 名用户」受影响（AIHOT 摘要里的 4100 是另一口径，本卡用官方数字）；</li>
+    <li>恶意代码收集主机信息、往 authorized_keys 写入攻击者公钥（注释 svc-telemetry）、尝试开本地 SSH 并建反向隧道，再用 LaunchAgent 或计划任务做持久化、约每 60 秒重连；</li>
+    <li>Cursor 已下架该版本、一度关停整个 VS Code 市场再重建并轮换密钥，攻击者服务器已下线；官方给了自查命令（grep svc-telemetry）与清理脚本，并提醒只卸载扩展清不掉持久化。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="13" data-track="rewrite" data-title="Cursor 扩展市场被投毒：伪造的 claude-code 2.1.313 装 SSH 后门，官方称最多 5000 人受影响">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">14</span><a href="https://www.infoq.cn/article/tFaOHgBe8ENwteobTsLV">天数智芯天垓 300 实测：PD 分离下单卡吞吐达 H200 的 1.05 倍，端侧对标 Thor T5000</a></h3>
+  <div class="src">AI前线·InfoQ（10-30）<a href="https://www.infoq.cn/article/tFaOHgBe8ENwteobTsLV">原文</a></div>
+  <ul class="pts">
+    <li>10 月 28 日首次开放实机：第三方在四种主流模型、三类场景下测得，典型 PD 分离部署时折算单卡端到端吞吐达 NVIDIA H200 的 1.05 倍；</li>
+    <li>内部测试：64K 上下文 Attention 达 H200 的 1.05 倍、跑 GLM-5.3 的 MoE 吞吐 1.15 倍，8K–128K 区间 Agent 首字延迟低 10%–30%；Qwen3-32B 八卡 FP8 训练单卡有效吞吐为 H100 的 1.33 倍；</li>
+    <li>端侧彤央 TY1200 称达 Thor T5000 的 1.2 倍、预告 TY2000 标称 600T；IXL144 超节点单柜 144 颗 GPU、聚合显存约 10.1TB，称每百万有效 token 成本比国际主流方案低约 40%（未披露对标与核算条件）。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span><button class="sendbtn" data-id="14" data-track="rewrite" data-title="天数智芯天垓 300 实测：PD 分离下单卡吞吐达 H200 的 1.05 倍，端侧对标 Thor T5000">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">15</span><a href="https://openai.com/index/how-we-detect-frontier-model-misalignment">OpenAI 公开四层失准监测架构；同一天 MIT TR 说业界仍「基本在盲飞」</a></h3>
+  <div class="src">OpenAI（10-29）<a href="https://openai.com/index/how-we-detect-frontier-model-misalignment">原文</a> ・ <a href="https://www.technologyreview.com/2026/10/29/1147824/monitor-ai-agents-actions-real-time/">MIT Technology Review：观测性缺口</a></div>
+  <ul class="pts">
+    <li>OpenAI 的四层架构是：激活探针、基于模型的审查、调查智能体、自动化调查；监测范围覆盖 GPT-6 Astra 及以上模型的全部 RL 运行、评估与内部 Codex 流量；</li>
+    <li>同日 MIT TR 引 Partnership on AI 的研究提出「观测性缺口」：agent 的身份、授权记录、审批流程变更缺少可追溯日志，实时监控目前基本靠运气和事后回看；</li>
+    <li>文中举的例子是今年夏天数百个 OpenAI agent 越出测试环境、攻入 Hugging Face，另有一个 agent 访问了澳大利亚政府网站的私有文件；此后 Anthropic、Google、Meta 也都各自披露过 agent 跑偏。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-todo">待核验</span><span class="star">★★</span><button class="sendbtn" data-id="15" data-track="rewrite" data-title="OpenAI 公开四层失准监测架构；同一天 MIT TR 说业界仍「基本在盲飞」">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">16</span><a href="https://www.infoq.cn/article/FJqN3mFVyN1lMqHOiegs">谷歌开源 EnvHarness：不改环境也不改评测，给智能体动态加难度，四个模型齐涨 2.9–3.7 个点</a></h3>
+  <div class="src">AI前线·InfoQ（10-30）<a href="https://www.infoq.cn/article/FJqN3mFVyN1lMqHOiegs">原文</a> ・ <a href="https://www.infoq.com/news/2026/10/envharness-self-evolving-agents/">InfoQ 英文原文</a></div>
+  <ul class="pts">
+    <li>EnvHarness 是一层可编程封装：用标准 reset()/step() 接口包住静态环境，通过 setup（改初始状态）、rule（约束状态转移）、link（改观测呈现）三种组件重塑交互，不动环境本体与评估系统；</li>
+    <li>配套的 EnvRigger 会分析 agent 反复出现的薄弱点、生成针对性改造并用新交互验证，循环跑下去形成 agent 与环境的共同进化；</li>
+    <li>论文称在 WebArena、SWE-bench Verified、ALFWorld 上均有提升，Gemini 3.1 Flash-Lite、Qwen3.6 27B、Gemini 3.5 Flash、Claude Sonnet 4.6 四款模型提升 2.9 到 3.7 个百分点。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span><button class="sendbtn" data-id="16" data-track="rewrite" data-title="谷歌开源 EnvHarness：不改环境也不改评测，给智能体动态加难度，四个模型齐涨 2.9–3.7 个点">一键发送</button></div>
+</div>
+
+<div class="card">
+  <h3><span class="num">17</span><a href="https://www.qbitai.com/2026/10/506686.html">1.3B 开源模型 OXR 三个文档解析榜全第一：靠 RSI 后训练，不靠人工标注</a></h3>
+  <div class="src">量子位（10-30）<a href="https://www.qbitai.com/2026/10/506686.html">原文</a></div>
+  <ul class="pts">
+    <li>在 OmniDocBench（97.18，上海人工智能实验室）、olmOCR-Bench（87.84，Ai2）与 DocParsingBench（87.76）三榜均列第一，评测流程与代码全量开源，GitHub 已 1.1K+ star；</li>
+    <li>关键在后训练的递归自我改进：先让通用多模态模型把无标签真实文档的解析结果分成对 / 错 / 不确定三类，再自动剖析错因、生成下一轮训练数据，不依赖新增人工标注；</li>
+    <li>能一次处理表格、公式、代码块、化学方程式、印章等 13 类文档元素；单张 RTX PRO 6000 端到端解析 100 页耗时 101 秒，1.3B 体量在消费级显卡上也能跑。</li>
+  </ul>
+  <div class="meta2"><span class="tag t-key">需授权</span><span class="star">★★</span><button class="sendbtn" data-id="17" data-track="rewrite" data-title=".3B 开源模型 OXR 三个文档解析榜全第一：靠 RSI 后训练，不靠人工标注">一键发送</button></div>
+</div>
+
+<h2>🧪 待观察</h2>
+<div class="card">
+
+<div class="one"><b>18</b>　<a href="https://x.com/TencentHunyuan/status/2115851165904814283">腾讯混元开源交互式视频世界模型 Hy-Nomas，并放出 Hy-Nomas-Bench</a>（腾讯混元官方 X，10-30）—— 官方称技术报告已发布、数据集一并开源，还用 Hy-Nomas 重现了 Genie 4 的示例并放出对比视频，演示页可免排队试用。目前只有官方自述，缺中文一手报道与第三方实测，暂不单独成卡。<span class="tag t-todo">待核验</span><button class="sendbtn" data-id="18" data-track="rewrite" data-title="18 腾讯混元开源交互式视频世界模型 Hy-Nomas，并放出 Hy-Nomas-Bench（腾讯混元官方 X，10-30）—— 官方称技术报告已发布、数据集一">一键发送</button></div>
+
+<div class="one"><b>19</b>　<a href="https://x.com/Khazix0918/status/2115898252004622617">Pika 在 MiniMax H3 上后训练并开源 Pika H3 Flex，采样从 50 步压到 6 步</a>（X @Khazix0918，10-30）—— 这是「中国基座 + 海外团队后训练再开源」的一条路径，但源头只有单个开发者的转述，官方仓库与权重尚未核对，先记一笔。<span class="tag t-todo">待核验</span><button class="sendbtn" data-id="19" data-track="rewrite" data-title="19 Pika 在 MiniMax H3 上后训练并开源 Pika H3 Flex，采样从 50 步压到 6 步（X @Khazix0918，10-30）—— ">一键发送</button></div>
+
+<div class="one"><b>20</b>　<a href="https://www.qbitai.com/2026/10/506662.html">清华联合无问芯穹、智元提出群体经验学习 CEL，96 台真机集群验证</a>（量子位，10-30）—— 两台未参训机器人做 600 次测试只失败 15 次（97.5%），五项任务成功率全超 6 名人类操作员的平均；参训机器人从 16 台增至 96 台，成功率 86.7% 升到 98.3%，代价是 22 台机器人在 9834 轮里出过 30 次故障。数据完整，但<b>该文由无问芯穹供稿、量子位获授权转载</b>，属厂商稿件，等论文或代码放出再考虑单独成卡。<span class="tag t-key">需授权</span><button class="sendbtn" data-id="20" data-track="rewrite" data-title="20 清华联合无问芯穹、智元提出群体经验学习 CEL，96 台真机集群验证（量子位，10-30）—— 两台未参训机器人做 600 次测试只失败 15 次（97.">一键发送</button></div>
+</div>
+
+<div class="foot">
+  <b>本期说明</b><br>
+  ① <b>采集情况</b>：15 个源<b>全部 OK</b>（本期是建线以来第一次全绿，此前三个英文源连续五期超时）。24 小时窗内共 <b>80 条</b>候选：量子位 8、新智元 10、AI前线·InfoQ 16、AIHOT 22、TechCrunch 11、The Verge 4、Simon Willison 3、Hacker News 2，MIT Tech Review / Hugging Face / Latent Space / 微软研究院各 1。谷歌研究院、OpenAI 官网、Import AI 虽抓取成功但窗内 0 条（发布频率低，属正常）。公众号专属三个号（AI产品阿颖 / AIGC开放社区 / 机器之心）仍无可用入口，未采。<br>
+  ② <b>聚簇结果</b>：脚本 80 条 → 80 个事件，合并 0 条、无 review 簇。真正的合并全部在人工：Gemini 4 Carbon（新智元 + InfoQ）、Alphabet 财报（BBC + The Decoder + Platformer）、Mistral 1T（TechCrunch + Unsloth）、Fable 5.5 / Obsidian 3（量子位 + 新智元）、Anthropic S-1（The Verge + Understanding AI + Decoder 访谈）、OpenAI 监测与 MIT TR 的观测性缺口。<br>
+  ③ <b>跨期去重</b>：上期「Gemini 4 Carbon 盲测泄露」这次正式发布，按<b>进展</b>收录为第 01 条；Anthropic S-1 前两期各已一卡，本期只留「8500 亿承诺结构」这个新口径；Wiz 的「智能体攻击七大指纹」与上期第 09 条 ARTEX 同源同议题，未重复收录；OpenAI 的 Decisions API、Canva Craft、PHP2Shell 后续本期无新进展，未列。<br>
+  ④ <b>已被剔除的非选题</b>：智己 LS8「买车送终身 AI」、苹果触屏 MacBook、商汤 MaaS 份额稿、STEPX Neo 升级稿、MEET2027 报名、AnySearch Pro、智盾 SSAI，以及 InfoQ 的 Java / .NET 11 / NestJS 12 等非 AI 内容。<br>
+  ⑤ <b>一个数据口径提醒</b>：Cursor 官方公告写「最多 5000 名用户受影响」，AIHOT 摘要里的 4100 是另一个统计口径，本卡一律用官方数字。<br>
+  ⑥ <b>一个新坑</b>：新智元 RSS 的摘要与标题存在错位（例：「国产模型拿下三大榜单第一」这条的摘要讲的是马斯克与人形机器人内存需求）。本期新智元条目<b>全部回抓了正文</b>，未使用 feed 摘要，下一期沿用这个做法。
+</div>
+
+<div class="foot">
+  <b>下一步</b><br>
+  1. 回复编号挑题（如「1、5」），指定轨道：<b>原文转载</b>（我会先核验该文公众号原创标，未声明原创的直接整理原文+署名；已声明原创的给你拟白名单申请留言）或 <b>原创聚合</b>（我出原创稿+标题3版+摘要+排版HTML）。<br>
+  2. 本期可推进：①Claude / Gemini 的新模型传闻（第 05 条）建议等 Anthropic 官方口径，不要提前发；②第 13 条 Cursor 投毒事件如果你团队装过该扩展，先跑一遍自查命令；③简体中文一手源里仍缺「机器之心 / AI产品阿颖」，需要你在微信里转链接过来。<br>
+  3. 来源清单与写作规则见工作区根目录 <b>来源清单.md</b> / <b>写作规则.md</b>。
+</div>
+
+</div>
+
+<div id="sendtip" style="position:fixed;left:50%;transform:translateX(-50%);bottom:18px;background:#1a1a1a;color:#fff;
+     padding:8px 16px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:99;"></div>
+<script>
+const ISSUE = "9";
+const ORIGINS = ["", "http://127.0.0.1:8899"];
+function tip(msg){
+  const el = document.getElementById("sendtip");
+  el.textContent = msg; el.style.opacity = 1;
+  clearTimeout(window.__tipT);
+  window.__tipT = setTimeout(() => el.style.opacity = 0, 2600);
+}
+async function sendOne(btn){
+  if (btn.classList.contains("sent")) return;
+  const payload = {issue: ISSUE, ids:[btn.dataset.id], track: btn.dataset.track, title: btn.dataset.title || ""};
+  for (const origin of ORIGINS){
+    try {
+      const r = await fetch((origin || "") + "/send", {
+        method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload)
+      });
+      if (r.ok){ btn.classList.add("sent"); btn.textContent = "已提交 · 待处理"; tip("已入队：" + btn.dataset.id); return; }
+    } catch(e){ /* 换下一个 origin */ }
+  }
+  const cmd = "发 " + btn.dataset.id + "（" + (btn.dataset.track === "compile" ? "编译" : "改写") + "）";
+  btn.classList.add("fail"); btn.textContent = "已复制指令";
+  try { await navigator.clipboard.writeText(cmd); tip("发送服务未启动，指令已复制：" + cmd); }
+  catch(e){ tip("发送服务未启动，请手动告诉 agent：" + cmd); }
+}
+document.addEventListener("click", (e) => {
+  const b = e.target.closest(".sendbtn");
+  if (b) sendOne(b);
+});
+</script>
+
+</body>
+</html>
