@@ -26,3 +26,12 @@ Thumbs.db
 
 # 自己的号名（用 品牌示例.json 复制一份改名）
 品牌.json
+
+# ── 状态数据不进 git ──
+# 原因：切分支会把这些文件一起切回去。台账一旦回退，闸门会以为「今天没发过」，
+# 同一天可能发两篇。数据只存在于工作目录，备份用 python scripts/gzh_export.py。
+稿件/
+运行台账/
+预览/
+雷达/pool.jsonl
+雷达/pool.jsonl.bak-*
