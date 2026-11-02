@@ -41,8 +41,18 @@ def text_of(block: str) -> str:
 
 
 def has_card(block: str) -> bool:
-    """卡片有两种写法：inline-block 的三连卡/榜单，和 C15 那种块级卡片（有底色+圆角）。"""
-    return "inline-block" in block or ("background:" in block and "border-radius" in block)
+    """判定「这是不是一张卡片」。
+
+    两种真卡片：
+      1. 块级卡片：有底色 + 圆角 + 内边距（C11 参数卡、C15 卡片要点）
+      2. 分栏/分行：同一块里有 2 个以上 inline-block 子项（C09 三连卡、C12 榜单）
+
+    为什么不能只看 inline-block：步骤条（C14）的圆形编号也是 inline-block + 底色，
+    但那只是一个 22px 的徽标，把它算成卡片会误报「卡片连排」。区别在**没有内边距**。
+    """
+    if "background:" in block and "border-radius" in block and "padding:" in block:
+        return True
+    return block.count("display:inline-block") >= 2
 
 
 def main(argv: list[str] | None = None) -> int:
