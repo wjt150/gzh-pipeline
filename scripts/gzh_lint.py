@@ -41,7 +41,8 @@ def text_of(block: str) -> str:
 
 
 def has_card(block: str) -> bool:
-    return "inline-block" in block
+    """卡片有两种写法：inline-block 的三连卡/榜单，和 C15 那种块级卡片（有底色+圆角）。"""
+    return "inline-block" in block or ("background:" in block and "border-radius" in block)
 
 
 def main(argv: list[str] | None = None) -> int:
