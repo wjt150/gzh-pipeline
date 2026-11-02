@@ -730,10 +730,13 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("没找到「保存为草稿」按钮，页面结构可能变了。上面的输出里有现场信息。")
     if "SKIP-SAVE-BAD-BODY" in out:
         print(out, file=sys.stderr)
+        # 这里必须现算：`expect` 是另一个函数的局部变量，之前引用它直接 NameError，
+        # 把「正文被压平」这个真正原因盖掉了，只看到一个看不懂的 NameError。
+        _st = scan_body(body)["stats"]
         raise SystemExit(
             "正文结构没保住，已主动放弃保存。"
-            f"源文件：section={expect.get('section', 0)} strong={expect.get('strong', 0)} "
-            f"styled={expect.get('styled', 0)} iblock={expect.get('iblock', 0)}；"
+            f"源文件：section={_st.get('section', 0)} strong={_st.get('strong', 0)} "
+            f"styled={_st.get('styled', 0)} iblock={_st.get('iblock', 0)}；"
             "编辑器里的实际数量见上面的 SKIP-SAVE-BAD-BODY 行。"
         )
     if "BODY_LEN=" not in out:
