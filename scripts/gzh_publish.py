@@ -136,7 +136,30 @@ def get_token(ab: str, profile: Path) -> str:
 # --------------------------------------------------------------------------- #
 # 闸门
 # --------------------------------------------------------------------------- #
-def local_gates(root: Path, appmsgid: str | None = None) -> list[dict]:
+def mass_send_toggle(mass_send: bool | None) -> list[list[str]]:
+    """在「发表」弹窗还开着的时候，决定要不要关掉群发通知。
+
+    为什么必须在这一刻做：弹窗里的 `.mass_send__notify` 是页面状态，
+    弹窗一关就没了，跨进程也拿不回来。
+
+    为什么不能用 class 判断开关状态：实测会永远停在 `weui-desktop-switch_loading`。
+    可靠信号是「分组通知」那一行在不在（开=在，关=消失）。
+    """
+    check = [
+        "eval",
+        "var t=document.body.innerText;'MS='+((t.indexOf('分组通知')>=0)?'on':'off')",
+    ]
+    if mass_send is not False:
+        return [check]
+    return [
+        ["eval", "var d=document.querySelector('.mass_send__notify');'MSFOUND='+(d?'yes':'no')"],
+        ["click", ".mass_send__notify label.weui-desktop-switch"],
+        ["wait", "2000"],
+        check,
+    ]
+
+
+def local_gates(root: Path, appmsgid: str | None = None, mass_send: bool | None = True) -> list[dict]:
     """本地闸门。**「今天还没发表过」改读台账**——旧版读 auto-runs 的 published 字段，
     而那个字段全仓没有一处置 true，闸门是死的（同一天会重复发）。
     """
@@ -147,8 +170,19 @@ def local_gates(root: Path, appmsgid: str | None = None) -> list[dict]:
         {"name": "急停文件不存在", "ok": not stop.exists(), "detail": str(stop) if stop.exists() else "OK"}
     )
 
-    pub = gzh_state.published_today(root)
-    gates.append({"name": "今天还没发表过", "ok": not pub["hit"], "detail": pub["detail"]})
+    if mass_send is False:
+        # 只发布不群发：不占群发配额，所以**不该**被「今天已经群发过」拦住。
+        # 换个护栏：一天总发表数不超过 3 篇——防手滑连发，也不至于让主页刷屏。
+        pub = gzh_state.published_today(root)
+        n = pub.get("count", len(pub["hits"]))
+        gates.append({
+            "name": "今日发表不超过 3 篇（本次不群发，不占配额）",
+            "ok": n < 3,
+            "detail": f"今日已发表 {n} 篇" + ("，可以继续" if n < 3 else "，已达上限"),
+        })
+    else:
+        pub = gzh_state.published_today(root)
+        gates.append({"name": "今天还没发表过", "ok": not pub["hit"], "detail": pub["detail"]})
 
     if appmsgid:
         dup = gzh_state.published_row_for(root, appmsgid)
@@ -319,6 +353,7 @@ def act_to_qr_wait(
     appmsgid: str,
     token: str,
     title: str | None = None,
+    mass_send: bool | None = True,
 ) -> dict:
     """推到二维码后**继续等扫码，扫完自己收尾，最后回发表记录核对**。
 
@@ -360,6 +395,10 @@ def act_to_qr_wait(
         ],
         ["click", "#__pub"],
         ["wait", "7000"],
+    ]
+    # 弹窗此刻是开着的：如果要「只发布不群发」，必须在这里关掉开关
+    cmds += mass_send_toggle(mass_send)
+    cmds += [
         [
             "eval",
             "var bs=[...document.querySelectorAll('button,a')].filter(function(b){return (b.innerText||'').trim()==='发表';});"
@@ -427,13 +466,16 @@ def act_to_qr_wait(
     evidence = (
         f"发表记录 {n0}→{n1}" if n0 is not None and n1 is not None else "count-unknown"
     ) + ("，标题已出现" if title_hit else "") + ("，弹窗显示成功" if dialog_done else "")
+    m_ms = re.search(r"\"MS=(on|off)\"", out)
+    ms_state = m_ms.group(1) if m_ms else "unknown"
     return {
         "published": published,
         "dialog_done": dialog_done,
         "list_hit": cnt_up,
         "rounds": rounds,
-        "evidence": evidence,
+        "evidence": evidence + (f"，群发={ms_state}" if ms_state != "unknown" else ""),
         "counts": {"before": n0, "after": n1},
+        "mass_send": ms_state,
     }
 
 
@@ -459,6 +501,12 @@ def main(argv: list[str] | None = None) -> int:
     )
     ap.add_argument("--plan-only", action="store_true", help="只解析队列与闸门，不开浏览器")
     ap.add_argument("--headed", action="store_true", help="用可见窗口（二维码要让人扫，必须开）")
+    ms = ap.add_mutually_exclusive_group()
+    ms.add_argument("--mass-send", dest="mass_send", action="store_true",
+                    help="开启群发通知（默认，会推给粉丝，占当天唯一配额）")
+    ms.add_argument("--no-mass-send", dest="mass_send", action="store_false",
+                    help="只发布不群发：读者收不到推送，不占配额，可一天发多篇")
+    ap.set_defaults(mass_send=None)
     ap.add_argument("--max-age", type=int, default=4, help="队列里允许多老的稿（天）")
     ap.add_argument("--profile", default=None)
     ap.add_argument("--ab", default=None)
@@ -526,7 +574,7 @@ def _run(args, root: Path, queue_dir: Path | None) -> int:
         "queue_dir": str(queue_dir.relative_to(root).as_posix()) if queue_dir else None,
     }
 
-    report["gates"] += local_gates(root, args.appmsgid)
+    report["gates"] += local_gates(root, args.appmsgid, True if args.mass_send is None else args.mass_send)
     report["gates"].append(verify_gate(args.verify_record))
 
     # plan-only：闸门跑完就停，不碰浏览器
@@ -569,6 +617,7 @@ def _run(args, root: Path, queue_dir: Path | None) -> int:
         res = act_to_qr_wait(
             ab, profile, editor, shot, args.wait_scan, str(args.appmsgid), token,
             (report.get("content") or {}).get("title"),
+            args.mass_send,
         )
         report["published"] = res["published"]
         report["needs_scan"] = True
@@ -584,7 +633,8 @@ def _run(args, root: Path, queue_dir: Path | None) -> int:
         if queue_dir and queue_dir.exists():
             if res["published"]:
                 gzh_state.mark_published(
-                    root, queue_dir, _sniff_publish_id(res["evidence"]), res["evidence"]
+                    root, queue_dir, _sniff_publish_id(res["evidence"]), res["evidence"],
+                    mass_send=(res.get("mass_send") != "off") if args.mass_send is None else args.mass_send,
                 )
             else:
                 gzh_state.mark_attempt_failed(

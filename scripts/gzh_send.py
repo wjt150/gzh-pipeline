@@ -55,6 +55,10 @@ def main(argv: list[str] | None = None) -> int:
 
     cmd = ["--from-queue", "--mode", "dry-run" if dry else "qr-wait",
            "--wait-scan", str(wait), "--headed"]
+    if "--no-mass-send" in args:
+        cmd.append("--no-mass-send")
+    elif "--mass-send" in args:
+        cmd.append("--mass-send")
     print("→ 准备发送（会开一个浏览器窗口，二维码在上面）", file=sys.stderr)
     code, out, err = run(cmd, wait + 260)
 

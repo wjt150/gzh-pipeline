@@ -97,10 +97,14 @@ def published_today(root: Path) -> dict:
         if rec.get("state") == "published" and str(rec.get("published_at") or "")[:10] == t:
             hits.append(f"draft:{rec.get('appmsgid')}")
     hits = sorted(set(hits))
+    # 同一篇会同时出现在 ledger 和 draft 里（两个来源各一条），按 id 去重后再计数，
+    # 否则「今天发了几篇」会翻倍。
+    ids = {h.split(":", 1)[-1] for h in hits}
     return {
         "hit": bool(hits),
         "detail": ("今日已发表：" + "，".join(hits)) if hits else f"ledger/draft 均无 {t} 的 published 记录",
         "hits": hits,
+        "count": len(ids),
     }
 
 
@@ -177,8 +181,30 @@ def can_transition(src: str, dst: str) -> bool:
 # --------------------------------------------------------------------------- #
 # 状态变更
 # --------------------------------------------------------------------------- #
+def mass_sent_today(root: Path) -> dict:
+    """今天有没有用过群发通知配额。
+
+    只发布不群发（mass_send=False）不算消耗——这是「一天多篇」的关键：
+    平台限制的是群发 1 次/天，不是发表次数。
+    旧台账行没有 mass_send 字段，按「消耗了」算（保守）。
+    """
+    t = today()
+    hits = [
+        f"ledger:{r.get('appmsgid')}"
+        for r in read_ledger(root)
+        if r.get("state") == "published" and r.get("date") == t and r.get("mass_send") is not False
+    ]
+    for _, rec in iter_drafts(root):
+        if rec.get("state") == "published" and str(rec.get("published_at") or "")[:10] == t \
+                and rec.get("mass_send") is not False:
+            hits.append(f"draft:{rec.get('appmsgid')}")
+    hits = sorted(set(hits))
+    return {"hit": bool(hits),
+            "detail": ("今日已群发：" + "，".join(hits)) if hits else f"ledger/draft 均无 {t} 的群发记录"}
+
+
 def mark_published(
-    root: Path, d: Path, publish_appmsgid: str | None, evidence: str = ""
+    root: Path, d: Path, publish_appmsgid: str | None, evidence: str = "", mass_send: bool | None = True
 ) -> dict:
     """标为已发表。先 ledger 后 draft。幂等：已 published 时只补空的 publish_appmsgid。"""
     rec = read_draft(d) or {}
@@ -199,6 +225,7 @@ def mark_published(
             "dir": rec.get("dir"),
             "title": rec.get("title"),
             "evidence": evidence,
+            "mass_send": mass_send,
             "attempt": rec.get("attempts", 0),
         },
     )
@@ -208,6 +235,7 @@ def mark_published(
             "state": "published",
             "publish_appmsgid": publish_appmsgid,
             "published_at": ts,
+            "mass_send": mass_send,
             "last_error": None,
         },
     )
