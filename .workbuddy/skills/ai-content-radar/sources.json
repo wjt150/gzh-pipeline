@@ -166,6 +166,22 @@
       "channel": "manual",
       "tier": 1,
       "note": "官网文章库需登录（jiqizhixin.com/rss 实测返回的是网页不是 feed）。入口靠用户在微信里转发链接。"
+    },
+    {
+      "name": "微博热搜",
+      "url": "https://newsnow.busiyi.world/api/s?id=weibo",
+      "channel": "hotlist",
+      "tier": 3,
+      "bypass_proxy": true,
+      "note": "大众注意力信号，**不进采集、不参与打分**，只用于选题校准（见 scripts/public_heat.py）。必须绕代理直连，走本机代理 502。2026-11-03 实测可用，约 50 条/次。"
+    },
+    {
+      "name": "知乎热榜",
+      "url": "https://newsnow.busiyi.world/api/s?id=zhihu",
+      "channel": "hotlist",
+      "tier": 3,
+      "bypass_proxy": true,
+      "note": "同上。知乎更偏「想搞清楚一件事」的人群，与「教普通人用 AI」的读者重叠度高。抓取见 scripts/public_heat.py。"
     }
   ]
 }

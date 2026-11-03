@@ -152,6 +152,28 @@ def _run(args) -> int:
         except Exception:
             pass
 
+    # 0.7 大众热度校准（只提示，不参与打分）
+    #   行业源回答「行业发生了什么」，热榜回答「普通人在关心什么」。
+    #   做「教普通人用 AI」，题目该挂在后者的注意力上。
+    #   抓不到就跳过——这只是参考信号，不能因为它让整个备稿失败。
+    if not args.url:
+        try:
+            import subprocess as _sp
+
+            r = _sp.run([sys.executable, str(HERE / "public_heat.py"), "--json"],
+                        capture_output=True, text=True, timeout=40, encoding="utf-8", errors="replace")
+            if r.returncode == 0 and r.stdout.strip():
+                heat = json.loads(r.stdout)
+                hits = heat.get("ai_hits") or []
+                if hits:
+                    print(f"📈 今天大众热榜有 {len(hits)} 条 AI 话题（仅供选题校准，不进打分）：", file=sys.stderr)
+                    for h in hits[:3]:
+                        print(f"   · [{h.get('source')}] {h.get('title', '')[:44]}", file=sys.stderr)
+                else:
+                    print("📈 今天大众热榜没有明显 AI 话题（别硬蹭，按行业源选）", file=sys.stderr)
+        except Exception as _e:  # noqa: BLE001
+            print(f"（大众热榜抓取跳过：{type(_e).__name__}）", file=sys.stderr)
+
     # 1 定选题
     if args.url:
         job = {
