@@ -98,7 +98,22 @@ def split_title(title: str, sub: str | None) -> tuple[str, str | None]:
     return t[:cut], t[cut:].lstrip("，,。 　")[:13]
 
 
-def build_html(title: str, sub: str | None, kick: str, foot: str) -> str:
+def build_html(title: str, sub: str | None, kick: str, foot: str,
+               template: str | None = None, palette: str | None = None,
+               steps: list[str] | None = None, number: str | None = None,
+               bg_image: str | None = None, radar_key: str = "") -> str:
+    # 走版式库：五套骨架、四套配色，按标题和文章类型选，不再共用一套坐标
+    try:
+        from cover_layouts import build as _build  # noqa: PLC0415
+    except Exception:
+        _build = None
+    if _build is not None:
+        return _build({
+            "template": template, "palette": palette, "title": title or "", "sub": sub or "",
+            "kick": kick, "foot": foot, "steps": steps, "number": number,
+            "bg_image": bg_image, "radar_key": radar_key,
+        })
+    a, b = split_title(title, sub)
     a, b = split_title(title, sub)
     total = len(a) + len(b or "")
     fs = 44 if total <= 18 else (38 if total <= 26 else 32)
@@ -118,8 +133,11 @@ def build_html(title: str, sub: str | None, kick: str, foot: str) -> str:
     )
 
 
-def render(title: str, sub: str | None, kick: str, foot: str, out: Path) -> dict:
-    html = build_html(title, sub, kick, foot)
+def render(title: str, sub: str | None, kick: str, foot: str, out: Path,
+           template: str | None = None, palette: str | None = None,
+           steps: list[str] | None = None, number: str | None = None,
+           bg_image: str | None = None, radar_key: str = "") -> dict:
+    html = build_html(title, sub, kick, foot, template, palette, steps, number, bg_image, radar_key)
     work = Path(tempfile.gettempdir()) / f"covercard-{hashlib.sha1(html.encode()).hexdigest()[:10]}"
     work.mkdir(parents=True, exist_ok=True)
     html_path = work / "card.html"
@@ -178,7 +196,17 @@ def render(title: str, sub: str | None, kick: str, foot: str, out: Path) -> dict
         "size": f"{dims[0]}x{dims[1]}" if dims else None,
         "ratio": round(dims[0] / dims[1], 3) if dims and dims[1] else None,
         "lines": [split_title(title, sub)[0], split_title(title, sub)[1]],
+        "template": template or "(auto)",
+        "palette": palette or "(auto)",
     }
+
+
+def _as_uri(p: str | None) -> str | None:
+    """photo 版式的背景图要 file:// URI；直接给 Windows 路径浏览器读不到。"""
+    if not p:
+        return None
+    f = Path(p).resolve()
+    return f.as_uri() if f.exists() else None
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -188,6 +216,15 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--kick", default=None, help="左上角小字（默认读 品牌.json）")
     ap.add_argument("--foot", default=None, help="左下角署名（默认读 品牌.json）")
     ap.add_argument("--out", default=".cache/covers/card.jpg")
+    ap.add_argument("--template", default=None,
+                    choices=["confront", "steps", "number", "quote", "photo"],
+                    help="版式骨架；不给就按标题自动选")
+    ap.add_argument("--palette", default=None,
+                    choices=["ink", "paper", "forest", "brick"],
+                    help="配色；不给就按标题自动岔开")
+    ap.add_argument("--steps", default=None, help="steps 版式的三个块，用逗号分隔")
+    ap.add_argument("--bg-image", default=None, help="photo 版式的底图路径（本地文件）")
+    ap.add_argument("--radar-key", default="", help="有锚点的稿子，默认用 confront（反差）")
     args = ap.parse_args(argv)
 
     brand = load_brand()
@@ -197,6 +234,11 @@ def main(argv: list[str] | None = None) -> int:
         args.kick if args.kick is not None else brand["kick"],
         args.foot if args.foot is not None else brand["foot"],
         Path(args.out).resolve(),
+        template=args.template,
+        palette=args.palette,
+        steps=[x.strip() for x in args.steps.split(",")] if args.steps else None,
+        bg_image=_as_uri(args.bg_image),
+        radar_key=args.radar_key,
     )
     print(json.dumps(res, ensure_ascii=False, indent=2))
     return 0 if res.get("ok") else 1
