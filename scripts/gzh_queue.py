@@ -74,6 +74,7 @@ def collect(today: date, max_age: int = EXPIRE_DAYS) -> tuple[list[dict], dict]:
                 "appmsgid": rec.get("appmsgid"),
                 "publish_appmsgid": rec.get("publish_appmsgid"),
                 "age_days": a,
+                "radar_key": _radar_key_of(d, rec),
                 "expired": a > max_age,
                 "rating": rec.get("rating"),
                 "score": rec.get("score"),
@@ -97,12 +98,33 @@ def candidates(items: list[dict]) -> list[dict]:
     ]
 
 
+
+def _radar_key_of(d: Path, rec: dict) -> str:
+    """取稿子的新闻锚点。draft.json 里没有这个字段，去同目录的 manifest 找。"""
+    key = rec.get("radar_key")
+    if key:
+        return str(key)
+    m = Path(d) / "manifest.json"
+    try:
+        if m.exists():
+            return str((json.loads(m.read_text(encoding="utf-8")) or {}).get("radar_key") or "")
+    except Exception:
+        pass
+    return ""
+
+
 def rank(items: list[dict]) -> list[dict]:
-    """FIFO 优先；24h 内扫码超时过的排最前（13:00 兜底要靠它）。"""
+    """扫码超时过的排最前；其次**带新闻锚点的优先**；再次 FIFO。
+
+    为什么要锚点优先：锚点稿依赖一条 7 天内的新闻，放着会过期；
+    方法稿（周报、PPT 这类）什么时候发都不过时。两者抢同一个推送位时，
+    该让有保质期的先走。
+    """
     return sorted(
         items,
         key=lambda i: (
             0 if i["retry_recent"] else 1,
+            0 if i.get("radar_key") else 1,
             -i["age_days"],
             -(i["rating"] or 0),
             -(i["score"] or 0),

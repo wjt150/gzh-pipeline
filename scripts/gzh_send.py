@@ -55,6 +55,11 @@ def main(argv: list[str] | None = None) -> int:
 
     cmd = ["--from-queue", "--mode", "dry-run" if dry else "qr-wait",
            "--wait-scan", str(wait), "--headed"]
+    # --id 可以点名发某一篇（草稿 id），不走 FIFO
+    if "--id" in args:
+        i = args.index("--id")
+        cmd = [x for x in cmd if x != "--from-queue"]
+        cmd += ["--appmsgid", args[i + 1]]
     if "--no-mass-send" in args:
         cmd.append("--no-mass-send")
     elif "--mass-send" in args:
