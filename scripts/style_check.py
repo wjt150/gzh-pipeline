@@ -46,6 +46,10 @@ BANNED = [
 # 万能副词：不是绝对禁止，但密集出现就是机器腔
 FILLER_ADV = ["非常", "十分", "极其", "格外", "颇为", "相当地", "极为", "分外", "甚是"]
 
+# 这些英文是中文写作里的通用词，不算「中英夹用」（做PPT、用Excel 都是正常说法）
+EN_OK = {"PPT", "EXCEL", "WORD", "PDF", "AI", "APP", "OK", "WIFI", "USB", "URL",
+         "ID", "HR", "KPI", "OKR", "SOP", "CEO", "CTO", "PR", "UI", "UX", "API"}
+
 # 四类角度的信号词（命中任一即算用过该角度）
 ANGLES = {
     "反差": ["其实", "反而", "恰恰", "以为", "结果", "不是……而是", "原来"],
@@ -90,8 +94,17 @@ def main(argv: list[str] | None = None) -> int:
         issues.append(f"[套话] 命中 {len(hit)} 个：{'、'.join(hit[:6])}")
         score -= min(24, 5 * len(hit))
 
-    # 2 句长
-    ss = sentences(t)
+    # 2 句长（按段落/块切：跨块拼句会把「小标题+正文」算成一句，误报超长）
+    from gzh_draft import scan_body as _scan
+
+    # 也不能只按块切：卡片里「标题 span + 正文 span」在同一个 section 里，
+    # 拼起来同样会误报。按 span 切行，一个 span 就是一行。
+    blocks = _scan(body)["blocks"]
+    ss = []
+    for b in blocks:
+        spans = re.findall(r"<span[^>]*>(.*?)</span>", b, re.S)
+        for piece in (spans or [b]):
+            ss += sentences(TAG.sub("", piece))
     lens = [len(s) for s in ss] or [0]
     avg = sum(lens) / len(lens)
     long_s = [s for s in ss if len(s) > 45]
@@ -124,7 +137,8 @@ def main(argv: list[str] | None = None) -> int:
         score -= 8
 
     # 6 中英混杂：中文句子里夹英文单词，是人手写不出来的东西
-    mixed = re.findall(r"[\u4e00-\u9fa5][A-Za-z]{3,}|[A-Za-z]{3,}[\u4e00-\u9fa5]", t_nq)
+    mixed = [m for m in re.findall(r"[\u4e00-\u9fa5][A-Za-z]{3,}|[A-Za-z]{3,}[\u4e00-\u9fa5]", t_nq)
+             if re.sub(r"[^A-Za-z]", "", m).upper() not in EN_OK]
     if mixed:
         issues.append(f"[混杂] {len(mixed)} 处中英夹用（如 {mixed[0]}），像是漏改的")
         score -= 8
@@ -136,7 +150,9 @@ def main(argv: list[str] | None = None) -> int:
         score -= 4
 
     # 8 具体性
-    nums = len(re.findall(r"\d", t))
+    nums = len(re.findall(r"\d", t)) + len(
+        re.findall(r"[一二三四五六七八九十百千万]+\s*(?:分钟|小时|秒|天|周|个月|年|步|行|页|块|个|次|条|篇|件|人|家)", t)
+    )
     if nums < 5:
         warns.append("[具体] 全文数字很少，读起来会空（时间、次数、金额、步骤编号都算）")
         score -= 5
