@@ -19,10 +19,25 @@
 """
 from __future__ import annotations
 
+import random
 import re
+import sys
 from html import escape
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 W, H = 900, 383
+
+# 底纹种类按「文章气质」分：工具类用电路，方法类用点阵，观点类用噪点
+KIND_BY_TPL = {
+    "confront": "beams",
+    "steps": "grid",
+    "number": "circuit",
+    "quote": "grain",
+    "photo": "circuit",
+}
+
 FONT = '"PingFang SC","Microsoft YaHei","Source Han Sans SC",system-ui,sans-serif'
 
 # 四套配色。每套：底、主字、强调、弱字
@@ -60,6 +75,29 @@ def _wrap(text: str, width: int, max_lines: int = 2) -> list[str]:
     return lines or [""]
 
 
+def _texture(cfg: dict, kind: str | None = None) -> str:
+    """底纹层：用 cover_bg 画 SVG，内联成 data URI 铺在底层。
+
+    为什么内联而不是引用文件：截图那一步只 open 一个 html，
+    外部 svg 走 file:// 相对路径在临时目录里会断，内联最稳。
+    """
+    try:
+        from cover_bg import build as _bg  # noqa: PLC0415
+    except Exception:
+        return ""
+    k = kind or cfg.get("bg_kind") or KIND_BY_TPL.get(cfg.get("template", ""), "circuit")
+    seed = cfg.get("seed")
+    if seed is None:
+        seed = sum(ord(c) for c in (cfg.get("title") or "x"))
+    svg = _bg(k, cfg.get("palette", "ink"), int(seed))
+    import base64
+
+    b64 = base64.b64encode(svg.encode("utf-8")).decode()
+    return (f'<div style="position:absolute;inset:0;'
+            f'background-image:url(data:image/svg+xml;base64,{b64});'
+            f'background-size:cover;background-position:center"></div>')
+
+
 def _base(title_id: str) -> str:
     return (
         f"*{{margin:0;padding:0;box-sizing:border-box}}"
@@ -70,6 +108,7 @@ def _base(title_id: str) -> str:
 
 # ───────────────────────── 1. 对峙：反差型 ─────────────────────────
 def tpl_confront(c: dict) -> str:
+    tx = _texture(c)
     p, dark_first = PALETTES[c["palette"]], c.get("first", "dark") == "dark"
     top, bot = (p["bg"], p["second"]) if dark_first else (p["second"], p["bg"])
     # 下半块是「被压暗的另一半」，所以字必须用亮色，不能按亮底配深字
@@ -78,8 +117,10 @@ def tpl_confront(c: dict) -> str:
     a = _wrap(c["title"], 11, 2)
     b = c.get("sub") or ""
     return f"""<!DOCTYPE html><html><head><meta charset="utf-8"><style>{_base(c["title"])}
-.h1{{position:absolute;left:0;top:0;width:100%;height:196px;background:{top}}}
-.h2{{position:absolute;left:0;top:196px;width:100%;height:187px;background:{bot};
+.h1{{position:absolute;left:0;top:0;width:100%;height:196px;
+   background:linear-gradient(90deg,{top}f2 0%,{top}b8 55%,{top}55 100%)}}
+.h2{{position:absolute;left:0;top:196px;width:100%;height:187px;
+   background:linear-gradient(90deg,{bot}f0 0%,{bot}a8 52%,{bot}4d 100%);
    clip-path:polygon(0 14px,100% 0,100% 100%,0 100%)}}
 .kick{{position:absolute;left:64px;top:44px;font-size:12px;letter-spacing:4px;
    color:{p["mute"]};font-weight:500}}
@@ -91,6 +132,7 @@ def tpl_confront(c: dict) -> str:
    transform:rotate(-1.1deg);transform-origin:left center}}
 .foot{{position:absolute;left:64px;bottom:26px;font-size:12px;color:{p["mute"]};letter-spacing:1px}}
 </style></head><body>
+{tx}
 <div class="h1"></div><div class="h2"></div>
 <div class="kick">{escape(c.get("kick",""))}</div>
 <div class="a1">{escape("".join(a))}</div>
@@ -102,6 +144,7 @@ def tpl_confront(c: dict) -> str:
 
 # ───────────────────────── 2. 序列：教程型 ─────────────────────────
 def tpl_steps(c: dict) -> str:
+    tx = _texture(c)
     p = PALETTES[c["palette"]]
     items = c.get("steps") or ["第一步", "第二步", "第三步"]
     cells = ""
@@ -112,6 +155,7 @@ def tpl_steps(c: dict) -> str:
         )
     return f"""<!DOCTYPE html><html><head><meta charset="utf-8"><style>{_base(c["title"])}
 body{{background:{p["bg"]}}}
+.scrim{{position:absolute;inset:0;background:linear-gradient(90deg,{p["bg"]}d8 0%,{p["bg"]}6a 62%,{p["bg"]}10 100%)}}
 .kick{{position:absolute;left:64px;top:44px;font-size:12px;letter-spacing:4px;
    color:{p["mute"]};font-weight:500}}
 .t{{position:absolute;left:62px;top:76px;font-size:40px;font-weight:800;color:{p["fg"]};
@@ -123,9 +167,10 @@ body{{background:{p["bg"]}}}
 .txt{{margin-top:12px;font-size:17px;color:{p["fg"]};opacity:.92;line-height:1.35}}
 .foot{{position:absolute;right:60px;bottom:20px;font-size:12px;color:{p["mute"]};letter-spacing:1px}}
 </style></head><body>
+{tx}
 <div class="kick">{escape(c.get("kick",""))}</div>
 <div class="t">{escape(c["title"][:22])}</div>
-<div class="row">{cells}</div>
+<div class="scrim"></div><div class="row">{cells}</div>
 <div class="foot">{escape(c.get("foot",""))}</div>
 </body></html>"""
 
@@ -140,12 +185,16 @@ def pick_number(text: str) -> str:
 
 
 def tpl_number(c: dict) -> str:
+    tx = _texture(c)
     p = PALETTES[c["palette"]]
     num = c.get("number") or pick_number(c["title"]) or "01"
     rest_text = (c["title"] or "").replace(num, "", 1).strip(" 　，。")
     # 数字本身超过 3 个字符（如「四十」「百分之八十」）就不适合当巨型数字，
     # 退回引语版式，否则画面会被一个字撑满、标题被劈成两半
     if len(num) > 3:
+        return tpl_quote(c)
+    # 中文数字不适合做视觉主元素（「四十」占地方却没张力），替换为标点式符号
+    if re.fullmatch(r"[一二三四五六七八九十百千万]+", num):
         return tpl_quote(c)
     rest = _wrap(rest_text, 15, 2)
     return f"""<!DOCTYPE html><html><head><meta charset="utf-8"><style>{_base(c["title"])}
@@ -162,6 +211,7 @@ body{{background:{p["bg"]}}}
    line-height:1.5;text-align:right}}
 .foot{{position:absolute;left:64px;bottom:26px;font-size:12px;color:{p["mute"]};letter-spacing:1px}}
 </style></head><body>
+{tx}
 <div class="wash"></div>
 <div class="kick">{escape(c.get("kick",""))}</div>
 <div class="num">{escape(num)}</div>
@@ -173,11 +223,13 @@ body{{background:{p["bg"]}}}
 
 # ───────────────────────── 4. 引语：观点型 ─────────────────────────
 def tpl_quote(c: dict) -> str:
+    tx = _texture(c)
     p = PALETTES[c["palette"]]
     a = _wrap(c["title"], 14, 2)
     lines = "".join(f'<div class="ln">{escape(x)}</div>' for x in a)
     return f"""<!DOCTYPE html><html><head><meta charset="utf-8"><style>{_base(c["title"])}
 body{{background:{p["bg"]}}}
+.scrim{{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,{p["bg"]}55 0%,{p["bg"]}cc 70%)}}
 .q{{position:absolute;left:58px;top:44px;font-size:96px;color:{p["accent"]};opacity:.32;
    font-family:Georgia,serif;line-height:1}}
 .ln{{font-size:46px;font-weight:800;color:{p["fg"]};line-height:1.28;letter-spacing:1px}}
@@ -187,32 +239,85 @@ body{{background:{p["bg"]}}}
 .foot{{position:absolute;left:0;right:0;bottom:28px;text-align:center;font-size:12px;
    color:{p["mute"]};letter-spacing:2px}}
 </style></head><body>
+{tx}
+<div class="scrim"></div>
 <div class="q">“</div>
 <div class="wrap">{lines}<div class="sub">{escape(c.get("sub",""))}</div></div>
 <div class="foot">{escape(c.get("foot",""))}</div>
 </body></html>"""
 
 
-# ───────────────────────── 5. 图片：原文配图 ─────────────────────────
+# ───────────────────────── 5. 蓝图暗：科技感（学 article-tools 的 blueprint） ─────────────────────────
 def tpl_photo(c: dict) -> str:
+    """有真图就铺图；没图就用 CSS 拼出「科技感」——双层网格 + 十字准星 + 同心圆 + 光斑。
+
+    全套元素都是 CSS 画的（渐变 / 伪元素 / transform），没有一张位图：
+      · 双层网格（4px 细 + 20px 粗）——营造纵深
+      · 十字准星 + 坐标标注——工程图气质
+      · 同心圆轨道 + 核心点——AI 的视觉隐喻
+      · 两团径向光斑——去掉塑料感
+    参考：github.com/eternityspring/article-tools 的 blueprint 模板。
+    """
     p = PALETTES[c["palette"]]
     a = _wrap(c["title"], 15, 2)
     lines = "".join(f'<div class="ln">{escape(x)}</div>' for x in a)
+    bg = c.get("bg_image") or ""
+    if bg:
+        layer = ('<div class="bg" style="background-image:url(\'' + bg + '\')"></div>'
+                 '<div class="veil"></div>')
+    else:
+        layer = (f'<div class="grid1"></div><div class="grid2"></div>'
+                 f'<div class="blob b1"></div><div class="blob b2"></div>'
+                 f'<div class="ring"><div class="ring2"></div><div class="core"></div></div>'
+                 f'<div class="cross v"></div><div class="cross h"></div>')
     return f"""<!DOCTYPE html><html><head><meta charset="utf-8"><style>{_base(c["title"])}
 body{{background:{p["bg"]}}}
-.bg{{position:absolute;inset:0;background-image:url('{c.get("bg_image","")}');
-   background-size:cover;background-position:center;filter:saturate(.92)}}
-.veil{{position:absolute;inset:0;background:linear-gradient(100deg,
-   {p["bg"]}f2 0%,{p["bg"]}cc 46%,{p["bg"]}38 78%,{p["bg"]}10 100%)}}
-.kick{{position:absolute;left:64px;top:44px;font-size:12px;letter-spacing:4px;
-   color:{p["mute"]};font-weight:500}}
-.box{{position:absolute;left:62px;bottom:64px;max-width:640px}}
+.bg{{position:absolute;inset:0;background-size:cover;background-position:center;
+   filter:saturate(.85) brightness(.45) contrast(1.08) blur(.4px)}}
+.veil{{position:absolute;inset:0;background:linear-gradient(96deg,
+   {p["bg"]}ff 0%,{p["bg"]}f2 42%,{p["bg"]}8c 74%,{p["bg"]}2a 100%)}}
+/* 双层网格：细 22px、粗 110px，越靠右越亮 */
+.grid1{{position:absolute;inset:0;background-image:
+   linear-gradient({p["accent"]}12 1px,transparent 1px),
+   linear-gradient(90deg,{p["accent"]}12 1px,transparent 1px);
+   background-size:22px 22px;
+   mask-image:linear-gradient(90deg,transparent 18%,rgba(0,0,0,.9) 62%,#000 100%)}}
+.grid2{{position:absolute;inset:0;background-image:
+   linear-gradient({p["accent"]}1f 1px,transparent 1px),
+   linear-gradient(90deg,{p["accent"]}1f 1px,transparent 1px);
+   background-size:110px 110px;
+   mask-image:linear-gradient(90deg,transparent 26%,#000 78%)}}
+/* 两团光斑：一大一小，右上方 */
+.blob{{position:absolute;border-radius:50%}}
+.b1{{right:-40px;top:-90px;width:400px;height:400px;
+   background:radial-gradient(circle,{p["accent"]}40 0%,transparent 66%)}}
+.b2{{right:150px;bottom:-120px;width:320px;height:320px;
+   background:radial-gradient(circle,{p["accent"]}26 0%,transparent 68%)}}
+/* 同心圆轨道 + 核心点 */
+.ring{{position:absolute;right:96px;top:50%;transform:translateY(-50%);
+   width:184px;height:184px;border-radius:50%;border:1px solid {p["accent"]}4d}}
+.ring2{{position:absolute;inset:26px;border-radius:50%;border:1px dashed {p["accent"]}38}}
+.core{{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+   width:7px;height:7px;border-radius:50%;background:{p["accent"]};
+   box-shadow:0 0 14px {p["accent"]},0 0 30px {p["accent"]}80}}
+/* 十字准星：一条竖一条横，穿过画面右侧 */
+.cross{{position:absolute;background:{p["accent"]}22}}
+.cross.v{{right:187px;top:0;width:1px;height:100%}}
+.cross.h{{left:0;top:50%;height:1px;width:100%}}
+/* 左上品牌线 + 坐标标注 */
+.top{{position:absolute;left:64px;top:40px;display:flex;align-items:center;gap:10px}}
+.top i{{display:block;width:26px;height:2px;background:{p["accent"]}}}
+.kick{{font-size:12px;letter-spacing:4px;color:{p["mute"]};font-weight:500}}
+.coord{{position:absolute;right:56px;top:38px;font-size:10px;letter-spacing:2px;
+   color:{p["mute"]};opacity:.7;font-family:ui-monospace,Menlo,monospace}}
+.box{{position:absolute;left:62px;bottom:72px;max-width:660px}}
 .ln{{font-size:40px;font-weight:800;color:{p["fg"]};line-height:1.26;letter-spacing:.5px}}
-.rule{{position:absolute;left:62px;bottom:52px;width:52px;height:2px;background:{p["accent"]}}}
+.rule{{position:absolute;left:62px;bottom:56px;width:52px;height:2px;background:{p["accent"]}}}
 .foot{{position:absolute;right:56px;bottom:24px;font-size:12px;color:{p["mute"]};letter-spacing:1px}}
 </style></head><body>
-<div class="bg"></div><div class="veil"></div>
-<div class="kick">{escape(c.get("kick",""))}</div>
+{layer}
+<div class="coord">900 × 383</div>
+<div class="top"><i></i><div class="kick">{escape(c.get("kick",""))}</div></div>
 <div class="box">{lines}</div><div class="rule"></div>
 <div class="foot">{escape(c.get("foot",""))}</div>
 </body></html>"""
@@ -256,7 +361,7 @@ def build(cfg: dict) -> str:
         cfg.get("title", ""), has_image=bool(cfg.get("bg_image")),
         radar_key=cfg.get("radar_key", ""), steps=cfg.get("steps"),
     )
-    if tpl == "photo" and not cfg.get("bg_image"):
+    if tpl == "photo" and False:
         tpl = "quote"
     cfg["template"] = tpl
     cfg.setdefault("palette", guess_palette(cfg.get("title", "")))
