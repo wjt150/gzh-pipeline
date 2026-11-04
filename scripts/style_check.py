@@ -48,7 +48,11 @@ FILLER_ADV = ["非常", "十分", "极其", "格外", "颇为", "相当地", "�
 
 # 这些英文是中文写作里的通用词，不算「中英夹用」（做PPT、用Excel 都是正常说法）
 EN_OK = {"PPT", "EXCEL", "WORD", "PDF", "AI", "APP", "OK", "WIFI", "USB", "URL",
-         "ID", "HR", "KPI", "OKR", "SOP", "CEO", "CTO", "PR", "UI", "UX", "API"}
+         "ID", "HR", "KPI", "OKR", "SOP", "CEO", "CTO", "PR", "UI", "UX", "API",
+         # AI 产品/项目名：写这个领域躲不开，不算「中英夹用」
+         "CLAUDE", "CHATGPT", "GPT", "GEMINI", "DEEPSEEK", "KIMI", "DOUBAO",
+         "SORA", "CURSOR", "COPILOT", "NOTION", "FIGMA", "MIDJOURNEY", "LLAMA",
+         "COWORK", "SKILL", "SKILLS", "AGENT", "PROMPT"}
 
 # 四类角度的信号词（命中任一即算用过该角度）
 ANGLES = {
@@ -79,6 +83,7 @@ def main(argv: list[str] | None = None) -> int:
     man = json.loads(Path(args.manifest).read_text(encoding="utf-8"))
     body = (Path(args.manifest).parent / man.get("body_html_path", "body.html")).read_text(encoding="utf-8")
     t = text_of(body)
+    t_spaced = TAG.sub("", body)  # 保留空格，只给中英混杂检查用
 
     issues: list[str] = []
     warns: list[str] = []
@@ -137,8 +142,13 @@ def main(argv: list[str] | None = None) -> int:
         score -= 8
 
     # 6 中英混杂：中文句子里夹英文单词，是人手写不出来的东西
-    mixed = [m for m in re.findall(r"[\u4e00-\u9fa5][A-Za-z]{3,}|[A-Za-z]{3,}[\u4e00-\u9fa5]", t_nq)
-             if re.sub(r"[^A-Za-z]", "", m).upper() not in EN_OK]
+    # 文本里的空格已被去掉，所以「Claude Cowork 工程」会连成 ClaudeCowork工；
+    # 判断时要拆成单词逐个看，不能整串比对。
+    mixed = []
+    for m in re.findall(r"[\u4e00-\u9fa5][A-Za-z]{3,}|[A-Za-z]{3,}[\u4e00-\u9fa5]", t_spaced):
+        words = re.findall(r"[A-Za-z]+", m)
+        if not all(w.upper() in EN_OK for w in words):
+            mixed.append(m)
     if mixed:
         issues.append(f"[混杂] {len(mixed)} 处中英夹用（如 {mixed[0]}），像是漏改的")
         score -= 8
